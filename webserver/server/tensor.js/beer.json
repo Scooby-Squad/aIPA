@@ -1,0 +1,107 @@
+[
+  {
+    "id": "Buck Naked",
+    "abv": 3.2,
+    "geo": 1,
+    "type": 7,
+    "score": 5
+  },
+  {
+    "id": "Modelo",
+    "abv": 4.2,
+    "geo": 1,
+    "type": 7,
+    "score": 5
+  },
+  {
+    "id": "Budweiser",
+    "abv": 5,
+    "geo": 1,
+    "type": 7,
+    "score": 5
+  },
+  {
+    "id": "Fat Belly Amber",
+    "abv": 5.5,
+    "geo": 1,
+    "type": 1,
+    "score": 1
+  },
+  {
+    "id": "Joe Boy's IPA",
+    "abv": 6.5,
+    "geo": 1,
+    "type": 5,
+    "score": 1
+  },
+  {
+    "id": "Aurora Amber",
+    "abv": 5.5,
+    "geo": 1,
+    "type": 1,
+    "score": 1
+  },
+  {
+    "id": "Liberty White Ale",
+    "abv": 5,
+    "geo": 3,
+    "type": 4,
+    "score": 1
+  },
+  {
+    "id": "Nitwit",
+    "abv": 4.7,
+    "geo": 3,
+    "type": 4,
+    "score": 1
+  },
+  {
+    "id": "Budlight Golden Wheat",
+    "abv": 4.5,
+    "geo": 3,
+    "type": 4,
+    "score": 1
+  },
+  {
+    "id": "Cricket's Nocturne",
+    "abv": 4.5,
+    "geo": 1,
+    "type": 7,
+    "score": 1
+  },
+  {
+    "id": "Three Steve",
+    "abv": 5.3,
+    "geo": 1,
+    "type": 10,
+    "score": 1
+  },
+  {
+    "id": "Yeti Imperial Stout",
+    "abv": 9.5,
+    "geo": 1,
+    "type": 10,
+    "score": 1
+  },
+  {
+    "id": "Big Bear Black Stout",
+    "abv": 8.1,
+    "geo": 1,
+    "type": 10,
+    "score": 1
+  },
+  {
+    "id": "Beer Town Brown",
+    "abv": 5.8,
+    "geo": 1,
+    "type": 3,
+    "score": 1
+  },
+  {
+    "id": "Nutbrown Ale",
+    "abv": 5.2,
+    "geo": 1,
+    "type": 3,
+    "score": 1
+  }
+]
