@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Coors",
+    "abv": 4.2,
+    "geo": 1,
+    "type": 7,
+    "score": 5
+  },
+  {
+    "name": "Miller",
+    "abv": 4.2,
+    "geo": 1,
+    "type": 7,
+    "score": 5
+  },
+  {
+    "name": "Guiness",
+    "abv": 4.3,
+    "geo": 6,
+    "type": 10,
+    "score": 1
+  },
+  {
+    "name": "Magic Brew",
+    "abv": 6.2,
+    "geo": 1,
+    "type": 3,
+    "score": 1
+  },
+  {
+    "name": "420 Extra Pale Ale",
+    "abv": 5.4,
+    "geo": 1,
+    "type": 5,
+    "score": 1
+  },
+  {
+    "name": "James Squire IPA",
+    "abv": 5.8,
+    "geo": 1,
+    "type": 3,
+    "score": 1
+  }
+]
