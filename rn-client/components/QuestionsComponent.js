@@ -29,7 +29,7 @@ const QuestionsComponent = props => {
   // `
   const [quizData, setQuizData] = useState([])
   const [currIdx, setCurrIdx] = useState(0)
-  const [enteredRating, setEnteredRating] = useState('')
+  const [enteredRating, setEnteredRating] = useState(0)
   const [isQuizFinished, setQuizFinished] = useState(false)
   const {returnHome} = props
 
@@ -37,12 +37,13 @@ const QuestionsComponent = props => {
     setEnteredRating(enteredText)
   }
 
-  const addRatingHandler = () => {
-    if (enteredRating.length === 0) return
+  const addRatingHandler = (rating) => {
+    if (rating.length === 0) return
+    setEnteredRating(rating)
     const copyQuizData = quizData.map((question, index) => {
       if (index === currIdx) {
         let skipped = false
-        return {...question, enteredRating, skipped}
+        return {...question, rating, skipped}
       } else return {...question}
     })
     setQuizData(copyQuizData)
@@ -87,6 +88,7 @@ const QuestionsComponent = props => {
           <RatingsList quizData={quizData} />
         ) : (
           <View style={styles.container}>
+            <Text>{currIdx + 1}/{quizData.length}</Text>
             <SingleQuestion quizData={quizData} currIdx={currIdx} />
             <RatingInput
               ratingInputHandler={ratingInputHandler}

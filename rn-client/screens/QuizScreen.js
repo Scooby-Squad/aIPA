@@ -55,7 +55,7 @@ export default function QuizScreen(props) {
         </View>
 
         <View style={styles.getStartedContainer}>
-          <Button title="Start New Game" onPress={startQuizHandler} />
+          <Button title="Take Quiz" onPress={startQuizHandler} />
           {isQuizzing ? (
             <QuestionsComponent
               visible={isQuizzing}

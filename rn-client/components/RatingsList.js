@@ -21,7 +21,7 @@ const RatingsList = props => {
                   //   item.correct ? styles.correctText : styles.incorrectText
                   // }
                 >
-                  Your Rating: {item.enteredRating}
+                  Your Rating: {item.rating}
                 </Text>
               </View>
             </ScrollView>
