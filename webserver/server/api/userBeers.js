@@ -3,9 +3,9 @@ const {Beer, User_Beer, User} = require('../db/models')
 module.exports = router
 
 // Get a user's beer ratings/wishlist
-router.get('/:userId', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    const userbeers = await User_Beer.findRatings(req.params.userId)
+    const userbeers = await User_Beer.findRatings(1)
     res.json(userbeers)
   } catch (err) {
     next(err)
