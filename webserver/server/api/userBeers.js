@@ -5,9 +5,7 @@ module.exports = router
 // Get a user's beer ratings/wishlist
 router.get('/:userId', async (req, res, next) => {
   try {
-    const userbeers = await User_Beer.findAll({
-      where: {userId: req.params.userId}
-    })
+    const userbeers = await User_Beer.findRatings(req.params.userId)
     res.json(userbeers)
   } catch (err) {
     next(err)
@@ -15,25 +13,18 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 // Put route
-
 router.put('/:beerId', async (req, res, next) => {
   if (req.user) {
+    const userId = req.user.dataValues.id
+    const beerId = req.params.beerId
+    const ratings = req.body.rating
     try {
-      const userBeer = await User_Beer.findOrCreate({
-        where: {
-          userId: req.user.dataValues.id,
-          beerId: req.params.beerId
-        }
-      })
+      const userBeer = await User_Beer.get(userId, beerId)
       if (req.body.rating) {
-        const updatedUserBeer = await User_Beer.update(
-          {rating: req.body.rating},
-          {
-            where: {
-              userId: req.user.dataValues.id,
-              beerId: req.params.beerId
-            }
-          }
+        const updatedUserBeer = await User_Beer.updateRatings(
+          userId,
+          beerId,
+          ratings
         )
         res.status(200).json(updatedUserBeer)
       } else {
