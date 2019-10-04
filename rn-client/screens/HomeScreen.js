@@ -198,8 +198,8 @@ const styles = StyleSheet.create({
 });
  */
 
-import React from "react"
-import { StyleSheet, Text, View, Image, Button } from "react-native"
+import React from 'react'
+import { StyleSheet, Text, View, Image, Button, Platform } from 'react-native'
 //import Expo, {Google} from "expo"
 import * as Google from 'expo-google-app-auth'
 
@@ -213,18 +213,18 @@ export default class HomeScreen extends React.Component {
     }
   }
   signIn = async () => {
-    console.log(Google, 'that function exists')
     try {
-      
-
       const result = await Google.logInAsync({
-        // androidClientId:
-        //   "833456763323-ig9ndr0tbvb62jv4ddn6j8pos3a49m35.apps.googleusercontent.com",
+        // in the rn-client folder, might need to run 'rm -rf node_modules && npm install' and restart expo cli
+        androidClientId:
+          "334829367129-7dm2ulp6lh2phi1plip594cqsshr7rml.apps.googleusercontent.com/",
         iosClientId: "334829367129-ugb9j6ptgf8e2fdt4r95n1kuafikdbie.apps.googleusercontent.com",
         scopes: ["profile", "email"]
       })
 
       if (result.type === "success") {
+        const user = await this.fetchUser(result.user)
+        console.log('user', user)
         this.setState({
           signedIn: true,
           name: result.user.name,
@@ -236,6 +236,24 @@ export default class HomeScreen extends React.Component {
     } catch (e) {
       console.log("error", e)
     }
+  }
+  fetchUser = (data) => {
+    const uri = Platform.OS === 'ios' ? 'http://localhost:8080/auth/google/' : 'http://10.0.2.2:8080/auth/google/'
+    fetch(uri, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then((response) => response.json())
+        .then((responseJson) => {
+          console.log('responseJson', responseJson)
+          return responseJson;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   }
   render() {
     return (
