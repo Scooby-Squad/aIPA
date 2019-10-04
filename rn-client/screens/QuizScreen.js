@@ -37,7 +37,6 @@ export default function QuizScreen(props) {
 
   return (
     <View style={styles.container}>
-      <Text>A quiZ!</Text>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}

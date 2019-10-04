@@ -58,13 +58,12 @@ export default class HomeScreen extends React.Component {
   }
   render() {
     return (
-      //temporary have both screens
       <View style={styles.container}>
-        {/* {this.state.signedIn ? ( */}
+        {this.state.signedIn ? (
           <LoggedInPage {...this.props} name={this.state.name} photoUrl={this.state.photoUrl} />
-        {/* ) : ( */}
+        ) : (
           <LoginPage signIn={this.signIn} />
-        {/* )} */}
+        )}
       </View>
     )
   }

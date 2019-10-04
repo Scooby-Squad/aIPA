@@ -45,9 +45,9 @@ router.post('/', async (req, res, next) => {
         // , imgUrl, firstName, lastName, fullName
       }
     })
-    res.json(user[0])
-  } catch (error) {
-    console.error(error)
+    req.login(user[0], err => (err ? next(err) : res.json(user[0])))
+  } catch (err) {
+    console.error(err)
   }
 })
 
