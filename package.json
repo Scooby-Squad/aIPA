@@ -9,7 +9,7 @@
   "scripts": {
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
-    "deploy": "script/deploy",
+    "deploy": "webserver/script/deploy",
     "heroku-token": "script/encrypt-heroku-auth-token.js",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
@@ -18,9 +18,12 @@
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "start": "node webserver/server",
-    "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
-    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+    "start-dev":
+      "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
+    "start-server":
+      "nodemon server -e html,js,scss --ignore public --ignore client",
+    "test":
+      "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
   },
   "husky": {
     "hooks": {
@@ -28,15 +31,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "prettier --write",
-      "npm run lint-fix",
-      "git add"
-    ],
-    "*.{css,scss,json,md}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.{js,jsx}": ["prettier --write", "npm run lint-fix", "git add"],
+    "*.{css,scss,json,md}": ["prettier --write", "git add"]
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
