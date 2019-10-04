@@ -53,4 +53,14 @@ const Beer = db.define('beer', {
   }
 })
 
+// Get Multiple Beers By From Multiple ID's gvien
+Beer.getRanked = function(IDs) {
+  let beers = []
+  IDs.forEach(async id => {
+    let beer = await Beer.findByPk(id)
+    beers.push(beer)
+  })
+  return beers
+}
+
 module.exports = Beer
