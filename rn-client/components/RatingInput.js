@@ -8,7 +8,7 @@ const RatingInput = props => {
       keyboardShouldPersistTaps="always"
       contentContainerStyle={styles.inputContainer}
     >
-      {/* <TextInput
+      <TextInput
         placeholder="Your Answer"
         style={styles.input}
         onChangeText={ratingInputHandler}
@@ -21,7 +21,7 @@ const RatingInput = props => {
         <View style={styles.button}>
           <Button title="Quit" color="red" onPress={props.onCancel} />
         </View>
-      </View> */}
+      </View>
     </ScrollView>
   )
 }

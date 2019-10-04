@@ -12,8 +12,8 @@ import {
 } from 'react-native'
 
 import {MonoText} from '../components/StyledText'
-// import QuestionsComponent from '../components/QuestionsComponent'
-// import RatingsList from '../components/RatingsList'
+import QuestionsComponent from '../components/QuestionsComponent'
+import RatingsList from '../components/RatingsList'
 
 export default function QuizScreen(props) {
   const [isQuizzing, setIsQuizzing] = useState(false)
@@ -38,7 +38,7 @@ export default function QuizScreen(props) {
   return (
     <View style={styles.container}>
       <Text>A quiZ!</Text>
-      {/* <ScrollView
+      <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
         keyboardShouldPersistTaps="always"
@@ -71,7 +71,7 @@ export default function QuizScreen(props) {
             <View />
           )}
         </View>
-      </ScrollView> */}
+      </ScrollView>
     </View>
   )
 }

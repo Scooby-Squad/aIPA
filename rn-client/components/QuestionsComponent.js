@@ -7,6 +7,13 @@ import RatingsList from './RatingsList'
 import SingleQuestion from './SingleQuestion'
 import RatingInput from './RatingInput'
 
+const tempData = { questions: [{
+  question: 'Beer 1',
+},
+{
+  question: 'Beer 2'
+}]}
+
 const QuestionsComponent = props => {
   // const query = gql`
   //   query {
@@ -52,7 +59,7 @@ const QuestionsComponent = props => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = [{}]
+        const data = tempData
         // const {data} = await props.client.query({
         //   query,
         //   fetchPolicy: 'no-cache'
@@ -75,7 +82,7 @@ const QuestionsComponent = props => {
   if (quizData.length === 0) return <Text>Loading...</Text>
   return (
     <Modal visible={props.visible} animationType="slide">
-      {/* <View style={styles.container}>
+      <View style={styles.container}>
         {isQuizFinished ? (
           <RatingsList quizData={quizData} />
         ) : (
@@ -89,7 +96,7 @@ const QuestionsComponent = props => {
             />
           </View>
         )}
-      </View> */}
+      </View>
     </Modal>
   )
 }
