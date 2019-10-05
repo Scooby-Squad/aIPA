@@ -243,7 +243,7 @@ export default class HomeScreen extends React.Component {
         {this.state.signedIn ? (
           <LoggedInPage name={this.state.name} photoUrl={this.state.photoUrl} />
         ) : (
-          <LoginPage signIn={this.signIn} />
+          <LoginPage signIn={this.signIn} navigation={this.props.navigation}/>
         )}
       </View>
     )
@@ -255,6 +255,7 @@ const LoginPage = props => {
     <View>
       <Text style={styles.header}>Sign In With Google</Text>
       <Button title="Sign in with Google" onPress={() => props.signIn()} />
+      <Button title="Single Beer Test" onPress={() => props.navigation.navigate('SingleBeerView')} />
     </View>
   )
 }
