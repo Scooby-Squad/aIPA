@@ -1,6 +1,6 @@
 const User = require('./user')
 const Beer = require('./beer')
-const User_Beer = require('./userbeer')
+const User_Beer = require('./userBeerModel')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
