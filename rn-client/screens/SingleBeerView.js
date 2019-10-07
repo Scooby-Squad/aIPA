@@ -9,10 +9,7 @@ const SingleBeerView = props => {
     <View style={styles.container}>
       <View style={styles.nameRating}>
         <Text style={styles.text}>Beer Name Here: {beer.name}</Text>
-        <Text style={styles.text}>{`Beer Rating: ${beer.rating}`}</Text>
-        {/* The Rating will probably need to be store in the db so there will be an onPress
-      To dispatch a thunk to change the shown stars */}
-        <StarRating disabled={false} maxStars={5} />
+        <StarRating disabled={false} rating={beer.rating} maxStars={5} />
       </View>
     </View>
   );
