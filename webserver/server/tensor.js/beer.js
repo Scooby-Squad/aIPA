@@ -50,7 +50,7 @@ model.compile({
 
 // train our network
 
-model.fit(trainingData, outputData, {epochs: 700}).then(history => {
+model.fit(trainingData, outputData, {epochs: 500}).then(history => {
   console.log(history)
   model.predict(testingData).print()
 })
