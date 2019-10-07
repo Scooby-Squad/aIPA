@@ -1,10 +1,14 @@
-import React from 'react';
+import React from 'react'
+import { View, Text } from 'react-native'
 
-export default function Item() {
+export default function Item(props) {
+  console.log(props)
   return (
-      
-        <Text>Item</Text>
-  );
+      <View> 
+        <Text>Name:{` ${props.name}`}</Text>
+        <Text>Rating:{` ${props.rating}`}</Text>
+      </View>
+  )
 }
 
 

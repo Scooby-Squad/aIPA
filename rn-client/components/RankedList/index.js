@@ -7,22 +7,21 @@ import Item from './item'
 
 
 
+
 class List extends Component {
 
     componentDidMount() {
         // Get all beers that user has previously ranked
         this.props.getRanks()
-        console.log(this.props)
     }
 
     render() {
       return (
         <View style={styles.container}>
             <View style={styles.textWrapper}>
-                <Text style={styles.myText}>I wish I was on the bottom right!</Text>
                 {this.props.ranked.map(beer => {
-                    <Item />
-                })}<Text>Hello</ Text>
+                    return <Item key={beer.id} name={beer.name} rating={beer.rating} />
+                })}
             </View>
         </View>
       );
