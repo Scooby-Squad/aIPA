@@ -2,7 +2,8 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Beer = db.define('beer', {
-  name: { // handle validations (i.e. not empty)
+  name: {
+    // handle validations (i.e. not empty)
     type: Sequelize.STRING,
     allowNull: false
   },

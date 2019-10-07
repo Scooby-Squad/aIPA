@@ -24,7 +24,8 @@ router.get('/:id', async (req, res, next) => {
 
 // Get All Beers That A User Has Ranked
 router.get('/ranked', async (req, res, next) => {
-  try { // might be a better way to do this w/ using where clause so you don't have to loop & make multiple queries
+  try {
+    // might be a better way to do this w/ using where clause so you don't have to loop & make multiple queries
     const beer = await Beer.getRanked(req.body.ids)
     res.json(beer)
   } catch (err) {

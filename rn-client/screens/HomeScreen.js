@@ -1,72 +1,82 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image, Button, Platform } from 'react-native'
+import React from "react";
+import { StyleSheet, Text, View, Image, Button, Platform } from "react-native";
 //import Expo, {Google} from "expo"
-import * as Google from 'expo-google-app-auth'
-import Touchable from 'react-native-platform-touchable';
+import * as Google from "expo-google-app-auth";
+import Touchable from "react-native-platform-touchable";
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       signedIn: false,
       name: "",
       photoUrl: ""
-    }
+    };
   }
   signIn = async () => {
     try {
       const result = await Google.logInAsync({
         // in the rn-client folder, might need to run 'rm -rf node_modules && npm install' and restart expo cli
-        androidClientId: // remove these and put it into a separate file. Make sure you .gitignore
+        // remove these and put it into a separate file. Make sure you .gitignore
+        androidClientId:
           "334829367129-7dm2ulp6lh2phi1plip594cqsshr7rml.apps.googleusercontent.com/",
-        iosClientId: "334829367129-ugb9j6ptgf8e2fdt4r95n1kuafikdbie.apps.googleusercontent.com",
+        iosClientId:
+          "334829367129-ugb9j6ptgf8e2fdt4r95n1kuafikdbie.apps.googleusercontent.com",
         scopes: ["profile", "email"]
-      })
+      });
 
       if (result.type === "success") {
-        const user = await this.fetchUser(result.user)
-        console.log('user', user)
+        const user = await this.fetchUser(result.user);
+        console.log("user", user);
         this.setState({
           signedIn: true,
           name: result.user.name,
           photoUrl: result.user.photoUrl
-        })
+        });
       } else {
-        console.log("cancelled")
+        console.log("cancelled");
       }
     } catch (e) {
-      console.log("error", e)
+      console.log("error", e);
     }
-  }
-  fetchUser = (data) => {
+  };
+  fetchUser = data => {
     // could also put these urls into a separate file called "configs" or something of that nature. think about passing flags in when you boot up the app to decide which configs to use
-    const uri = Platform.OS === 'ios' ? 'http://localhost:8080/auth/google/' : 'http://10.0.2.2:8080/auth/google/'
+    const uri =
+      Platform.OS === "ios"
+        ? "http://localhost:8080/auth/google/"
+        : "http://10.0.2.2:8080/auth/google/";
     fetch(uri, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(data), // probably better to switch this to async/await. stay consistent. Also, you're not .catching on the outer .then
-    }).then((response) => response.json())
-        .then((responseJson) => {
-          console.log('responseJson', responseJson)
-          return responseJson;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-  }
+      body: JSON.stringify(data) // probably better to switch this to async/await. stay consistent. Also, you're not .catching on the outer .then
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log("responseJson", responseJson);
+        return responseJson;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   render() {
     return (
       <View style={styles.container}>
         {this.state.signedIn ? (
-          <LoggedInPage {...this.props} name={this.state.name} photoUrl={this.state.photoUrl} />
+          <LoggedInPage
+            {...this.props}
+            name={this.state.name}
+            photoUrl={this.state.photoUrl}
+          />
         ) : (
           <LoginPage signIn={this.signIn} />
         )}
       </View>
-    )
+    );
   }
 }
 
@@ -78,39 +88,40 @@ const LoginPage = props => {
       <Text style={styles.header}>Sign In With Google</Text>
       <Button title="Sign in with Google" onPress={() => props.signIn()} />
     </View>
-  )
-}
+  );
+};
 
 const LoggedInPage = props => {
   const _handlePressDocs = () => {
-    console.log(props)
-    props.navigation.navigate('Quiz')
+    console.log(props);
+    props.navigation.navigate("Quiz");
   };
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome:{props.name}</Text>
       <Image style={styles.image} source={{ uri: props.photoUrl }} />
       <Touchable
-          style={styles.option}
-          background={Touchable.Ripple('#ccc', false)}
-          onPress={_handlePressDocs}>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={styles.optionIconContainer}>
-              {/* <Image
+        style={styles.option}
+        background={Touchable.Ripple("#ccc", false)}
+        onPress={_handlePressDocs}
+      >
+        <View style={{ flexDirection: "row" }}>
+          <View style={styles.optionIconContainer}>
+            {/* <Image
                 source={require('../assets/images/expo-icon.png')}
                 resizeMode="contain"
                 fadeDuration={0}
                 style={{ width: 20, height: 20, marginTop: 1 }}
               /> */}
-            </View>
-            <View style={styles.optionTextContainer}>
-              <Text style={styles.optionText}>Take/Review Quiz</Text>
-            </View>
           </View>
-        </Touchable>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>Take/Review Quiz</Text>
+          </View>
+        </View>
+      </Touchable>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -134,24 +145,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 15,
     marginTop: 9,
-    marginBottom: 12,
+    marginBottom: 12
   },
   optionIconContainer: {
-    marginRight: 9,
+    marginRight: 9
   },
   option: {
-    backgroundColor: '#fdfdfd',
+    backgroundColor: "#fdfdfd",
     paddingHorizontal: 15,
     paddingVertical: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#EDEDED',
+    borderBottomColor: "#EDEDED"
   },
   optionText: {
     fontSize: 15,
-    marginTop: 1,
-  },
-})
-
+    marginTop: 1
+  }
+});
 
 // remove all of this if you don't need it
 
