@@ -3,7 +3,9 @@ const db = require('../db')
 
 const User_Beer = db.define('user_beer', {
   rating: {
-    type: Sequelize.INTEGER
+    type: Sequelize.ENUM,
+    values: [0, 1, 2, 3, 4, 5],
+    defaultValue: 0
   }
 })
 
