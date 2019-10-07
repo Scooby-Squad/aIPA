@@ -2,12 +2,15 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User_Beer = db.define('user_beer', {
+  // might be worth having a max/min for rating & default
+  // also think about having some kind of boolean for checking if they've rated it or not or some idea w/ a specific rating to tell if it's been rated or not
   rating: {
     type: Sequelize.INTEGER
   }
 })
 
 // Find or Creates a User_Beer and returns it
+// better name for this method.
 User_Beer.get = async function(userId, beerId) {
   const userBeer = await User_Beer.findOrCreate({
     where: {

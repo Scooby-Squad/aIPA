@@ -4,7 +4,7 @@ module.exports = router
 
 // Get a user's beer ratings/wishlist
 router.get('/', async (req, res, next) => {
-  try {
+  try { // change this after tweaking your rating schema
     const userbeers = await User_Beer.findRatings(1)
     res.json(userbeers)
   } catch (err) {
@@ -18,7 +18,7 @@ router.put('/:beerId', async (req, res, next) => {
     const userId = req.user.dataValues.id
     const beerId = req.params.beerId
     const ratings = req.body.rating
-    try {
+    try { // restructure this to be two separate routes. one for adding to wishlist & another for adding a rating.
       const userBeer = await User_Beer.get(userId, beerId)
       if (req.body.rating) {
         const updatedUserBeer = await User_Beer.updateRatings(

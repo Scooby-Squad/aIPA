@@ -14,7 +14,7 @@ const tempData = { questions: [{
   question: 'Beer 2'
 }]}
 
-const QuestionsComponent = props => {
+const QuestionsComponent = props => { // remove commented/unused code
   // const query = gql`
   //   query {
   //     questions {
@@ -27,6 +27,8 @@ const QuestionsComponent = props => {
   //     }
   //   }
   // `
+
+  // if you're keeping hooks in here, EVERYONE should feel comfortable talking & teaching me about this
   const [quizData, setQuizData] = useState([])
   const [currIdx, setCurrIdx] = useState(0)
   const [enteredRating, setEnteredRating] = useState(0)
@@ -37,6 +39,7 @@ const QuestionsComponent = props => {
     setEnteredRating(enteredText)
   }
 
+  // look into possibly refactoring this. this feels like a lot of extra functionality is going on in here that could be modularized
   const addRatingHandler = (rating) => {
     if (rating.length === 0) return
     setEnteredRating(rating)
@@ -103,6 +106,7 @@ const QuestionsComponent = props => {
   )
 }
 
+// good to break styles up separately like this
 const styles = StyleSheet.create({
   container: {
     flex: 1,

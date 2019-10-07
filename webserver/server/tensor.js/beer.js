@@ -50,6 +50,7 @@ model.compile({
 
 // train our network
 
+// don't have a .catch here
 model.fit(trainingData, outputData, {epochs: 1000}).then(history => {
   console.log(history)
   model.predict(testingData).print()

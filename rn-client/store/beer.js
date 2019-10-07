@@ -22,7 +22,7 @@ const gotRankedBeers = beers => ({type: GOT_RANKED_BEERS, beers})
  **/
 export const getRankedBeers = () => {
   return async (dispatch) => {
-    try {
+    try { // restructure so you don't have this for loop here. Not necessary. feels like an include would solve this
         let beers = []
         let { data } = await axios.get('/api/userbeers')
         for (let i = 0; i < data.length; ++i) {

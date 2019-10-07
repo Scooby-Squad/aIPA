@@ -2,6 +2,8 @@ const router = require('express').Router()
 const {Beer, User_Beer, User} = require('../db/models')
 module.exports = router
 
+// ....wut? restructure files to have a single userbeer api w/ routes
+
 // Get a user's beer ratings/wishlist
 router.get('/:userId', async (req, res, next) => {
   try {

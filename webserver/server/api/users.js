@@ -27,6 +27,7 @@ module.exports = router
   }
 }) */
 
+// put this req.user into middleware so you don't have to keep dealing with if statements like this
 router.get('/', async (req, res, next) => {
   if (req.user) {
     try {

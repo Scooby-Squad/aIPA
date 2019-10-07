@@ -17,7 +17,7 @@ export default class HomeScreen extends React.Component {
     try {
       const result = await Google.logInAsync({
         // in the rn-client folder, might need to run 'rm -rf node_modules && npm install' and restart expo cli
-        androidClientId:
+        androidClientId: // remove these and put it into a separate file. Make sure you .gitignore
           "334829367129-7dm2ulp6lh2phi1plip594cqsshr7rml.apps.googleusercontent.com/",
         iosClientId: "334829367129-ugb9j6ptgf8e2fdt4r95n1kuafikdbie.apps.googleusercontent.com",
         scopes: ["profile", "email"]
@@ -39,6 +39,7 @@ export default class HomeScreen extends React.Component {
     }
   }
   fetchUser = (data) => {
+    // could also put these urls into a separate file called "configs" or something of that nature. think about passing flags in when you boot up the app to decide which configs to use
     const uri = Platform.OS === 'ios' ? 'http://localhost:8080/auth/google/' : 'http://10.0.2.2:8080/auth/google/'
     fetch(uri, {
       method: 'POST',
@@ -46,7 +47,7 @@ export default class HomeScreen extends React.Component {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data), // probably better to switch this to async/await. stay consistent. Also, you're not .catching on the outer .then
     }).then((response) => response.json())
         .then((responseJson) => {
           console.log('responseJson', responseJson)
@@ -68,6 +69,8 @@ export default class HomeScreen extends React.Component {
     )
   }
 }
+
+// might be worth refactoring this into separate components
 
 const LoginPage = props => {
   return (
@@ -149,6 +152,8 @@ const styles = StyleSheet.create({
   },
 })
 
+
+// remove all of this if you don't need it
 
 /* import * as WebBrowser from 'expo-web-browser';
 import React from 'react';

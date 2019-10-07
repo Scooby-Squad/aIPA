@@ -2,7 +2,7 @@ import React from 'react'
 import {FlatList, View, ScrollView, Text, StyleSheet} from 'react-native'
 
 const RatingsList = props => {
-  const {quizData} = props
+  const {quizData} = props // remove unused code here
   // const score = quizData.reduce((sum, curVal) => {
   //   return sum + (curVal.correct ? 1 : 0)
   // }, 0)
