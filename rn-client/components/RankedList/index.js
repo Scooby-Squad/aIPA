@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, Button } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import {getRankedBeers} from '../../store/beer'
 import Item from './item'
@@ -9,6 +9,9 @@ import Item from './item'
 
 
 class List extends Component {
+    constructor(props) {
+        super(props)
+    }
 
     componentDidMount() {
         // Get all beers that user has previously ranked
@@ -20,7 +23,7 @@ class List extends Component {
         <View style={styles.container}>
             <View style={styles.textWrapper}>
                 {this.props.ranked.map(beer => {
-                    return <Item key={beer.id} name={beer.name} rating={beer.rating} />
+                    return <Button key={beer.id} title={`${beer.name}`} onPress={() => this.props.navigation.navigate('SingleBeer', {beer})} />
                 })}
             </View>
         </View>
