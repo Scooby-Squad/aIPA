@@ -18,46 +18,51 @@ module.exports = router
  * process.env.GOOGLE_CALLBACK = '/your/google/callback'
  */
 
-if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-  console.log('Google client ID / secret not found. Skipping Google OAuth.')
-} else {
-  const googleConfig = {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK
-  }
+// if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+//   console.log('Google client ID / secret not found. Skipping Google OAuth.')
+// } else {
+//   const googleConfig = {
+//     clientID: process.env.GOOGLE_CLIENT_ID,
+//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//     callbackURL: process.env.GOOGLE_CALLBACK
+//   }
 
-  const strategy = new GoogleStrategy(
-    googleConfig,
-    (token, refreshToken, profile, done) => {
-      const googleId = profile.id
-      const email = profile.emails[0].value
-      const imgUrl = profile.photos[0].value
-      const firstName = profile.name.givenName
-      const lastName = profile.name.familyName
-      const fullName = profile.displayName
+//   const strategy = new GoogleStrategy(
+//     googleConfig,
+//     (token, refreshToken, profile, done) => {
+router.post('/', async (req, res, next) => {
+  const googleId = req.body.id
+  const email = req.body.email
+  const imgUrl = req.body.photoUrl
+  const firstName = req.body.givenName
+  const lastName = req.body.familyName
 
-      User.findOrCreate({
-        where: {googleId},
-        defaults: {email, imgUrl, firstName, lastName, fullName}
-      })
-        .then(([user]) => done(null, user))
-        .catch(done)
-    }
-  )
-
-  passport.use(strategy)
-
-  router.get(
-    '/',
-    passport.authenticate('google', {scope: ['email', 'profile']})
-  )
-
-  router.get(
-    '/callback',
-    passport.authenticate('google', {
-      successRedirect: '/home',
-      failureRedirect: '/login'
+  try {
+    const user = await User.findOrCreate({
+      where: {googleId},
+      defaults: {
+        email
+        // , imgUrl, firstName, lastName, fullName
+      }
     })
-  )
-}
+    req.login(user[0], err => (err ? next(err) : res.json(user[0])))
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+// passport.use(strategy)
+
+// router.get(
+//   '/',
+//   passport.authenticate('google', {scope: ['email', 'profile']})
+// )
+
+// router.get(
+//   '/callback',
+//   passport.authenticate('google', {
+//     successRedirect: '/home',
+//     failureRedirect: '/login'
+//   })
+//   )
+// }
