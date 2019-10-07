@@ -7,17 +7,6 @@ const User_Beer = db.define('user_beer', {
   }
 })
 
-// Find or Creates a User_Beer and returns it
-User_Beer.get = async function(userId, beerId) {
-  const userBeer = await User_Beer.findOrCreate({
-    where: {
-      userId,
-      beerId
-    }
-  })
-  return userBeer
-}
-
 // Finds User_Beers for a user
 User_Beer.findRatings = async function(userId) {
   const userbeers = await User_Beer.findAll({
