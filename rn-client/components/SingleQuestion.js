@@ -1,6 +1,5 @@
 import React from 'react'
 import {View, Text, StyleSheet} from 'react-native'
-// import capitalize from '../utils/'
 
 const SingleQuestion = props => {
   const {quizData, currIdx} = props
@@ -9,12 +8,6 @@ const SingleQuestion = props => {
       <View>
         <Text style={styles.categoryText}>
           Beer
-          {/* Category:{' '}
-          {quizData[currIdx].category &&
-            quizData[currIdx].category.title
-              .split(' ')
-              .map(item => capitalize(item))
-              .join(' ')} */}
         </Text>
       </View>
       <View>
