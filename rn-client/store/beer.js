@@ -20,7 +20,7 @@ const initialState = {
 /**
  * ACTION CREATORS
  **/
-const gotRankedBeers = (beers) => ({type: GOT_RANKED_BEERS, beers})
+export const gotRankedBeers = (beers) => ({type: GOT_RANKED_BEERS, beers})
 const updatedRankedBeer = (beer) => ({type: UPDATED_RANKED_BEER, beer})
 
 /**
@@ -29,6 +29,7 @@ const updatedRankedBeer = (beer) => ({type: UPDATED_RANKED_BEER, beer})
 export const getRankedBeers = () => {
   return async (dispatch) => {
     try {
+      console.log('hello')
         let beers = []
         let { data } = await axios.get('http://localhost:8080/api/userbeers')
         for (let i = 0; i < data.length; ++i) {
@@ -68,13 +69,10 @@ export default function(state = initialState, action) {
     case UPDATED_RANKED_BEER:
       for (let i = 0; i < state.ranked.length; ++i){
         let rk = state.ranked[i]
-        console.log('BEFORE', state.ranked)
         if (rk.id === action.beer.id) {
-          console.log('found match')
           state.ranked[i] = action.beer
         }
       }
-      console.log('AFTER', state.ranked)
       return {...state, ranked: state.ranked}
     default:
       return state
