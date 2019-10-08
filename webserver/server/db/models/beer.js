@@ -45,6 +45,12 @@ const Beer = db.define('beer', {
   website: {
     type: Sequelize.STRING
   },
+  geoId: {
+    type: Sequelize.INTEGER
+  },
+  typeId: {
+    type: Sequelize.INTEGER
+  },
   geo: {
     type: Sequelize.STRING
   },
