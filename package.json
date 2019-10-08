@@ -13,7 +13,7 @@
     "heroku-token": "webserver/script/encrypt-heroku-auth-token.js",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
-    "prepare": "if [ -d .git ]; fi",
+    "prepare": "if [ -d .git ]; then fi",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
     "seed": "node webserver/script/seed.js",
