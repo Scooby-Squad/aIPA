@@ -1,5 +1,4 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
-//import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import {persistStore, persistReducer} from 'redux-persist'
@@ -25,3 +24,4 @@ export const persistor = persistStore(store)
 
 export default store
 export * from './beer'
+
