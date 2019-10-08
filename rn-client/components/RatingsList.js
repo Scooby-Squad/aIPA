@@ -6,7 +6,7 @@ const RatingsList = props => {
   return (
     <View style={styles.contentContainer}>
       <FlatList
-        keyExtractor={(item, index) => item.id}
+        keyExtractor={(item, index) => index.toString()}
         data={quizData}
         renderItem={({item}) => {
           return (
@@ -14,7 +14,7 @@ const RatingsList = props => {
               <Text>Question: {item.question}</Text>
               <View>
                 <Text>
-                  Your Rating: {item.rating}
+                  Your Rating: {item.rating == 0 ? 'Skipped' : item.rating}
                 </Text>
               </View>
             </ScrollView>

@@ -3,7 +3,7 @@ import {ScrollView, View, StyleSheet, Button} from 'react-native'
 import StarRating from 'react-native-star-rating'
 
 const RatingInput = props => {
-  const {enteredRating, addRatingHandler} = props
+  const {addRatingHandler} = props
   return (
     <ScrollView
       keyboardShouldPersistTaps="always"
@@ -12,13 +12,12 @@ const RatingInput = props => {
       <StarRating
         disabled={false}
         maxStars={5}
-        rating={enteredRating}
         fullStarColor="yellow"
         selectedStar={(rating) => addRatingHandler(rating, false)}
       />
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <Button title="Skip" onPress={(rating) => addRatingHandler(rating, true)} />
+          <Button title="Skip" onPress={() => addRatingHandler(undefined, true)} />
         </View>
         <View style={styles.button}>
           <Button title="Quit" color="red" onPress={props.onCancel} />

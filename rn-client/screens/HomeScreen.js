@@ -16,11 +16,6 @@ export default class HomeScreen extends React.Component {
   }
   signIn = async () => {
     try {
-      console.log('android!', androidClientId)
-      console.log('IOS!', iosClientId)
-      console.log('where ami', getEnvVars)
-      console.log('where ami', getEnvVars())
-      console.log('where ami2', apiUrl)
       const result = await Google.logInAsync({
         // in the rn-client folder, might need to run 'rm -rf node_modules && npm install' and restart expo cli
         androidClientId,
@@ -30,7 +25,6 @@ export default class HomeScreen extends React.Component {
 
       if (result.type === "success") {
         const user = await this.fetchUser(result.user)
-        console.log('user', user)
         this.setState({
           signedIn: true,
           name: result.user.name,
@@ -54,7 +48,6 @@ export default class HomeScreen extends React.Component {
       body: JSON.stringify(data),
     }).then((response) => response.json())
         .then((responseJson) => {
-          console.log('responseJson', responseJson)
           return responseJson;
         })
         .catch((error) => {
@@ -85,7 +78,6 @@ const LoginPage = props => {
 
 const LoggedInPage = props => {
   const _handlePressDocs = () => {
-    console.log(props)
     props.navigation.navigate('Quiz')
   };
   return (
