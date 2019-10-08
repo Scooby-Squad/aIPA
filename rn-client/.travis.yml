@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - node # uses most recent stable node version
+services:
+  - postgresql # starts up postgres
+addons:
+  postgresql: '10' # recent postgres version on Travis
+dist: xenial # uses xenial environment
+notifications:
+  email:
+    on_success: change # default: change (only when going from broken to fixed)
+    on_failure: always # default: always (which is annoying, as it should be)
+install:
+  - npm ci # faster, goes only from package-lock
+before_script:
+  - psql -c 'create database "aipa-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+script:
+  - npm test             # test the code
+  - npm run build-client # make the bundle
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: scoobysquadaipa
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: g3/PRq0NVP/vSOfF/lnWCB2vtfeAApvuD3WmF2yShH4jaDp+PcofpHct/+BFQGwehk6Civ1ThxAAHLmINmZYVzJUsaKKsbz/tz1FJzBd8AqUN1NKlBEYvvWJkGnuaISoIyS7h5FlkLWSpio881/S8rnv560U+iDqPJtG8gCGolZMT9efarvoPh3RTQqp7Dmz8YYu1Q97rRK9SGdxcYmxIm3PGxPZcjN4Smi/3qD5Zi68Jzuxex1r+CsZoUaafYJWqGabnym1oe8uCZ2vTsgO3Ky2AyHyj1OuMi8RQ+vrZ64NimsVvPkq6LZfqZbQmxDj/B0XY128IoV1eRIKDa2sTgauklu+9/EPU1Y4HJHDsegCLvcFW6KARjjqage+B6QzMSmZFtGdPDJyqBi/AAXF8l5CVwr/XQna5QEGU24D1LrRqRdwoK10p0nccbRX0tZaKdnnjUmrKY3LsvolPFVcHJXjrKJE5CNg23BcXYFcRP9BGwPDz0sLJr4miVd1KS6sQNGahsuJAbNknHN2+hrWQeHdOBfxxRoFu9NuHQn4qoUjLNCJQCDNSWND4mMOPZoQ7U7a78GqgyxAY1NJA8WAqFnpEHvP2laV8N6AMfHC04sM34TA3HooLC1vSVsb7QddSwOLCqu9MvA2of9ThMx/T5UGroeswSXE3GI7x1qPkx4=
