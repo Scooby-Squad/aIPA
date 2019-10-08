@@ -1,5 +1,7 @@
 import axios from 'axios'
 import all from './beerDb'
+import getEnvVars from '../environment'
+const {apiUrl} = getEnvVars()
 
 
 /**
@@ -30,7 +32,7 @@ export const getRankedBeers = () => {
   return async (dispatch) => {
     try {
         let beers = []
-        let { data } = await axios.get('http://localhost:8080/api/userbeers')
+        let { data } = await axios.get(`${apiUrl}/api/userbeers`)
         for (let i = 0; i < data.length; ++i) {
             let userBeer = data[i]
             let beer = all[userBeer.beerId]
@@ -40,7 +42,7 @@ export const getRankedBeers = () => {
         }
       dispatch(gotRankedBeers(beers))
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   }
 }
@@ -50,10 +52,10 @@ export const updateUserBeer = (ub) => {
         const rating = ub.rating
         const userId = ub.userId
         const beerId = ub.id
-        await axios.put('http://localhost:8080/api/userbeers/update', {rating, userId, beerId})
+        await axios.put(`${apiUrl}/api/userbeers/update`, {rating, userId, beerId})
         dispatch(updatedRankedBeer(ub))
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   }
 }
@@ -68,13 +70,10 @@ export default function(state = initialState, action) {
     case UPDATED_RANKED_BEER:
       for (let i = 0; i < state.ranked.length; ++i){
         let rk = state.ranked[i]
-        console.log('BEFORE', state.ranked)
         if (rk.id === action.beer.id) {
-          console.log('found match')
           state.ranked[i] = action.beer
         }
       }
-      console.log('AFTER', state.ranked)
       return {...state, ranked: state.ranked}
     default:
       return state

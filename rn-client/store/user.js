@@ -30,6 +30,7 @@ const loggedIn = user => ({type: LOGGED_IN, user})
  * THUNK CREATORS
  **/
 const fetchUser = (data) => {
+  // const user
   const uri = `${apiUrl}/auth/google/`
   fetch(uri, {
     method: 'POST',
