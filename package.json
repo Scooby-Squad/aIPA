@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build-client": "webpack",
+    "build-client": "touch buildClient.js",
     "build-client-watch": "webpack -w",
     "deploy": "webserver/script/deploy",
     "heroku-token": "webserver/script/encrypt-heroku-auth-token.js",
