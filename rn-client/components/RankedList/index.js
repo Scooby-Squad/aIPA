@@ -6,17 +6,20 @@ import { getRankedBeers } from '../../store/beer'
 
 
 
+
 export default function List (props) {
 
     const ranked = useSelector(state => state.beer.ranked);
+    const change = useSelector(state => state.beer.change);
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log('RENDERING LIST')
         const fetchData = async () => (
           await dispatch(getRankedBeers())
         )
         fetchData();
-    }, []);
+    }, [change]);
 
     let rendered = (
         <View style={styles.container}>

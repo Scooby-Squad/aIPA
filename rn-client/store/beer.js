@@ -7,6 +7,7 @@ import all from './beerDb'
  **/
 const GOT_RANKED_BEERS = 'GOT_RANKED_BEERS'
 const UPDATED_RANKED_BEER = 'UPDATED_RANKED_BEER'
+const CHANGE = 'CHANGE'
 
 
 /**
@@ -14,14 +15,16 @@ const UPDATED_RANKED_BEER = 'UPDATED_RANKED_BEER'
  **/
 const initialState = {
   all,
-  ranked: []
+  ranked: [],
+  change: false
 }
 
 /**
  * ACTION CREATORS
  **/
-export const gotRankedBeers = (beers) => ({type: GOT_RANKED_BEERS, beers})
+const gotRankedBeers = (beers) => ({type: GOT_RANKED_BEERS, beers})
 const updatedRankedBeer = (beer) => ({type: UPDATED_RANKED_BEER, beer})
+export const change = () => ({type: CHANGE})
 
 /**
  * THUNK CREATORS
@@ -29,7 +32,6 @@ const updatedRankedBeer = (beer) => ({type: UPDATED_RANKED_BEER, beer})
 export const getRankedBeers = () => {
   return async (dispatch) => {
     try {
-      console.log('hello')
         let beers = []
         let { data } = await axios.get('http://localhost:8080/api/userbeers')
         for (let i = 0; i < data.length; ++i) {
@@ -74,6 +76,8 @@ export default function(state = initialState, action) {
         }
       }
       return {...state, ranked: state.ranked}
+    case CHANGE:
+      return {...state, change: !(state.change)}
     default:
       return state
   }

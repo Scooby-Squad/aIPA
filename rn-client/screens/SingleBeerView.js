@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import StarRating from 'react-native-star-rating';
-import {updateUserBeer} from '../store/beer'
+import { updateUserBeer, change } from '../store/beer'
 
 
 
@@ -14,17 +14,17 @@ export default function Single (props) {
 
   useEffect(() => {
         const fetchData = async () => (
-          await dispatch(updateUserBeer(data.beer))
+          await dispatch(updateUserBeer(data))
         )
         fetchData();
-    }, [data.beer]);
+    }, [data]
+  );
   
   onStarRatingPress = (rating) => {
-      let newBeer = data
-      newBeer.rating = rating
-      setData(newBeer)
-      console.log(newBeer)
+      dispatch(change())
+      setData({...data, rating})
   }
+
   return (
     <View style={styles.container}>
       <View style={styles.nameRating}>
