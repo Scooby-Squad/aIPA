@@ -1,17 +1,12 @@
-import * as WebBrowser from 'expo-web-browser'
 import React, {useState} from 'react'
 import {
   Image,
   Platform,
   ScrollView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
   Button
 } from 'react-native'
-
-import {MonoText} from '../components/StyledText'
 import QuestionsComponent from '../components/QuestionsComponent'
 import RatingsList from '../components/RatingsList'
 
