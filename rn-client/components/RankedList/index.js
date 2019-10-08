@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {connect} from 'react-redux'
-import { View, StyleSheet, Text, Button } from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import {getRankedBeers} from '../../store/beer'
-import Item from './item'
+
 
 
 
