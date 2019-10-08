@@ -1,16 +1,32 @@
 const router = require('express').Router()
-const {Beer} = require('../db/models')
+const {Beer, User_Beer} = require('../db/models')
 const {Tensor} = require('../tensor.js')
 module.exports = router
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 // Get Predictions for All Beers
 router.get('/', async (req, res, next) => {
   try {
-    const tensor = await Tensor()
-    //console.log(tensor, 'tensor is')
-    res.json(tensor)
-    // const beers = await Beer.findAll()
-    // res.json(beers)
+    const ratedBeers = await User_Beer.findAll({
+      where: {userId: 1, rating: {[Op.ne]: '0'}}
+    })
+    let userRatedBeers = []
+    ratedBeers.forEach(beer => {
+      // console.log(beer.dataValues.rating!=='0')
+      userRatedBeers.push({
+        id: beer.dataValues.beerId,
+        abv: 4.2,
+        geo: 1,
+        type: 7,
+        score: parseInt(beer.dataValues.rating)
+      })
+    })
+    //let ratedBeersFiltered = await ratedBeers.filter(beer => {beer.dataValues.rating === '0'})
+    //console.log(ratedBeersFiltered)
+    res.json(userRatedBeers)
+    // const tensor = await Tensor()
+    // res.json(tensor)
   } catch (err) {
     next(err)
   }
