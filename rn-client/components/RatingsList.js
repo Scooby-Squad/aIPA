@@ -3,9 +3,6 @@ import {FlatList, View, ScrollView, Text, StyleSheet} from 'react-native'
 
 const RatingsList = props => {
   const {quizData} = props
-  // const score = quizData.reduce((sum, curVal) => {
-  //   return sum + (curVal.correct ? 1 : 0)
-  // }, 0)
   return (
     <View style={styles.contentContainer}>
       <FlatList
@@ -16,11 +13,7 @@ const RatingsList = props => {
             <ScrollView style={styles.contentContainer}>
               <Text>Question: {item.question}</Text>
               <View>
-                <Text
-                  // style={
-                  //   item.correct ? styles.correctText : styles.incorrectText
-                  // }
-                >
+                <Text>
                   Your Rating: {item.rating}
                 </Text>
               </View>
