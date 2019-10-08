@@ -11,3 +11,22 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+// Update a userbeer
+router.put('/update', async (req, res, next) => {
+  try {
+    await User_Beer.update(
+      {rating: req.body.rating},
+      {
+        where: {
+          userId: req.body.userId,
+          beerId: req.body.beerId
+        }
+      }
+    )
+    console.log('Updated')
+    res.send(200)
+  } catch (err) {
+    next(err)
+  }
+})

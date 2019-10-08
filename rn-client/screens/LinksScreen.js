@@ -11,7 +11,7 @@ export default function LinksScreen(props) {
 }
 
 LinksScreen.navigationOptions = {
-  title: 'Links',
+  title: 'Beer Rankings',
 };
 
 const styles = StyleSheet.create({
