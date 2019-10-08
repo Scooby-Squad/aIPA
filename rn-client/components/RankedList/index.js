@@ -1,4 +1,5 @@
-import React, { Component, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'
 import {connect} from 'react-redux'
 import { View, StyleSheet, Button } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
@@ -8,27 +9,35 @@ import {getRankedBeers} from '../../store/beer'
 
 
 
-class List extends Component {
-    constructor(props) {
-        super(props)
-    }
+function List () {
+    const [data, setData] = useState({ranked: []})
+    useEffect(() => {
+        const fetchData = async () => {
+          const result = await axios(
+            'http://localhost:8080/api/userbeers',
+          );
+          let beers = []
+          for (let i = 0; i < data.length; ++i) {
+            let userBeer = data[i]
+            let beer = all[userBeer.beerId]
+            beer.rating = userBeer.rating
+            beer.userId = userBeer.userId
+            beers.push(beer)
+        }
+          setData(beers.data);
+        };
+        fetchData();
+      }, []);
 
-    componentDidMount() {
-        // Get all beers that user has previously ranked
-        this.props.getRanks()
-    }
-
-    render() {
       return (
         <View style={styles.container}>
             <View style={styles.textWrapper}>
-                {this.props.ranked.map(beer => {
+                {data.ranked.map(beer => {
                     return <Button key={beer.id} title={`${beer.name}`} onPress={() => this.props.navigation.navigate('SingleBeer', {beer})} />
                 })}
             </View>
         </View>
       );
-    }
 }
 
 const styles = StyleSheet.create({
@@ -41,16 +50,16 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    getRanks: () => {
-        dispatch(getRankedBeers())
-    }
-})
+// const mapDispatchToProps = (dispatch) => ({
+//     getRanks: () => {
+//         dispatch(getRankedBeers())
+//     }
+// })
 
-const mapStateToProps = (state) => ({
-    ranked: state.beer.ranked
-})
+// const mapStateToProps = (state) => ({
+//     ranked: state.beer.ranked
+// })
 
-const RankedList = connect(mapStateToProps, mapDispatchToProps)(List)
+// const RankedList = connect(mapStateToProps, mapDispatchToProps)(List)
 
-export default RankedList
+export default List
