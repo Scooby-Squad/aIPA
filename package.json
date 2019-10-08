@@ -7,8 +7,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "build-client": "webserver/webpack",
-    "build-client-watch": "webserver/webpack -w",
+    "build-client": "rn-client/webpack",
+    "build-client-watch": "rn-client/webpack -w",
     "deploy": "webserver/script/deploy",
     "heroku-token": "webserver/script/encrypt-heroku-auth-token.js",
     "lint": "eslint ./ --ignore-path .gitignore",
