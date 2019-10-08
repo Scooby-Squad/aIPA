@@ -1,9 +1,9 @@
 const tf = require('@tensorflow/tfjs')
 const holder = require('@tensorflow/tfjs-node')
 const beerTesting = require('./beerTesting.json')
-const beer = require('./beer.json')
+// const beer = require('./beer.json')
 
-const Tensor = async () => {
+const Tensor = async beer => {
   const trainingData = tf.tensor2d(
     beer.map(item => [item.abv, item.geo, item.type])
   )
@@ -50,19 +50,6 @@ const Tensor = async () => {
   })
 
   // train our network
-  /*   let output;
-
-  model.fit(trainingData, outputData, {epochs: 500, verbose: 0}).then(history => {
-    //console.log(history)
-    // model.predict(testingData).print()
-    output = model.predict(testingData).data()
-    //console.log(output, 'this is output')
-    //output.print()
-    return output
-  }).then(whatIsThisVariable => { 
-    // console.log(output, 'this is the output from the then')
-    // console.log(whatIsThisVariable, 'is this')
-  }) */
 
   let fit = await model.fit(trainingData, outputData, {epochs: 500, verbose: 0})
   let output = await model.predict(testingData).data()
