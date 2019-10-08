@@ -1,12 +1,11 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
 import RankedList from '../components/RankedList'
 
-export default function LinksScreen() {
+export default function LinksScreen(props) {
   return (
     <ScrollView style={styles.container}>
-      <RankedList />
+      <RankedList navigation={props.navigation} />
     </ScrollView>
   );
 }

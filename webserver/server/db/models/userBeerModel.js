@@ -3,20 +3,10 @@ const db = require('../db')
 
 const User_Beer = db.define('user_beer', {
   rating: {
-    type: Sequelize.INTEGER
+    type: Sequelize.ENUM('0', '1', '2', '3', '4', '5'),
+    defaultValue: '0'
   }
 })
-
-// Find or Creates a User_Beer and returns it
-User_Beer.get = async function(userId, beerId) {
-  const userBeer = await User_Beer.findOrCreate({
-    where: {
-      userId,
-      beerId
-    }
-  })
-  return userBeer
-}
 
 // Finds User_Beers for a user
 User_Beer.findRatings = async function(userId) {

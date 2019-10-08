@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Beer} = require('../server/db/models')
+const {User, Beer, User_Beer} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -115007,10 +115007,204 @@ async function seed() {
       geo: '',
       type: '',
       id: '5948'
+    }),
+    Beer.create({
+      name: 'Guiness Draught',
+      abv: '4.2',
+      ibu: '20',
+      srm: '40',
+      description:
+        "Guinness is a dark Irish dry stout that originated in the brewery of Arthur Guinness at St. James's Gate, Dublin, Ireland, in 1759. It is one of the most successful beer brands worldwide, brewed in almost 50 countries, and available in over 120.",
+      style: 'Irish Stout',
+      category: 'Stout',
+      brewer: 'Guiness Ltd',
+      address: 'St. James Gate',
+      city: 'Dublin',
+      state: '8',
+      country: 'Ireland',
+      coordinates: '53.3419, 6.2867',
+      website: 'http://www.guiness.com',
+      geo: 'Irish',
+      type: 'Stout',
+      id: '5949'
     })
   ])
 
   console.log(`seeded ${beers.length} beers`)
+  console.log(`seeded successfully`)
+
+  const userbeers = await Promise.all([
+    User_Beer.create({
+      rating: '0',
+      createdAt: '2019-10-07T20:59:48.871Z',
+      updatedAt: '2019-10-07T20:59:48.871Z',
+      userId: 1,
+      beerId: 1
+    }),
+    User_Beer.create({
+      rating: '1',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 1023
+    }),
+    User_Beer.create({
+      rating: '1',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 1333
+    }),
+    User_Beer.create({
+      rating: '4',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 2116
+    }),
+    User_Beer.create({
+      rating: '1',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 850
+    }),
+    User_Beer.create({
+      rating: '1',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 5918
+    }),
+    User_Beer.create({
+      rating: '3',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 5113
+    }),
+    User_Beer.create({
+      rating: '5',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 4861
+    }),
+    User_Beer.create({
+      rating: '4',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 4899
+    }),
+    User_Beer.create({
+      rating: '4',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 965
+    }),
+    User_Beer.create({
+      rating: '4',
+      createdAt: '2019-10-07T21:14:35.059Z',
+      updatedAt: '2019-10-07T21:14:35.059Z',
+      userId: 1,
+      beerId: 2737
+    }),
+    User_Beer.create({
+      rating: '4',
+      createdAt: '2019-10-07T21:17:36.119Z',
+      updatedAt: '2019-10-07T21:17:36.119Z',
+      userId: 1,
+      beerId: 1346
+    }),
+    User_Beer.create({
+      rating: '4',
+      createdAt: '2019-10-07T21:17:36.119Z',
+      updatedAt: '2019-10-07T21:17:36.119Z',
+      userId: 1,
+      beerId: 2682
+    }),
+    User_Beer.create({
+      rating: '5',
+      createdAt: '2019-10-07T21:17:36.119Z',
+      updatedAt: '2019-10-07T21:17:36.119Z',
+      userId: 1,
+      beerId: 1944
+    }),
+    User_Beer.create({
+      rating: '1',
+      createdAt: '2019-10-07T21:20:10.347Z',
+      updatedAt: '2019-10-07T21:20:10.347Z',
+      userId: 1,
+      beerId: 756
+    }),
+    User_Beer.create({
+      rating: '2',
+      createdAt: '2019-10-07T21:20:10.347Z',
+      updatedAt: '2019-10-07T21:20:10.347Z',
+      userId: 1,
+      beerId: 3493
+    }),
+    User_Beer.create({
+      rating: '1',
+      createdAt: '2019-10-07T21:20:10.347Z',
+      updatedAt: '2019-10-07T21:20:10.347Z',
+      userId: 1,
+      beerId: 4922
+    }),
+    User_Beer.create({
+      rating: '5',
+      createdAt: '2019-10-07T21:24:42.866Z',
+      updatedAt: '2019-10-07T21:24:42.866Z',
+      userId: 1,
+      beerId: 2447
+    }),
+    User_Beer.create({
+      rating: '1',
+      createdAt: '2019-10-07T21:24:42.866Z',
+      updatedAt: '2019-10-07T21:24:42.866Z',
+      userId: 1,
+      beerId: 1711
+    }),
+    User_Beer.create({
+      rating: '5',
+      createdAt: '2019-10-07T21:24:42.866Z',
+      updatedAt: '2019-10-07T21:24:42.866Z',
+      userId: 1,
+      beerId: 199
+    }),
+    User_Beer.create({
+      rating: '5',
+      createdAt: '2019-10-07T21:24:42.866Z',
+      updatedAt: '2019-10-07T21:24:42.866Z',
+      userId: 1,
+      beerId: 3076
+    }),
+    User_Beer.create({
+      rating: '5',
+      createdAt: '2019-10-07T20:59:48.871Z',
+      updatedAt: '2019-10-07T20:59:48.871Z',
+      userId: 1,
+      beerId: 5949
+    }),
+    User_Beer.create({
+      rating: '0',
+      createdAt: '2019-10-07T21:24:42.866Z',
+      updatedAt: '2019-10-07T21:24:42.866Z',
+      userId: 1,
+      beerId: 2
+    }),
+    User_Beer.create({
+      rating: '0',
+      createdAt: '2019-10-07T21:24:42.866Z',
+      updatedAt: '2019-10-07T21:24:42.866Z',
+      userId: 1,
+      beerId: 3
+    })
+  ])
+
+  console.log(`seeded ${userbeers.length} beer ratings`)
   console.log(`seeded successfully`)
 }
 

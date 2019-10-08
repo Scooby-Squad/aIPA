@@ -1,14 +1,17 @@
 import axios from 'axios'
+import all from './beerDb'
 
 /**
  * ACTION TYPES
  **/
 const GOT_RANKED_BEERS = 'GOT_RANKED_BEERS'
 
+
 /**
  * INITIAL STATE
  **/
 const initialState = {
+  all,
   ranked: []
 }
 
@@ -24,12 +27,12 @@ export const getRankedBeers = () => {
   return async (dispatch) => {
     try {
         let beers = []
-        let { data } = await axios.get('/api/userbeers')
+        let { data } = await axios.get('http://localhost:8080/api/userbeers')
         for (let i = 0; i < data.length; ++i) {
             let userBeer = data[i]
-            let beer = await axios.get(`/api/beers/${userBeer.beerId}`)
-            beer = beer.data
-            beers.push({beer, userBeer})
+            let beer = all[userBeer.beerId]
+            beer.rating = userBeer.rating
+            beers.push(beer)
         }
       dispatch(gotRankedBeers(beers))
     } catch (err) {
