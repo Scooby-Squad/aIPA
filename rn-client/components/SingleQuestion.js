@@ -11,7 +11,9 @@ const SingleQuestion = props => {
         </Text>
       </View>
       <View>
-        <Text style={styles.questionText}>{quizData[currIdx].question}</Text>
+        <Text style={styles.questionText}>Name: {quizData[currIdx].name}</Text>
+      <Text style={styles.questionText}>Brewery: {quizData[currIdx].brewer}</Text>
+        <Text style={styles.questionText}>Style: {quizData[currIdx].style}</Text>
       </View>
     </View>
   )
