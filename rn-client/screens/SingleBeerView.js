@@ -29,6 +29,9 @@ export default function Single(props) {
         <Text style={styles.text}>Name: {data.name}</Text>
         <StarRating
           disabled={false}
+          iconSet="Ionicons"
+          emptyStar="ios-star-outline"
+          fullStar="ios-star"
           rating={Number(data.rating)}
           maxStars={5}
           selectedStar={rating => onStarRatingPress(rating)}
