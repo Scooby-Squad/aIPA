@@ -8,6 +8,7 @@ router.get('/', async (req, res, next) => {
     const userbeers = await User_Beer.findRatings(1)
     res.json(userbeers)
   } catch (err) {
+    console.error(err)
     next(err)
   }
 })
@@ -24,7 +25,7 @@ router.put('/update', async (req, res, next) => {
         }
       }
     )
-    console.log('Updated')
+    console.error('Updated')
     res.send(200)
   } catch (err) {
     next(err)

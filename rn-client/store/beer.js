@@ -1,5 +1,8 @@
-import axios from 'axios';
-import all from './beerDb';
+import axios from 'axios'
+import all from './beerDb'
+import getEnvVars from '../environment'
+const {apiUrl} = getEnvVars()
+
 
 /**
  * ACTION TYPES
@@ -30,35 +33,31 @@ export const change = () => ({ type: CHANGE });
 export const getRankedBeers = () => {
   return async dispatch => {
     try {
-      let beers = [];
-      let { data } = await axios.get('http://localhost:8080/api/userbeers');
-      for (let i = 0; i < data.length; ++i) {
-        let userBeer = data[i];
-        let beer = all[userBeer.beerId];
-        beer.rating = userBeer.rating;
-        beer.userId = userBeer.userId;
-        beers.push(beer);
-      }
-      dispatch(gotRankedBeers(beers));
+        let beers = []
+        let { data } = await axios.get(`${apiUrl}/api/userbeers`)
+        for (let i = 0; i < data.length; ++i) {
+            let userBeer = data[i]
+            let beer = all[userBeer.beerId]
+            beer.rating = userBeer.rating
+            beer.userId = userBeer.userId
+            beers.push(beer)
+        }
+      dispatch(gotRankedBeers(beers))
     } catch (err) {
-      console.log(err);
+      console.error(err)
     }
   };
 };
 export const updateUserBeer = ub => {
   return async dispatch => {
     try {
-      const rating = ub.rating;
-      const userId = ub.userId;
-      const beerId = ub.id;
-      await axios.put('http://localhost:8080/api/userbeers/update', {
-        rating,
-        userId,
-        beerId
-      });
-      dispatch(updatedRankedBeer(ub));
+        const rating = ub.rating
+        const userId = ub.userId
+        const beerId = ub.id
+        await axios.put(`${apiUrl}/api/userbeers/update`, {rating, userId, beerId})
+        dispatch(updatedRankedBeer(ub))
     } catch (err) {
-      console.log(err);
+      console.error(err)
     }
   };
 };

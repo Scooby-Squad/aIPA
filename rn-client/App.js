@@ -4,10 +4,12 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import store from './store'
+import store, {persistor} from './store'
 import {Provider} from 'react-redux'
+import {PersistGate} from 'redux-persist/lib/integration/react'
 
 import AppNavigator from './navigation/AppNavigator';
+import Splash from './screens/Splash'
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -25,7 +27,9 @@ export default function App(props) {
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <Provider store={store}>
-        <AppNavigator />
+          <PersistGate loading={<Splash />} persistor={persistor}>
+            <AppNavigator />
+          </PersistGate>
         </Provider>
       </View>
     );

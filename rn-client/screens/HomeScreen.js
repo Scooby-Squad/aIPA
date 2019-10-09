@@ -1,77 +1,32 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Button, Platform } from 'react-native'
-import * as Google from 'expo-google-app-auth'
+import { StyleSheet, Text, View, Image, Button} from 'react-native'
+import {useSelector, useDispatch} from 'react-redux'
+import {signIn, logOut} from '../store/user'
 import Touchable from 'react-native-platform-touchable'
-import getEnvVars from '../environment'
-const {apiUrl, androidClientId, iosClientId} = getEnvVars()
 
-export default class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      signedIn: false,
-      name: "",
-      photoUrl: ""
-    }
-  }
-  signIn = async () => {
-    try {
-      const result = await Google.logInAsync({
-        // in the rn-client folder, might need to run 'rm -rf node_modules && npm install' and restart expo cli
-        androidClientId,
-        iosClientId,
-        scopes: ["profile", "email"]
-      })
+const HomeScreen = props => {
 
-      if (result.type === "success") {
-        const user = await this.fetchUser(result.user)
-        this.setState({
-          signedIn: true,
-          name: result.user.name,
-          photoUrl: result.user.photoUrl
-        })
-      } else {
-        console.log("cancelled")
-      }
-    } catch (e) {
-      console.log("error", e)
-    }
-  }
-  fetchUser = (data) => {
-    const uri = `${apiUrl}/auth/google/`
-    fetch(uri, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }).then((response) => response.json())
-        .then((responseJson) => {
-          return responseJson;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.state.signedIn ? (
-          <LoggedInPage {...this.props} name={this.state.name} photoUrl={this.state.photoUrl} />
-        ) : (
-          <LoginPage signIn={this.signIn} />
-        )}
-      </View>
-    )
-  }
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  const dispatchSignIn = () => dispatch(signIn())
+  const dispatchLogOut = () => dispatch(logOut())
+
+  return (
+    <View style={styles.container}>
+      {user.signedIn ? (
+        <LoggedInPage {...user} {...props} name={user.name} photoUrl={user.photoUrl} logOut={dispatchLogOut} />
+      ) : (
+        <LoginPage signIn={dispatchSignIn} />
+      )}
+    </View>
+  )
 }
 
 const LoginPage = props => {
   return (
     <View>
       <Text style={styles.header}>Sign In With Google</Text>
-      <Button title="Sign in with Google" onPress={() => props.signIn()} />
+      <Button title="Sign in with Google" onPress={props.signIn} />
     </View>
   )
 }
@@ -93,7 +48,17 @@ const LoggedInPage = props => {
               <Text style={styles.optionText}>Take/Review Quiz</Text>
             </View>
           </View>
-        </Touchable>
+      </Touchable>
+      <Touchable
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={props.logOut}>
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>Log Out</Text>
+          </View>
+        </View>
+      </Touchable>
     </View>
   )
 }
@@ -137,3 +102,5 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 })
+
+export default HomeScreen
