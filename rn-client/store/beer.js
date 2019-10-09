@@ -7,29 +7,31 @@ const {apiUrl} = getEnvVars()
 /**
  * ACTION TYPES
  **/
-const GOT_RANKED_BEERS = 'GOT_RANKED_BEERS'
-const UPDATED_RANKED_BEER = 'UPDATED_RANKED_BEER'
-
+const GOT_RANKED_BEERS = 'GOT_RANKED_BEERS';
+const UPDATED_RANKED_BEER = 'UPDATED_RANKED_BEER';
+const CHANGE = 'CHANGE';
 
 /**
  * INITIAL STATE
  **/
 const initialState = {
   all,
-  ranked: []
-}
+  ranked: [],
+  change: false
+};
 
 /**
  * ACTION CREATORS
  **/
-const gotRankedBeers = (beers) => ({type: GOT_RANKED_BEERS, beers})
-const updatedRankedBeer = (beer) => ({type: UPDATED_RANKED_BEER, beer})
+const gotRankedBeers = beers => ({ type: GOT_RANKED_BEERS, beers });
+const updatedRankedBeer = beer => ({ type: UPDATED_RANKED_BEER, beer });
+export const change = () => ({ type: CHANGE });
 
 /**
  * THUNK CREATORS
  **/
 export const getRankedBeers = () => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
         let beers = []
         let { data } = await axios.get(`${apiUrl}/api/userbeers`)
@@ -44,10 +46,10 @@ export const getRankedBeers = () => {
     } catch (err) {
       console.error(err)
     }
-  }
-}
-export const updateUserBeer = (ub) => {
-  return async (dispatch) => {
+  };
+};
+export const updateUserBeer = ub => {
+  return async dispatch => {
     try {
         const rating = ub.rating
         const userId = ub.userId
@@ -57,8 +59,8 @@ export const updateUserBeer = (ub) => {
     } catch (err) {
       console.error(err)
     }
-  }
-}
+  };
+};
 
 /**
  * REDUCER
@@ -66,16 +68,18 @@ export const updateUserBeer = (ub) => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_RANKED_BEERS:
-      return {...state, ranked: action.beers}
+      return { ...state, ranked: action.beers };
     case UPDATED_RANKED_BEER:
-      for (let i = 0; i < state.ranked.length; ++i){
-        let rk = state.ranked[i]
+      for (let i = 0; i < state.ranked.length; ++i) {
+        let rk = state.ranked[i];
         if (rk.id === action.beer.id) {
-          state.ranked[i] = action.beer
+          state.ranked[i] = action.beer;
         }
       }
-      return {...state, ranked: state.ranked}
+      return { ...state, ranked: state.ranked };
+    case CHANGE:
+      return { ...state, change: !state.change };
     default:
-      return state
+      return state;
   }
 }

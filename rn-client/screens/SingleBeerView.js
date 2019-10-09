@@ -1,67 +1,55 @@
-import React from 'react';
-import {connect} from 'react-redux'
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
 import StarRating from 'react-native-star-rating';
-import {updateUserBeer} from '../store/beer'
+import { updateUserBeer, getRankedBeers } from '../store/beer';
 
+export default function Single(props) {
+  const [data, setData] = useState(props.navigation.getParam('beer'));
+  const dispatch = useDispatch();
 
+  useEffect(
+    () => {
+      const dispatchers = async () => {
+        await dispatch(updateUserBeer(data));
+        await dispatch(getRankedBeers());
+      };
+      dispatchers();
+    },
+    [data]
+  );
 
+  const onStarRatingPress = async rating => {
+    await setData({ ...data, rating });
+  };
 
-class Single extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      beer: props.navigation.getParam('beer')
-    }
-  }
-  componentWillUnmount() {
-    this.props.update(this.state.beer)
-  }
-  onStarRatingPress(rating) {
-    this.setState({
-      beer: {...this.state.beer, rating}
-    });
-  }
-  render () {
-    return (
-      <View style={styles.container}>
-        <View style={styles.nameRating}>
-          <Text style={styles.text}>Name: {this.state.beer.name}</Text>
-          <StarRating 
-            disabled={false} 
-            rating={this.state.beer.rating} 
-            maxStars={5} 
-            selectedStar={(rating) => this.onStarRatingPress(rating)}
-            fullStarColor={'blue'}
-             />
-        </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.nameRating}>
+        <Text style={styles.text}>Name: {data.name}</Text>
+        <StarRating
+          disabled={false}
+          rating={Number(data.rating)}
+          maxStars={5}
+          selectedStar={rating => onStarRatingPress(rating)}
+          fullStarColor="blue"
+        />
       </View>
-    )
-  }
-};
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   text: {
-    fontSize: 19,
+    fontSize: 19
   },
   nameRating: {
     justifyContent: 'space-around'
   }
 });
-
-const mapDispatchToProps = (dispatch) => ({
-  update: (ub) => {
-      dispatch(updateUserBeer(ub))
-  }
-})
-
-const SingleBeerView = connect(null, mapDispatchToProps)(Single)
-
-
-export default SingleBeerView;
