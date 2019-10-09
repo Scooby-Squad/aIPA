@@ -38,20 +38,6 @@ const fetchUser = async (user) => {
   } catch (error) {
     console.error(error)
   }
-  // fetch(uri, {
-  //   method: 'POST',
-  //   headers: {
-  //     Accept: 'application/json',
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify(data),
-  // }).then((response) => response.json())
-  //     .then((responseJson) => {
-  //       return responseJson;
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
 }
 
 export const signIn = () => {
@@ -65,6 +51,7 @@ export const signIn = () => {
       })
 
       if (result.type === "success") {
+        // Might need to pull from actual DB user at some point, but have what we need here for now
         const user = await fetchUser(result.user)
         const action = {
           signedIn: true,
