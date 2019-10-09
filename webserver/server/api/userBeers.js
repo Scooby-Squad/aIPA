@@ -24,7 +24,6 @@ router.put('/update', async (req, res, next) => {
         }
       }
     )
-    console.log('Updated')
     res.send(200)
   } catch (err) {
     next(err)
