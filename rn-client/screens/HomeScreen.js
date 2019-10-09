@@ -14,7 +14,7 @@ const HomeScreen = props => {
   return (
     <View style={styles.container}>
       {user.signedIn ? (
-        <LoggedInPage {...user} name={user.name} photoUrl={user.photoUrl} logOut={dispatchLogOut} />
+        <LoggedInPage {...user} {...props} name={user.name} photoUrl={user.photoUrl} logOut={dispatchLogOut} />
       ) : (
         <LoginPage signIn={dispatchSignIn} />
       )}
