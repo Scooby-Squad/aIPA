@@ -7,6 +7,7 @@ const {apiUrl, androidClientId, iosClientId} = getEnvVars()
  * ACTION TYPES
  **/
 const LOGGED_IN = 'LOGGED_IN'
+const LOGGED_OUT = 'LOGGED_OUT'
 
 
 /**
@@ -25,27 +26,32 @@ const initialState = {
  * ACTION CREATORS
  **/
 const loggedIn = user => ({type: LOGGED_IN, user})
+export const logOut = () => ({type: LOGGED_OUT})
 
 /**
  * THUNK CREATORS
  **/
-const fetchUser = (data) => {
-  // const user
-  const uri = `${apiUrl}/auth/google/`
-  fetch(uri, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  }).then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+const fetchUser = async (user) => {
+  try {
+    const {data} = await axios.post(`${apiUrl}/auth/google/`, user)
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+  // fetch(uri, {
+  //   method: 'POST',
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify(data),
+  // }).then((response) => response.json())
+  //     .then((responseJson) => {
+  //       return responseJson;
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
 }
 
 export const signIn = () => {
@@ -85,6 +91,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case LOGGED_IN:
       return {...state, ...action.user}
+    case LOGGED_OUT:
+      return initialState
     default:
       return state
   }
