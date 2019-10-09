@@ -1,39 +1,34 @@
-import * as WebBrowser from 'expo-web-browser'
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import {
   Image,
   Platform,
   ScrollView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
   Button
-} from 'react-native'
-
-import {MonoText} from '../components/StyledText'
-import QuestionsComponent from '../components/QuestionsComponent'
-import RatingsList from '../components/RatingsList'
+} from 'react-native';
+import QuestionsComponent from '../components/QuestionsComponent';
+import RatingsList from '../components/RatingsList';
 
 export default function QuizScreen(props) {
-  const [isQuizzing, setIsQuizzing] = useState(false)
-  const [quizCompleted, setQuizCompleted] = useState(false)
-  const [ratingData, setRatingData] = useState([])
+  const [isQuizzing, setIsQuizzing] = useState(false);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [ratingData, setRatingData] = useState([]);
 
   const startQuizHandler = () => {
-    setIsQuizzing(true)
-    setQuizCompleted(false)
-  }
+    setIsQuizzing(true);
+    setQuizCompleted(false);
+  };
 
   const returnHomeHandler = answers => {
-    setRatingData(answers)
-    setIsQuizzing(false)
-    setQuizCompleted(true)
-  }
+    setRatingData(answers);
+    setIsQuizzing(false);
+    setQuizCompleted(true);
+  };
 
   const cancelQuizHandler = () => {
-    setIsQuizzing(false)
-  }
+    setIsQuizzing(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -72,7 +67,7 @@ export default function QuizScreen(props) {
         </View>
       </ScrollView>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -131,7 +126,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         shadowColor: 'black',
-        shadowOffset: {width: 0, height: -3},
+        shadowOffset: { width: 0, height: -3 },
         shadowOpacity: 0.1,
         shadowRadius: 3
       },
@@ -162,4 +157,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7'
   }
-})
+});

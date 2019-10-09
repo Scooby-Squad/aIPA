@@ -1,28 +1,19 @@
-import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
-// import capitalize from '../utils/'
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 const SingleQuestion = props => {
-  const {quizData, currIdx} = props
+  const { quizData, currIdx } = props;
   return (
     <View style={styles.contentContainer}>
       <View>
-        <Text style={styles.categoryText}>
-          Beer
-          {/* Category:{' '}
-          {quizData[currIdx].category &&
-            quizData[currIdx].category.title
-              .split(' ')
-              .map(item => capitalize(item))
-              .join(' ')} */}
-        </Text>
+        <Text style={styles.categoryText}>Beer</Text>
       </View>
       <View>
         <Text style={styles.questionText}>{quizData[currIdx].question}</Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -39,6 +30,6 @@ const styles = StyleSheet.create({
     padding: 15,
     textAlign: 'center'
   }
-})
+});
 
-export default SingleQuestion
+export default SingleQuestion;

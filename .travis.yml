@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - node # uses most recent stable node version
+  - node # uses most recent stable node version 
 services:
   - postgresql # starts up postgres
 addons:
@@ -13,9 +13,8 @@ notifications:
 install:
   - npm ci # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "aipa-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "aipa";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
-  - npm test             # test the code
   - npm run build-client # make the bundle
 before_deploy: # omit node_modules, since we set skip_cleanup below
   - rm -rf node_modules

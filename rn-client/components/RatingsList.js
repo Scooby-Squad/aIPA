@@ -1,36 +1,29 @@
-import React from 'react'
-import {FlatList, View, ScrollView, Text, StyleSheet} from 'react-native'
+import React from 'react';
+import { FlatList, View, ScrollView, Text, StyleSheet } from 'react-native';
 
 const RatingsList = props => {
-  const {quizData} = props
-  // const score = quizData.reduce((sum, curVal) => {
-  //   return sum + (curVal.correct ? 1 : 0)
-  // }, 0)
+  const { quizData } = props;
   return (
     <View style={styles.contentContainer}>
       <FlatList
-        keyExtractor={(item, index) => item.id}
+        keyExtractor={(item, index) => index.toString()}
         data={quizData}
-        renderItem={({item}) => {
+        renderItem={({ item }) => {
           return (
             <ScrollView style={styles.contentContainer}>
               <Text>Question: {item.question}</Text>
               <View>
-                <Text
-                  // style={
-                  //   item.correct ? styles.correctText : styles.incorrectText
-                  // }
-                >
-                  Your Rating: {item.rating}
+                <Text>
+                  Your Rating: {item.rating == 0 ? 'Skipped' : item.rating}
                 </Text>
               </View>
             </ScrollView>
-          )
+          );
         }}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -43,6 +36,6 @@ const styles = StyleSheet.create({
   incorrectText: {
     color: 'red'
   }
-})
+});
 
-export default RatingsList
+export default RatingsList;

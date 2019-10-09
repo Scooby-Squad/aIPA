@@ -10,6 +10,9 @@ const User_Beer = require('./userBeerModel')
  */
 User.belongsToMany(Beer, {through: User_Beer})
 Beer.belongsToMany(User, {through: User_Beer})
+
+Beer.hasMany(User_Beer)
+User_Beer.belongsTo(Beer)
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'

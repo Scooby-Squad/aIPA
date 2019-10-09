@@ -1,22 +1,23 @@
 {
-  "name": "boilermaker",
+  "name": "aipa",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description":
+    "AI. Machine Learning. Data Visualization. Recommendation System. Mobile.",
   "engines": {
     "node": ">= 7.0.0"
   },
   "main": "index.js",
   "scripts": {
-    "build-client": "webpack",
+    "build-client": "touch buildClient.js",
     "build-client-watch": "webpack -w",
     "deploy": "webserver/script/deploy",
-    "heroku-token": "script/encrypt-heroku-auth-token.js",
+    "heroku-token": "webserver/script/encrypt-heroku-auth-token.js",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
-    "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
+    "prepare": "touch preparationComplete.js",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
-    "seed": "node script/seed.js",
+    "seed": "node webserver/script/seed.js",
     "start": "node webserver/server",
     "start-dev":
       "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
@@ -37,6 +38,8 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@tensorflow/tfjs": "^1.2.11",
+    "@tensorflow/tfjs-node": "^1.2.11",
     "axios": "^0.19.0",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",

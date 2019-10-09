@@ -1,38 +1,34 @@
-import React from 'react'
-import {ScrollView, View, TextInput, StyleSheet, Button} from 'react-native'
-import StarRating from 'react-native-star-rating'
+import React from 'react';
+import { ScrollView, View, StyleSheet, Button } from 'react-native';
+import StarRating from 'react-native-star-rating';
 
 const RatingInput = props => {
-  const {ratingInputHandler, enteredRating, addRatingHandler} = props
+  const { addRatingHandler } = props;
   return (
     <ScrollView
       keyboardShouldPersistTaps="always"
       contentContainerStyle={styles.inputContainer}
     >
-      {/* <TextInput
-        placeholder="Your Answer"
-        style={styles.input}
-        onChangeText={ratingInputHandler}
-        value={enteredRating}
-      /> */}
       <StarRating
         disabled={false}
         maxStars={5}
-        rating={enteredRating}
         fullStarColor="yellow"
-        selectedStar={(rating) => addRatingHandler(rating)}
+        selectedStar={rating => addRatingHandler(rating, false)}
       />
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <Button title="Submit" onPress={addRatingHandler} />
+          <Button
+            title="Skip"
+            onPress={() => addRatingHandler(undefined, true)}
+          />
         </View>
         <View style={styles.button}>
           <Button title="Quit" color="red" onPress={props.onCancel} />
         </View>
       </View>
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -54,6 +50,6 @@ const styles = StyleSheet.create({
   button: {
     width: '40%'
   }
-})
+});
 
-export default RatingInput
+export default RatingInput;
