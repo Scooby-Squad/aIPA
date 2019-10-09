@@ -1,14 +1,60 @@
+export const types = [
+  {
+    value: 'Amber Ale',
+    id: 1
+  },
+  {
+    value: 'Blonde Ale',
+    id: 2
+  },
+  {
+    value: 'Brown Ale',
+    id: 3
+  },
+  {
+    value: 'Hefeweizen',
+    id: 4
+  },
+  {
+    value: 'IPA',
+    id: 5
+  },
+  {
+    value: 'Irish Red Ale',
+    id: 6
+  },
+  {
+    value: 'Lager',
+    id: 7
+  },
+  {
+    value: 'Porter',
+    id: 8
+  },
+  {
+    value: 'Seasonal',
+    id: 9
+  },
+  {
+    value: 'Stout',
+    id: 10
+  },
+  {
+    value: 'Other',
+    id: 11
+  }
+];
+
 export default (beerDb = [
   {
     name: 'Loading',
     abv: '0',
     ibu: '0',
     srm: '0',
-    description:
-      "Loading...",
+    description: 'Loading...',
     style: '',
     category: '',
-    brewer: "",
+    brewer: '',
     address: '',
     city: '',
     state: '',
@@ -5039,7 +5085,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      '"If you can\'t feel good about your beer... what else is worth feeling good about.',
+      "\"If you can't feel good about your beer... what else is worth feeling good about.",
     style: 'American-Style Lager',
     category: 'North American Lager',
     brewer: 'Russian River Brewing',
@@ -6129,7 +6175,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Ladies and Gentlemen, Shmaltz Brewing Co. is proud to introduce Bittersweet Lenny\'s R.I.P.A. Brewed with an obscene amount of malts and hops. Shocking flavors - far beyond contemporary community standards. We cooked up the straight dope for the growing minions of our nation\'s Radical Beer junkies. Judges may not be able to define "Radical Beer," but you\'ll damn well know it when you taste it. Bruce died, officially declared a pauper by the State of California, personally broken and financially bankrupt simply for challenging America\'s moral hypocrisies with words. The memorial playbill read: "Yes, we killed him. Because he picked on the wrong god." -Directed by, the Courts, the Cops, the Church... and his own self-destructive super ego. Like Noah lying naked and loaded in his tent after the apocalyptic deluge: a witness, a patron saint, a father of what was to come. Sick, Dirty, Prophetic Lenny: a scapegoat, a martyr, a supreme inspiration.',
+      "Ladies and Gentlemen, Shmaltz Brewing Co. is proud to introduce Bittersweet Lenny's R.I.P.A. Brewed with an obscene amount of malts and hops. Shocking flavors - far beyond contemporary community standards. We cooked up the straight dope for the growing minions of our nation's Radical Beer junkies. Judges may not be able to define \"Radical Beer,\" but you'll damn well know it when you taste it. Bruce died, officially declared a pauper by the State of California, personally broken and financially bankrupt simply for challenging America's moral hypocrisies with words. The memorial playbill read: \"Yes, we killed him. Because he picked on the wrong god.\" -Directed by, the Courts, the Cops, the Church... and his own self-destructive super ego. Like Noah lying naked and loaded in his tent after the apocalyptic deluge: a witness, a patron saint, a father of what was to come. Sick, Dirty, Prophetic Lenny: a scapegoat, a martyr, a supreme inspiration.",
     style: 'Imperial or Double India Pale Ale',
     category: 'North American Ale',
     brewer: 'Shmaltz Brewing Company',
@@ -6636,8 +6682,7 @@ export default (beerDb = [
     state: 'Virginia',
     country: 'United States',
     coordinates: '39.0324, -77.4097',
-    website:
-      'http://www.greatamericanrestaurants.com/sweetMainSter/index.htm',
+    website: 'http://www.greatamericanrestaurants.com/sweetMainSter/index.htm',
     geoId: '8',
     typeId: '10',
     geo: 'None',
@@ -6930,7 +6975,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Clean, refreshing and perhaps just a bit tart, our brewers developed Weyerbacher Blanche just after their trip to Belgium during the winter of 2000.  Blanche, meaning "white", takes its name from the whitish haze in this pale gold brew, which is a result of the raw wheat and wheat malts used to brew this Belgian-style beer.    In 2002, Blanche was named as Best of the Mid-Atlantic/Southeast in the Belgian Specialty category at the US Beer Tasting Championships.   White beers are well known as the principal product from Hoegaarden, a small town in a wheat-growing region east of Brussels.  Light, cloudy and smooth, Weyerbacher Blanche brings you authentic Belgian-style flavor along with microbrewed quality and freshness.   Blanche is a thirst quenching beer that combines character and flavor with a moderate alcohol content.  Just try a bottle.  In the nose you\'ll notice spiciness from the coriander seeds and dried curacao orange peels added during the boil.  In the mouth you\'ll find a mild and refreshing ale with a hint of dryness from the wheat ingredients.  A clean finish follows with just a hint of tart spiciness.',
+      "Clean, refreshing and perhaps just a bit tart, our brewers developed Weyerbacher Blanche just after their trip to Belgium during the winter of 2000.  Blanche, meaning \"white\", takes its name from the whitish haze in this pale gold brew, which is a result of the raw wheat and wheat malts used to brew this Belgian-style beer.    In 2002, Blanche was named as Best of the Mid-Atlantic/Southeast in the Belgian Specialty category at the US Beer Tasting Championships.   White beers are well known as the principal product from Hoegaarden, a small town in a wheat-growing region east of Brussels.  Light, cloudy and smooth, Weyerbacher Blanche brings you authentic Belgian-style flavor along with microbrewed quality and freshness.   Blanche is a thirst quenching beer that combines character and flavor with a moderate alcohol content.  Just try a bottle.  In the nose you'll notice spiciness from the coriander seeds and dried curacao orange peels added during the boil.  In the mouth you'll find a mild and refreshing ale with a hint of dryness from the wheat ingredients.  A clean finish follows with just a hint of tart spiciness.",
     style: 'Belgian-Style White',
     category: 'Belgian and French Ale',
     brewer: 'Weyerbacher Brewing Company',
@@ -8834,8 +8879,7 @@ export default (beerDb = [
     abv: '4.1999998093',
     ibu: '0',
     srm: '0',
-    description:
-      'Exactly what it says, Bud Light and Lime. Brewed in Georgia.',
+    description: 'Exactly what it says, Bud Light and Lime. Brewed in Georgia.',
     style: 'American-Style Light Lager',
     category: 'North American Lager',
     brewer: 'Anheuser-Busch',
@@ -10853,7 +10897,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Cinder Cone Red\'s diverse selection of hops and barley captivates thirsty palates with its toffee-like flavor, intense citrus aroma and defined bitterness.   Located on the northern slope of Mt. Bachelor, the Cinder Cone was also known as "Red Hill" due to its reddish color that is revealed as the seasons change, the weather warms and the snow melts.  It\'s spring. Time to get outside.',
+      "Cinder Cone Red's diverse selection of hops and barley captivates thirsty palates with its toffee-like flavor, intense citrus aroma and defined bitterness.   Located on the northern slope of Mt. Bachelor, the Cinder Cone was also known as \"Red Hill\" due to its reddish color that is revealed as the seasons change, the weather warms and the snow melts.  It's spring. Time to get outside.",
     style: 'American-Style Amber/Red Ale',
     category: 'North American Ale',
     brewer: 'Deschutes Brewery',
@@ -11594,7 +11638,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Coors Light is Coors Brewing Company\'s largest-selling brand and the fourth best-selling beer in the U.S. Introduced in 1978, Coors Light has been a favorite in delivering the ultimate in cold refreshment for more than 25 years. The simple, silver-toned can caught people\'s attention and the brew became nicknamed the "Silver Bullet" as sales climbed.',
+      "Coors Light is Coors Brewing Company's largest-selling brand and the fourth best-selling beer in the U.S. Introduced in 1978, Coors Light has been a favorite in delivering the ultimate in cold refreshment for more than 25 years. The simple, silver-toned can caught people's attention and the brew became nicknamed the \"Silver Bullet\" as sales climbed.",
     style: 'American-Style Light Lager',
     category: 'North American Lager',
     brewer: 'Coors Brewing - Golden Brewery',
@@ -11745,7 +11789,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Way up in the Keewenaw Peninsula in Michigans UP, Mt. Bohemia ski area has a powder run hidden at the top called "Cousin Jack" (named after the Cornish miners)that winds its\' way steeply through the rocks and trees. AAAHHH WINTER!!! Double the Belgian Malt, double the Amarillo hops-a perfect way to end any day. Everyones\' favorite cousin! Also available barrel aged.',
+      "Way up in the Keewenaw Peninsula in Michigans UP, Mt. Bohemia ski area has a powder run hidden at the top called \"Cousin Jack\" (named after the Cornish miners)that winds its' way steeply through the rocks and trees. AAAHHH WINTER!!! Double the Belgian Malt, double the Amarillo hops-a perfect way to end any day. Everyones' favorite cousin! Also available barrel aged.",
     style: 'Imperial or Double India Pale Ale',
     category: 'North American Ale',
     brewer: 'The Livery',
@@ -12045,8 +12089,7 @@ export default (beerDb = [
     abv: '4.5',
     ibu: '0',
     srm: '0',
-    description:
-      'A Craft Amber Ale, brewed using Honey from Northern Mexico.',
+    description: 'A Craft Amber Ale, brewed using Honey from Northern Mexico.',
     style: 'American-Style Amber/Red Ale',
     category: 'North American Ale',
     brewer: 'Cucapa Brewing Company',
@@ -14188,7 +14231,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'In 1859 Col. Edwin L. Drake successfully drilled the first oil well in Northwest Pennsylvania. Because of the project known as "Drake\'s Folly," Pennsylvania was actually responsible for almost half of the world\'s oil production until the 1901 oil boom in Texas. Erie Brewing Co. reflects on our regions oil history and oil rush by producing a crude oil Black, silky smooth, malt bonanza oatmeal stout.',
+      "In 1859 Col. Edwin L. Drake successfully drilled the first oil well in Northwest Pennsylvania. Because of the project known as \"Drake's Folly,\" Pennsylvania was actually responsible for almost half of the world's oil production until the 1901 oil boom in Texas. Erie Brewing Co. reflects on our regions oil history and oil rush by producing a crude oil Black, silky smooth, malt bonanza oatmeal stout.",
     style: 'Oatmeal Stout',
     category: 'British Ale',
     brewer: 'Erie Brewing Company',
@@ -14296,7 +14339,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      '"A rich, flavorful Amber that\'s smooth and easy to drink. Drop Top is fermented by an American Ale yeast to produce beer with a clean flavor and fruity aroma. The velvet texture is from using Honey malt and a touch of milk sugar. The Alchemy bittering hops provide soft bitterness. Simcoe, a newly developed hop variety, adds unique hop flavor and aroma. 2004 GABF Gold Medal Award Winner',
+      "\"A rich, flavorful Amber that's smooth and easy to drink. Drop Top is fermented by an American Ale yeast to produce beer with a clean flavor and fruity aroma. The velvet texture is from using Honey malt and a touch of milk sugar. The Alchemy bittering hops provide soft bitterness. Simcoe, a newly developed hop variety, adds unique hop flavor and aroma. 2004 GABF Gold Medal Award Winner",
     style: 'American-Style Amber/Red Ale',
     category: 'North American Ale',
     brewer: 'Widmer Brothers Brewing',
@@ -18658,8 +18701,7 @@ export default (beerDb = [
     state: 'Virginia',
     country: 'United States',
     coordinates: '39.0324, -77.4097',
-    website:
-      'http://www.greatamericanrestaurants.com/sweetMainSter/index.htm',
+    website: 'http://www.greatamericanrestaurants.com/sweetMainSter/index.htm',
     geoId: '1',
     typeId: '5',
     geo: 'American',
@@ -19668,7 +19710,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Harpoon Brown is brewed to accentuate the sweeter, rounder notes derived from six different malts, including a de-husked chocolate malt that adds a hint of chocolate. The blend of these malts produces a beer that is complex and delicious without being heavy. This drinkable beer is perfect as a session beer or paired with foods.   This is the first year-round Harpoon beer the brewery has released in almost a decade.  While the craft beer industry has seen a growing trend in "extreme" beers, the brewers of Harpoon wanted to create something they could sit down and enjoy over an extended period of time - a session beer.  At 4.3% alcohol by volume, the Harpoon Brown Ale has the lowest alcohol content of all Harpoon beers.   Harpoon Brown Ale will be available in bottles and on draft beginning in March 2007.  An evening of celebrations to toast the beer\'s release will be held at locations throughout New England on Thursday, March 8th, including tastings at Harpoon\'s breweries in Boston, MA and Windsor, VT',
+      "Harpoon Brown is brewed to accentuate the sweeter, rounder notes derived from six different malts, including a de-husked chocolate malt that adds a hint of chocolate. The blend of these malts produces a beer that is complex and delicious without being heavy. This drinkable beer is perfect as a session beer or paired with foods.   This is the first year-round Harpoon beer the brewery has released in almost a decade.  While the craft beer industry has seen a growing trend in \"extreme\" beers, the brewers of Harpoon wanted to create something they could sit down and enjoy over an extended period of time - a session beer.  At 4.3% alcohol by volume, the Harpoon Brown Ale has the lowest alcohol content of all Harpoon beers.   Harpoon Brown Ale will be available in bottles and on draft beginning in March 2007.  An evening of celebrations to toast the beer's release will be held at locations throughout New England on Thursday, March 8th, including tastings at Harpoon's breweries in Boston, MA and Windsor, VT",
     style: 'American-Style Brown Ale',
     category: 'North American Ale',
     brewer: 'Harpoon Brewery - Boston',
@@ -20400,7 +20442,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'The ancient peoples that inhabited Wisconsin are known for building numerous celestial stone monuments and earthen effigy mounds to serve as symbols of their culture and their beliefs.  Unfortunately, most of these structures have fallen victim to the farmer\'s plow over the past 150 years.  Not far from the brewery, lying preserved on the floor of Rock Lake, are two effigy mounds - a Headless Man and a Turtle.  Legend tells us, as the Turtle can survive on both land and in water, its spirit helped guide the Headless Man into the afterlife.  May the Turtle\'s spirit guide you to happiness with a Headless Man Amber Alt.   The Headless Man is brewed in the "old way" of a DÃ¼sseldorf-style Altbier.  A unique cold lagering process gives this amber ale its smooth taste.',
+      "The ancient peoples that inhabited Wisconsin are known for building numerous celestial stone monuments and earthen effigy mounds to serve as symbols of their culture and their beliefs.  Unfortunately, most of these structures have fallen victim to the farmer's plow over the past 150 years.  Not far from the brewery, lying preserved on the floor of Rock Lake, are two effigy mounds - a Headless Man and a Turtle.  Legend tells us, as the Turtle can survive on both land and in water, its spirit helped guide the Headless Man into the afterlife.  May the Turtle's spirit guide you to happiness with a Headless Man Amber Alt.   The Headless Man is brewed in the \"old way\" of a DÃ¼sseldorf-style Altbier.  A unique cold lagering process gives this amber ale its smooth taste.",
     style: 'German-Style Brown Ale/Altbier',
     category: 'German Ale',
     brewer: 'Tyranena Brewing',
@@ -22189,7 +22231,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'First brewed in 2002 to celebrate the 15th Anniversary of the Pizza Port in Solana Beach, Hop 15 was imagined and designed by Tomme Arthur and Jeff Bagby. It was to be a celebration of 15 years of "Good Beer Brings Good Cheer." So there are 15 different hop varieties that are added to the beer every 15 minutes. Over the years, Hop 15 has racked up numerous accolades. It has won two silver medals at the Great American Beer Festival. It also was named Alpha King in 2004 and received a first place award at the Bistro Double IPA beer festival in Hayward, CA. Hop 15 remains won of the stickiest most resinous beers we have ever tasted and for that, we are thankful it is on tap at our brewery each and every day.   Malts- Two Row and English Light Crystal  Hops- We use 15 Different Varieties on a strictly don\'t ask don\'t tell policy  Yeast- White Labs California Ale and Proprietary Yeast Strains   Original Gravity- 1.086  Terminal Gravity- 1.014  9.7 % ABV   Draft- Available in Southern California 22 Oz Bottles and Cases- At Port Brewing San Marcos and Pizza Port Carlsbad, San Clemente and Solana Beach and wherever better beers are sold.',
+      "First brewed in 2002 to celebrate the 15th Anniversary of the Pizza Port in Solana Beach, Hop 15 was imagined and designed by Tomme Arthur and Jeff Bagby. It was to be a celebration of 15 years of \"Good Beer Brings Good Cheer.\" So there are 15 different hop varieties that are added to the beer every 15 minutes. Over the years, Hop 15 has racked up numerous accolades. It has won two silver medals at the Great American Beer Festival. It also was named Alpha King in 2004 and received a first place award at the Bistro Double IPA beer festival in Hayward, CA. Hop 15 remains won of the stickiest most resinous beers we have ever tasted and for that, we are thankful it is on tap at our brewery each and every day.   Malts- Two Row and English Light Crystal  Hops- We use 15 Different Varieties on a strictly don't ask don't tell policy  Yeast- White Labs California Ale and Proprietary Yeast Strains   Original Gravity- 1.086  Terminal Gravity- 1.014  9.7 % ABV   Draft- Available in Southern California 22 Oz Bottles and Cases- At Port Brewing San Marcos and Pizza Port Carlsbad, San Clemente and Solana Beach and wherever better beers are sold.",
     style: 'Imperial or Double India Pale Ale',
     category: 'North American Ale',
     brewer: 'Port Brewing Company',
@@ -22537,7 +22579,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Hop Ottin\' IPA is as hoppy as they come. The name means "hard working hops," in Boontling, and that tells it all. Generous additions of high-alpha Pacific Northwest hops added during a vigorous boil, plus traditional dry hopping, with whole hop cones, give this ale a delicious citrus aroma, and an intense hoppy bite. This IPA is a hop lover\'s dream.',
+      "Hop Ottin' IPA is as hoppy as they come. The name means \"hard working hops,\" in Boontling, and that tells it all. Generous additions of high-alpha Pacific Northwest hops added during a vigorous boil, plus traditional dry hopping, with whole hop cones, give this ale a delicious citrus aroma, and an intense hoppy bite. This IPA is a hop lover's dream.",
     style: 'American-Style India Pale Ale',
     category: 'North American Ale',
     brewer: 'Anderson Valley Brewing',
@@ -30002,7 +30044,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Milwaukee\'s Best Light is Miller Brewing Company\'s lead low-calorie brand in the near-premium segment. Brewed to uncompromising standards using select pale malt, cereal grains and yeast, this is a smooth, highly drinkable beer at an affordable price. Available nationwide, Miller first rolled out Milwaukee\'s Best Light in 1986 with an ambition to become the beer choice for guys. Our marketing, including sponsorship with the World Series of Poker and award-winning TV spots, takes a humorous approach to reinforce the idea that "Men should act like men and light beer should taste like beer.";"0',
+      "Milwaukee's Best Light is Miller Brewing Company's lead low-calorie brand in the near-premium segment. Brewed to uncompromising standards using select pale malt, cereal grains and yeast, this is a smooth, highly drinkable beer at an affordable price. Available nationwide, Miller first rolled out Milwaukee's Best Light in 1986 with an ambition to become the beer choice for guys. Our marketing, including sponsorship with the World Series of Poker and award-winning TV spots, takes a humorous approach to reinforce the idea that \"Men should act like men and light beer should taste like beer.\";\"0",
     style: 'American-Style Light Lager',
     category: 'North American Lager',
     brewer: 'Miller Brewing',
@@ -34348,7 +34390,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Brewer\'s Art\'s answer to the Belgian "devil" beers (i.e. Lucifer, Duvel, etc.). Both rich and dry, this beer is all too easy to consume in large quantities. Hopped with Styrian Goldings.',
+      "Brewer's Art's answer to the Belgian \"devil\" beers (i.e. Lucifer, Duvel, etc.). Both rich and dry, this beer is all too easy to consume in large quantities. Hopped with Styrian Goldings.",
     style: 'Other Belgian-Style Ales',
     category: 'Belgian and French Ale',
     brewer: "Brewer's Art",
@@ -37475,7 +37517,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'It took only a couple of rounds of India\'s finest for the 19th century British Colonists to write home, "Either send us some good beer or we\'re outta here." India Pale Ale is what was sent. Originally made extra hoppy to survive the voyage, it\'s unique flavor also survived the Colonists finicky tastes and became and instant favorite back home.   Pyramid India Pale Ale has the distinctively hoppy flavor and aroma craft beer enthusiasts demand. Abundant helpings of Columbus hops gives this ale an astonishing 67 IBU\'s - truly a beer for bold tastes! The distinguished Celebrator Beer News aptly named this brew "hophead nectar" (June/July issue, 1998).',
+      "It took only a couple of rounds of India's finest for the 19th century British Colonists to write home, \"Either send us some good beer or we're outta here.\" India Pale Ale is what was sent. Originally made extra hoppy to survive the voyage, it's unique flavor also survived the Colonists finicky tastes and became and instant favorite back home.   Pyramid India Pale Ale has the distinctively hoppy flavor and aroma craft beer enthusiasts demand. Abundant helpings of Columbus hops gives this ale an astonishing 67 IBU's - truly a beer for bold tastes! The distinguished Celebrator Beer News aptly named this brew \"hophead nectar\" (June/July issue, 1998).",
     style: 'American-Style India Pale Ale',
     category: 'North American Ale',
     brewer: 'Pyramid Ales Brewery',
@@ -40762,7 +40804,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Our Belgian Style White beer is smooth, tangy and very thirst quenching. Brewed with a delicate combination of oats, wheat and barley malt, we season it ever so lightly with hops. Then we add sprinklings of coriander and orange peel for a refreshing brew with a citrus aroma. Don\'t be fooled by the cloudy appearance, that\'s expected of a classic Belgian-style "Whitbier" or white beer.',
+      "Our Belgian Style White beer is smooth, tangy and very thirst quenching. Brewed with a delicate combination of oats, wheat and barley malt, we season it ever so lightly with hops. Then we add sprinklings of coriander and orange peel for a refreshing brew with a citrus aroma. Don't be fooled by the cloudy appearance, that's expected of a classic Belgian-style \"Whitbier\" or white beer.",
     style: 'Belgian-Style White',
     category: 'Belgian and French Ale',
     brewer: 'F.X. Matt Brewing',
@@ -47391,7 +47433,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Our Crisp, lighter in body, yet still full flavored brew.  Before Prohibition, thirst quenching lagers were firm and substantial, and enjoyed in huge volumes. This recipe incorporates yeast from the C. Schmidt Brewery of Philadelphia and a small portion of brewer\'s corn to recreate an "industrial" lager of the turn of the century.    Released April 6 to celebrate Prohibition\'s repeal 73 yrs. ago, Throwback Lager is a draft only release that should flow into June',
+      "Our Crisp, lighter in body, yet still full flavored brew.  Before Prohibition, thirst quenching lagers were firm and substantial, and enjoyed in huge volumes. This recipe incorporates yeast from the C. Schmidt Brewery of Philadelphia and a small portion of brewer's corn to recreate an \"industrial\" lager of the turn of the century.    Released April 6 to celebrate Prohibition's repeal 73 yrs. ago, Throwback Lager is a draft only release that should flow into June",
     style: 'American-Style Lager',
     category: 'North American Lager',
     brewer: 'Victory Brewing',
@@ -47909,7 +47951,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'Tournay Black is a bottle conditioned, Belgian stout brewed by Brasserie de Cazeau which is a farm-brewery located in the south of Belgium.  It was originally brewed as a winter ale under the name Tournay de Noel, but later became a year-round release.  They didn\'t provide much specific detail about how it was brewed except to say that it is made with water, malts, candi-sugar, hops, and yeast.  It is 7.6% ABV with a recommended drinking temperature of +/- 50 degrees.  The brewer states that the tasting notes are of, "roasted malts, coffee, bitter chocolate, earth, and cigar ash."  Well, I am a prodigious cigar smoker and I can\'t say that I would want to consume the ash.',
+      "Tournay Black is a bottle conditioned, Belgian stout brewed by Brasserie de Cazeau which is a farm-brewery located in the south of Belgium.  It was originally brewed as a winter ale under the name Tournay de Noel, but later became a year-round release.  They didn't provide much specific detail about how it was brewed except to say that it is made with water, malts, candi-sugar, hops, and yeast.  It is 7.6% ABV with a recommended drinking temperature of +/- 50 degrees.  The brewer states that the tasting notes are of, \"roasted malts, coffee, bitter chocolate, earth, and cigar ash.\"  Well, I am a prodigious cigar smoker and I can't say that I would want to consume the ash.",
     style: 'Belgian-Style Dark Strong Ale',
     category: 'Belgian and French Ale',
     brewer: 'Brasserie de Cazeau',
@@ -51004,7 +51046,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      '"Our Brewmasters\' Release - The three different red, caramelized, and dark wheat malts give this beer an intense red color that runs as deep as the flavor. The toasted grain flavors blend perfectly with the subtle spiciness of the hops just as the entirety fades to a smooth quick finish. 2007 Great American Beer Festival Silver Medal Award Winner.',
+      "\"Our Brewmasters' Release - The three different red, caramelized, and dark wheat malts give this beer an intense red color that runs as deep as the flavor. The toasted grain flavors blend perfectly with the subtle spiciness of the hops just as the entirety fades to a smooth quick finish. 2007 Great American Beer Festival Silver Medal Award Winner.",
     style: 'Light American Wheat Ale or Lager',
     category: 'Other Style',
     brewer: 'Widmer Brothers Brewing',
@@ -51542,7 +51584,7 @@ export default (beerDb = [
     ibu: '0',
     srm: '0',
     description:
-      'This one is dedicated to everyone who has gotten up at the butt crack of dawn, headed towards the shores and found it 4-6 feet and offshore only to find 30 of your "buddies" have already claimed the peak. As you paddle out, a swell arrives from nowhere signaling your turn to go. The surf Gods are shinning on you today. You turn, stroke like mad for the wave. Standing up you are alone and blammo you Wipeout....blowing the only chance of a right hander all to yourself. You know who you are. We\'ve all been there too. It\'s inside each and every one of us.   Welcome to the waters of Wipeout IPA, a massively hopped India Pale Ale with enough substance and body to overcome even the worst and most tragic of on the water spills. We brew Wipeout IPA for everyone- especially those hardy souls who brave the cold winter water and monster sets produced by an amazing northwest swell.    Only a tidal wave of hops can overcome the surging tide of malt that is required to produce a beer of this shape. We invite you to drop in, hang on and kick out the backside. That is, unless you enjoy wiping out and all the glory that goes with it.   Malts- Two Row, Wheat, Carapils and English Crystal Malts  Hops- Amarillo, Centennial and Simcoe   Yeast- White Labs California Ale   Original Gravity- 1.064  Terminal Gravity- 1.008  7.0% ABV   Draft- Available in Southern California and Arizona 22 Oz Bottles and Cases- At Port Brewing San Marcos and Pizza Port Carlsbad, San Clemente and Solana Beach and wherever better beers are sold.',
+      "This one is dedicated to everyone who has gotten up at the butt crack of dawn, headed towards the shores and found it 4-6 feet and offshore only to find 30 of your \"buddies\" have already claimed the peak. As you paddle out, a swell arrives from nowhere signaling your turn to go. The surf Gods are shinning on you today. You turn, stroke like mad for the wave. Standing up you are alone and blammo you Wipeout....blowing the only chance of a right hander all to yourself. You know who you are. We've all been there too. It's inside each and every one of us.   Welcome to the waters of Wipeout IPA, a massively hopped India Pale Ale with enough substance and body to overcome even the worst and most tragic of on the water spills. We brew Wipeout IPA for everyone- especially those hardy souls who brave the cold winter water and monster sets produced by an amazing northwest swell.    Only a tidal wave of hops can overcome the surging tide of malt that is required to produce a beer of this shape. We invite you to drop in, hang on and kick out the backside. That is, unless you enjoy wiping out and all the glory that goes with it.   Malts- Two Row, Wheat, Carapils and English Crystal Malts  Hops- Amarillo, Centennial and Simcoe   Yeast- White Labs California Ale   Original Gravity- 1.064  Terminal Gravity- 1.008  7.0% ABV   Draft- Available in Southern California and Arizona 22 Oz Bottles and Cases- At Port Brewing San Marcos and Pizza Port Carlsbad, San Clemente and Solana Beach and wherever better beers are sold.",
     style: 'American-Style India Pale Ale',
     category: 'North American Ale',
     brewer: 'Port Brewing Company',

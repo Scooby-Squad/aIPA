@@ -14,8 +14,7 @@ const UPDATED_RANKED_BEER = 'UPDATED_RANKED_BEER';
  **/
 const initialState = {
   all,
-  ranked: [],
-  rankTracker: false
+  ranked: []
 };
 
 /**

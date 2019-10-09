@@ -1,14 +1,23 @@
 import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
+import { ScrollView, StyleSheet } from 'react-native';
+import AllBeerList from '../components/AllBeerList';
 
-export default function SettingsScreen() {
-  /**
-   * Go ahead and delete ExpoConfigView and replace it with your content;
-   * we just wanted to give you a quick view of your config.
-   */
-  return <ExpoConfigView />;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 15,
+    backgroundColor: '#fff'
+  }
+});
+
+export default function SearchScreen(props) {
+  return (
+    <ScrollView style={styles.container}>
+      <AllBeerList navigation={props.navigation} />
+    </ScrollView>
+  );
 }
 
-SettingsScreen.navigationOptions = {
-  title: 'app.json',
+SearchScreen.navigationOptions = {
+  title: 'Search'
 };
