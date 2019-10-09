@@ -1,5 +1,27 @@
 export default (beerDb = [
   {
+    name: 'Loading',
+    abv: '0',
+    ibu: '0',
+    srm: '0',
+    description:
+      "Loading...",
+    style: '',
+    category: '',
+    brewer: "",
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+    coordinates: '',
+    website: '',
+    geoId: '',
+    typeId: '',
+    geo: '',
+    type: '',
+    id: '0'
+  },
+  {
     name: '.38 Special Bitter',
     abv: '3.7999999523',
     ibu: '0',
