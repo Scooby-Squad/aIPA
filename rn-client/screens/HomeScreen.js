@@ -1,71 +1,80 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image, Button, Platform } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, Image, Button, Platform } from 'react-native';
 //import Expo, {Google} from "expo"
-import * as Google from 'expo-google-app-auth'
+import * as Google from 'expo-google-app-auth';
 import Touchable from 'react-native-platform-touchable';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       signedIn: false,
-      name: "",
-      photoUrl: ""
-    }
+      name: '',
+      photoUrl: ''
+    };
   }
   signIn = async () => {
     try {
       const result = await Google.logInAsync({
         // in the rn-client folder, might need to run 'rm -rf node_modules && npm install' and restart expo cli
         androidClientId:
-          "334829367129-7dm2ulp6lh2phi1plip594cqsshr7rml.apps.googleusercontent.com/",
-        iosClientId: "334829367129-ugb9j6ptgf8e2fdt4r95n1kuafikdbie.apps.googleusercontent.com",
-        scopes: ["profile", "email"]
-      })
+          '334829367129-7dm2ulp6lh2phi1plip594cqsshr7rml.apps.googleusercontent.com/',
+        iosClientId:
+          '334829367129-ugb9j6ptgf8e2fdt4r95n1kuafikdbie.apps.googleusercontent.com',
+        scopes: ['profile', 'email']
+      });
 
-      if (result.type === "success") {
-        const user = await this.fetchUser(result.user)
-        console.log('user', user)
+      if (result.type === 'success') {
+        const user = await this.fetchUser(result.user);
+        console.log('user', user);
         this.setState({
           signedIn: true,
           name: result.user.name,
           photoUrl: result.user.photoUrl
-        })
+        });
       } else {
-        console.log("cancelled")
+        console.log('cancelled');
       }
     } catch (e) {
-      console.log("error", e)
+      console.log('error', e);
     }
-  }
-  fetchUser = (data) => {
-    const uri = Platform.OS === 'ios' ? 'http://localhost:8080/auth/google/' : 'http://10.0.2.2:8080/auth/google/'
+  };
+  fetchUser = data => {
+    const uri =
+      Platform.OS === 'ios'
+        ? 'http://localhost:8080/auth/google/'
+        : 'http://10.0.2.2:8080/auth/google/';
     fetch(uri, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data),
-    }).then((response) => response.json())
-        .then((responseJson) => {
-          console.log('responseJson', responseJson)
-          return responseJson;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-  }
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log('responseJson', responseJson);
+        return responseJson;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
   render() {
     return (
       <View style={styles.container}>
         {this.state.signedIn ? (
-          <LoggedInPage {...this.props} name={this.state.name} photoUrl={this.state.photoUrl} />
+          <LoggedInPage
+            {...this.props}
+            name={this.state.name}
+            photoUrl={this.state.photoUrl}
+          />
         ) : (
           <LoginPage signIn={this.signIn} />
         )}
       </View>
-    )
+    );
   }
 }
 
@@ -75,46 +84,47 @@ const LoginPage = props => {
       <Text style={styles.header}>Sign In With Google</Text>
       <Button title="Sign in with Google" onPress={() => props.signIn()} />
     </View>
-  )
-}
+  );
+};
 
 const LoggedInPage = props => {
   const _handlePressDocs = () => {
-    console.log(props)
-    props.navigation.navigate('Quiz')
+    console.log(props);
+    props.navigation.navigate('Quiz');
   };
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome:{props.name}</Text>
       <Image style={styles.image} source={{ uri: props.photoUrl }} />
       <Touchable
-          style={styles.option}
-          background={Touchable.Ripple('#ccc', false)}
-          onPress={_handlePressDocs}>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={styles.optionIconContainer}>
-              {/* <Image
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={_handlePressDocs}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionIconContainer}>
+            {/* <Image
                 source={require('../assets/images/expo-icon.png')}
                 resizeMode="contain"
                 fadeDuration={0}
                 style={{ width: 20, height: 20, marginTop: 1 }}
               /> */}
-            </View>
-            <View style={styles.optionTextContainer}>
-              <Text style={styles.optionText}>Take/Review Quiz</Text>
-            </View>
           </View>
-        </Touchable>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>Take/Review Quiz</Text>
+          </View>
+        </View>
+      </Touchable>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   header: {
     fontSize: 25
@@ -123,7 +133,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     width: 150,
     height: 150,
-    borderColor: "rgba(0,0,0,0.2)",
+    borderColor: 'rgba(0,0,0,0.2)',
     borderWidth: 3,
     borderRadius: 150
   },
@@ -131,24 +141,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 15,
     marginTop: 9,
-    marginBottom: 12,
+    marginBottom: 12
   },
   optionIconContainer: {
-    marginRight: 9,
+    marginRight: 9
   },
   option: {
     backgroundColor: '#fdfdfd',
     paddingHorizontal: 15,
     paddingVertical: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#EDEDED',
+    borderBottomColor: '#EDEDED'
   },
   optionText: {
     fontSize: 15,
-    marginTop: 1,
-  },
-})
-
+    marginTop: 1
+  }
+});
 
 /* import * as WebBrowser from 'expo-web-browser';
 import React from 'react';

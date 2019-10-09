@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
 
 export default function List(props) {
   const ranked = useSelector(state => state.beer.ranked);
-  //const change = useSelector(state => state.beer.change)
   const dispatch = useDispatch();
 
   useEffect(() => {

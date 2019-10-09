@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import StarRating from 'react-native-star-rating';
 import { updateUserBeer, getRankedBeers } from '../store/beer';
 
 export default function Single(props) {
-  const ranked = useSelector(state => state.beer.ranked);
   const [data, setData] = useState(props.navigation.getParam('beer'));
   const dispatch = useDispatch();
 
