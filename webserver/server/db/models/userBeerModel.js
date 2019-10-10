@@ -30,4 +30,15 @@ User_Beer.updateRatings = async function(userId, beerId, rating) {
   return updatedUserBeer
 }
 
+User_Beer.updateOrCreateRating = async function(userId, beerId, rating = 0) {
+  const userBeer = await User_Beer.findOrCreate({
+    where: {
+      userId,
+      beerId
+    }
+  })
+  const updatedUB = await userBeer[0].update({rating})
+  return updatedUB
+}
+
 module.exports = User_Beer

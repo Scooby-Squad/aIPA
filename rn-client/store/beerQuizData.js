@@ -1,4 +1,9 @@
-[
+// import * as beerQuizJSON from '../../webserver/server/tensor.js/beer'
+import beerDb from './beerDb'
+
+// putting this here directly, but ideally arent storing in both tensor.js in webserver and here
+// cant import easily
+const beerQuizJSON = [
   {
     "beerId": 408,
     "id": "Budweiser",
@@ -168,3 +173,10 @@
     "score": 5
   }
 ]
+
+
+const beerQuizData = beerQuizJSON.map(beer => {
+  return beerDb[beer.beerId]
+})
+
+export default beerQuizData
