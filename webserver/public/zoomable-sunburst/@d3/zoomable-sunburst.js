@@ -148,7 +148,7 @@ Touch a slice to expand. Touch the center to zoom out.`
     )
 
   main.variable().define('data', ['d3'], function(d3) {
-    return d3.json('http://localhost:8080/api/d3/sunburst')
+    return d3.json('../api/d3/sunburst')
   })
   main
     .define('partition', ['d3'], function(d3) {

@@ -166,7 +166,7 @@ Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
     })
   main.variable(observer('data')).define('data', ['d3'], async function(d3) {
     return Object.assign(
-      await d3.csv('http://localhost:8080/api/d3/hexbin', ({carat, price}) => ({
+      await d3.csv('../api/d3/hexbin', ({carat, price}) => ({
         x: +carat,
         y: +price
       })),
