@@ -23,10 +23,11 @@ export default function Single(props) {
     await setData({ ...data, rating });
   };
 
+  console.log('single beer view data is', data)
   return (
     <View style={styles.container}>
       <View style={styles.nameRating}>
-        <Text style={styles.text}>Name: {data.name}</Text>
+        <Text style={styles.textLarge}>{data.name}</Text>
         <StarRating
           disabled={false}
           iconSet="Ionicons"
@@ -37,6 +38,40 @@ export default function Single(props) {
           selectedStar={rating => onStarRatingPress(rating)}
           fullStarColor="blue"
         />
+        {
+          data.brewer ? <Text style={styles.text}>Brewed by {data.brewer}</Text> : <Text></Text>
+        }
+        {
+          data.type ? <Text style={styles.text}>Type: {data.type}</Text> : <Text></Text>
+        }
+        {
+          data.abv ? <Text style={styles.text}>ABV: {data.abv}</Text> : <Text></Text>
+        }
+        {
+          data.ibu>0 ? <Text style={styles.text}>IBU: {data.ibu}</Text> : <Text></Text>
+        }
+        {
+          data.srm>0 ? <Text style={styles.text}>SRM: {data.srm}</Text> : <Text></Text>
+        }
+        {
+          data.description ? <Text style={styles.text}>{data.description}</Text> : <Text></Text>
+        }
+        {
+          data.website ? <Text style={styles.text}>{data.website}</Text> : <Text></Text>
+        }
+        <Text></Text>
+        {
+          data.address ? <Text style={styles.text}>{data.address}</Text> : <Text></Text>
+        }
+        <Text style={styles.text}>
+          { data.city ? `${data.city}, ` : '' }
+          { data.state ? `${data.state}, ` : '' }
+          { data.country ? `${data.country}` : '' }
+        </Text>
+        {
+          data.coordinates ? <Text style={styles.text}>Coordinates: {data.coordinates}</Text> : <Text></Text>
+        }
+
       </View>
     </View>
   );
@@ -47,10 +82,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    margin: 25
   },
   text: {
     fontSize: 19
+  },
+  textLarge: {
+    fontSize: 29
   },
   nameRating: {
     justifyContent: 'space-around'
