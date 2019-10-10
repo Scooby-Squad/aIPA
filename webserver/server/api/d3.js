@@ -46,7 +46,7 @@ router.get('/sunburst', async (req, res, next) => {
 })
 
 router.get('/hexbin', async (req, res, next) => {
-  try{
+  try {
     const ratedBeers = await User_Beer.findAll({
       where: {userId: 1, rating: {[Op.ne]: '0'}},
       include: [{model: Beer}]
@@ -67,22 +67,21 @@ router.get('/hexbin', async (req, res, next) => {
     })
     const tensor = await Tensor(userRatedBeers)
 
-    let out = "carat,price\n"
-    for(let i=0; i<tensor.length; i++) {
-      out+= `${beerList[i].abv},${tensor[i]}\n`
+    let out = 'carat,price\n'
+    for (let i = 0; i < tensor.length; i++) {
+      out += `${beerList[i].abv},${tensor[i]}\n`
     }
     console.log(typeof beerList)
     console.log(beerList.length)
     res.send(out)
     //res.json(tensor)
-} catch (err) {
-  next(err)
-}})
-
-
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.get('/bubble-chart', async (req, res, next) => {
-  try{
+  try {
     const ratedBeers = await User_Beer.findAll({
       where: {userId: 1, rating: {[Op.ne]: '0'}},
       include: [{model: Beer}]
@@ -99,14 +98,21 @@ router.get('/bubble-chart', async (req, res, next) => {
     })
     const tensor = await Tensor(userRatedBeers)
 
-    let out = "id,value\n"
-    for(let i=0; i<tensor.length; i++) {
-      out+= `${beerList[i].type}.${beerList[i].name},${tensor[i]*tensor[i]*tensor[i]*tensor[i]*tensor[i]*tensor[i]*tensor[i]}\n`
+    let out = 'id,value\n'
+    for (let i = 0; i < tensor.length; i++) {
+      out += `${beerList[i].type}.${beerList[i].name},${tensor[i] *
+        tensor[i] *
+        tensor[i] *
+        tensor[i] *
+        tensor[i] *
+        tensor[i] *
+        tensor[i]}\n`
     }
     console.log(typeof beerList)
     console.log(beerList.length)
     res.send(out)
     //res.json(tensor)
-} catch (err) {
-  next(err)
-}})
+  } catch (err) {
+    next(err)
+  }
+})
