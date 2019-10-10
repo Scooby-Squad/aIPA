@@ -6,9 +6,9 @@ const renderSeparator = () => {
     <View
       style={{
         height: 1,
-        width: '86%',
+        width: '95%',
         backgroundColor: '#CED0CE',
-        marginLeft: '14%'
+        marginRight: '15%'
       }}
     />
   );
