@@ -11,6 +11,7 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import QuizScreen from '../screens/QuizScreen';
 import SingleBeerScreen from '../screens/SingleBeerView';
+import RecommendedList from '../components/RecommendedList'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -20,7 +21,8 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Quiz: QuizScreen
+    Quiz: QuizScreen,
+    Recs: RecommendedList
   },
   config
 );
