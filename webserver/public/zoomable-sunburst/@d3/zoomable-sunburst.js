@@ -6,6 +6,7 @@ export default function define(runtime, observer) {
 # Your Beer List
 
 Touch a slice to expand. Touch the center to zoom out.`
+
   })
   main
     .variable(observer('chart'))
@@ -145,11 +146,11 @@ Touch a slice to expand. Touch the center to zoom out.`
         return svg.node()
       }
     )
+
   main.variable().define('data', ['d3'], function(d3) {
     return d3.json('http://localhost:8080/api/d3/sunburst')
   })
   main
-
     .define('partition', ['d3'], function(d3) {
       return data => {
         const root = d3
@@ -166,6 +167,7 @@ Touch a slice to expand. Touch the center to zoom out.`
         d3.quantize(d3.interpolateRainbow, data.children.length + 1)
       )
     })
+
   main.variable().define('format', ['d3'], function(d3) {
     return d3.format(',d')
   })
@@ -174,11 +176,14 @@ Touch a slice to expand. Touch the center to zoom out.`
   })
   main
     .variable()
+
     .define('radius', ['width'], function(width) {
       return width / 6
     })
   main
+
     .variable()
+
     .define('arc', ['d3', 'radius'], function(d3, radius) {
       return d3
         .arc()
@@ -189,7 +194,9 @@ Touch a slice to expand. Touch the center to zoom out.`
         .innerRadius(d => d.y0 * radius)
         .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1))
     })
+
   main.variable().define('d3', ['require'], function(require) {
+
     return require('d3@5')
   })
   return main
