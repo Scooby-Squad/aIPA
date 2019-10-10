@@ -12,6 +12,8 @@ import SettingsScreen from '../screens/SettingsScreen';
 import QuizScreen from '../screens/QuizScreen';
 import GraphsScreen from '../screens/GraphsScreen';
 import SunburstScreen from '../screens/SunburstScreen';
+import BubbleChartScreen from '../screens/BubbleChartScreen';
+import HexbinScreen from '../screens/HexbinScreen';
 import SingleBeerScreen from '../screens/SingleBeerView';
 
 const config = Platform.select({
@@ -24,7 +26,9 @@ const HomeStack = createStackNavigator(
     Home: HomeScreen,
     Quiz: QuizScreen,
     Graphs: GraphsScreen,
-    Sunburst: SunburstScreen
+    Sunburst: SunburstScreen,
+    BubbleChart: BubbleChartScreen,
+    Hexbin: HexbinScreen
   },
   config
 );

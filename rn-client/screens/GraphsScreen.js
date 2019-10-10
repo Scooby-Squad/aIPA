@@ -44,12 +44,12 @@ export default function GraphsScreen(props) {
           <Image
             source={
               __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
+                ? require('../assets/images/scooby-squad-aipa-logo.png')
+                : require('../assets/images/scooby-squad-aipa-logo.png')
             }
             style={styles.welcomeImage}
           />
-          <Text>THIS WORKS</Text>
+          
           <Touchable
             style={styles.option}
             background={Touchable.Ripple('#ccc', false)}
@@ -61,25 +61,31 @@ export default function GraphsScreen(props) {
               </View>
             </View>
           </Touchable>
+          <Touchable
+            style={styles.option}
+            background={Touchable.Ripple('#ccc', false)}
+            onPress={() => {props.navigation.navigate('BubbleChart')}}
+          >
+            <View style={{ flexDirection: 'row' }}>
+              <View style={styles.optionTextContainer}>
+                <Text style={styles.optionText}>View Bubble Chart</Text>
+              </View>
+            </View>
+          </Touchable>
+          <Touchable
+            style={styles.option}
+            background={Touchable.Ripple('#ccc', false)}
+            onPress={() => {props.navigation.navigate('Hexbin')}}
+          >
+            <View style={{ flexDirection: 'row' }}>
+              <View style={styles.optionTextContainer}>
+                <Text style={styles.optionText}>View Hexbin</Text>
+              </View>
+            </View>
+          </Touchable>
         </View>
 
-        <View style={styles.getStartedContainer}>
-          <Button title="Take Quiz" onPress={startQuizHandler} />
-          {isQuizzing ? (
-            <QuestionsComponent
-              visible={isQuizzing}
-              returnHome={returnHomeHandler}
-              onCancel={cancelQuizHandler}
-            />
-          ) : (
-            <View />
-          )}
-          {!isQuizzing && quizCompleted ? (
-            <RatingsList quizData={ratingData} />
-          ) : (
-            <View />
-          )}
-        </View>
+        
       </ScrollView>
     </View>
   )
