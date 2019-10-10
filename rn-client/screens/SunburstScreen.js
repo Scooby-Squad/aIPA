@@ -7,6 +7,6 @@ export default function SunburstScreen(props) {
 
 
   return (
-    <WebView source={{ uri: 'https://facebook.github.io/react-native/' }} />
+    <WebView source={{ uri: 'http://scoobysquadaipa.herokuapp.com/zoomable-sunburst/' }} />
   )
 }
