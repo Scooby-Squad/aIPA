@@ -1,26 +1,31 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image, Button} from 'react-native'
-import {useSelector, useDispatch} from 'react-redux'
-import {signIn, logOut} from '../store/user'
-import Touchable from 'react-native-platform-touchable'
+import React from 'react';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { signIn, logOut } from '../store/user';
+import Touchable from 'react-native-platform-touchable';
 
 const HomeScreen = props => {
-
-  const user = useSelector(state => state.user)
-  const dispatch = useDispatch()
-  const dispatchSignIn = () => dispatch(signIn())
-  const dispatchLogOut = () => dispatch(logOut())
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const dispatchSignIn = () => dispatch(signIn());
+  const dispatchLogOut = () => dispatch(logOut());
 
   return (
     <View style={styles.container}>
       {user.signedIn ? (
-        <LoggedInPage {...user} {...props} name={user.name} photoUrl={user.photoUrl} logOut={dispatchLogOut} />
+        <LoggedInPage
+          {...user}
+          {...props}
+          name={user.name}
+          photoUrl={user.photoUrl}
+          logOut={dispatchLogOut}
+        />
       ) : (
         <LoginPage signIn={dispatchSignIn} />
       )}
     </View>
-  )
-}
+  );
+};
 
 const LoginPage = props => {
   return (
@@ -28,31 +33,33 @@ const LoginPage = props => {
       <Text style={styles.header}>Sign In With Google</Text>
       <Button title="Sign in with Google" onPress={props.signIn} />
     </View>
-  )
-}
+  );
+};
 
 const LoggedInPage = props => {
   const _handlePressDocs = () => {
-    props.navigation.navigate('Quiz')
+    props.navigation.navigate('Quiz');
   };
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome:{props.name}</Text>
       <Image style={styles.image} source={{ uri: props.photoUrl }} />
       <Touchable
-          style={styles.option}
-          background={Touchable.Ripple('#ccc', false)}
-          onPress={_handlePressDocs}>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={styles.optionTextContainer}>
-              <Text style={styles.optionText}>Take/Review Quiz</Text>
-            </View>
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={_handlePressDocs}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>Take/Review Quiz</Text>
           </View>
+        </View>
       </Touchable>
       <Touchable
         style={styles.option}
         background={Touchable.Ripple('#ccc', false)}
-        onPress={props.logOut}>
+        onPress={props.logOut}
+      >
         <View style={{ flexDirection: 'row' }}>
           <View style={styles.optionTextContainer}>
             <Text style={styles.optionText}>Log Out</Text>
@@ -60,15 +67,15 @@ const LoggedInPage = props => {
         </View>
       </Touchable>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   header: {
     fontSize: 25
@@ -77,7 +84,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     width: 150,
     height: 150,
-    borderColor: "rgba(0,0,0,0.2)",
+    borderColor: 'rgba(0,0,0,0.2)',
     borderWidth: 3,
     borderRadius: 150
   },
@@ -85,22 +92,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 15,
     marginTop: 9,
-    marginBottom: 12,
+    marginBottom: 12
   },
   optionIconContainer: {
-    marginRight: 9,
+    marginRight: 9
   },
   option: {
     backgroundColor: '#fdfdfd',
     paddingHorizontal: 15,
     paddingVertical: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#EDEDED',
+    borderBottomColor: '#EDEDED'
   },
   optionText: {
     fontSize: 15,
-    marginTop: 1,
-  },
-})
+    marginTop: 1
+  }
+});
 
-export default HomeScreen
+export default HomeScreen;
