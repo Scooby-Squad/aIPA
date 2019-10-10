@@ -37,7 +37,6 @@ User_Beer.updateOrCreateRating = async function(userId, beerId, rating) {
       beerId
     }
   })
-  console.log(userBeer[0])
   const updatedUB = await userBeer[0].update({rating})
   return updatedUB
 }

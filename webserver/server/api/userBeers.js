@@ -15,11 +15,14 @@ router.get('/', async (req, res, next) => {
 
 // Update a userbeer
 router.put('/update', async (req, res, next) => {
-  console.log('reqbody', req.body)
-  const {rating, userId, beerId} = req.body
+  // have a check on req.user in index, currently commented out for testing
+  const {rating, beerId} = req.body
   try {
-    const update = await User_Beer.updateOrCreateRating(userId, beerId, rating)
-    console.log('updated', update)
+    const update = await User_Beer.updateOrCreateRating(
+      req.user.id,
+      beerId,
+      rating
+    )
     if (!update) {
       console.error('Updated')
     }
