@@ -6,7 +6,6 @@ export default function define(runtime, observer) {
 # Your Beer List
 
 Touch a slice to expand. Touch the center to zoom out.`
-
   })
   main
     .variable(observer('chart'))
@@ -150,23 +149,20 @@ Touch a slice to expand. Touch the center to zoom out.`
   main.variable().define('data', ['d3'], function(d3) {
     return d3.json('../api/d3/sunburst')
   })
-  main
-    .define('partition', ['d3'], function(d3) {
-      return data => {
-        const root = d3
-          .hierarchy(data)
-          .sum(d => d.value)
-          .sort((a, b) => b.value - a.value)
-        return d3.partition().size([2 * Math.PI, root.height + 1])(root)
-      }
-    })
-  main
-
-    .define('color', ['d3', 'data'], function(d3, data) {
-      return d3.scaleOrdinal(
-        d3.quantize(d3.interpolateRainbow, data.children.length + 1)
-      )
-    })
+  main.define('partition', ['d3'], function(d3) {
+    return data => {
+      const root = d3
+        .hierarchy(data)
+        .sum(d => d.value)
+        .sort((a, b) => b.value - a.value)
+      return d3.partition().size([2 * Math.PI, root.height + 1])(root)
+    }
+  })
+  main.define('color', ['d3', 'data'], function(d3, data) {
+    return d3.scaleOrdinal(
+      d3.quantize(d3.interpolateRainbow, data.children.length + 1)
+    )
+  })
 
   main.variable().define('format', ['d3'], function(d3) {
     return d3.format(',d')
@@ -196,7 +192,6 @@ Touch a slice to expand. Touch the center to zoom out.`
     })
 
   main.variable().define('d3', ['require'], function(require) {
-
     return require('d3@5')
   })
   return main

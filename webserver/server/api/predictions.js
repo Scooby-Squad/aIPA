@@ -7,17 +7,12 @@ const Op = Sequelize.Op
 
 // Get Predictions for All Beers
 router.get('/', async (req, res, next) => {
-  // USER ID 1 IS HARDCODED FOR NOW!!!!!!!!!!!!!!!!!!!!!!
-
   try {
     const ratedBeers = await User_Beer.findAll({
-      where: {userId: 1, rating: {[Op.ne]: '0'}},
+      where: {userId: req.user.id, rating: {[Op.ne]: '0'}},
       include: [{model: Beer}]
     })
-    console.log(
-      ratedBeers[0].dataValues.beer.dataValues,
-      'RATEDBEERSDATAVALUES'
-    )
+
     let userRatedBeers = []
     ratedBeers.forEach(beer => {
       userRatedBeers.push({

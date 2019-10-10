@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { getRankedBeers } from '../../store/beer';
+import { useSelector } from 'react-redux';
+import { getPredictions } from '../../store/beer';
 import List from '../List'
 
 const styles = StyleSheet.create({
@@ -15,12 +16,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function RankedList(props) {
-  const rankedState = state => state.beer.ranked;
+export default function RecommendedList(props) {
+  const predictionsState = state => state.beer.predictions;
+  // need to run getPredictions upon completion of quiz
   const sort = (a, b) =>
     (a.rating < b.rating
       ? 1
       : a.rating === b.rating ? (a.name > b.name ? 1 : -1) : -1)
 
-  return <List selectorCB={rankedState} sortCB={sort} dispatchCreator={getRankedBeers} />
+  return <List selectorCB={predictionsState} sortCB={sort} dispatchCreator={getPredictions} />
 }

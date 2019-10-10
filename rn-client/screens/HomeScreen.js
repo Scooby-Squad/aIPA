@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn, logOut } from '../store/user';
+import { getPredictions } from '../store/beer';
 import Touchable from 'react-native-platform-touchable';
 
 const HomeScreen = props => {
@@ -9,6 +10,7 @@ const HomeScreen = props => {
   const dispatch = useDispatch();
   const dispatchSignIn = () => dispatch(signIn());
   const dispatchLogOut = () => dispatch(logOut());
+  const dispatchGetPredictions = () => dispatch(getPredictions());
 
   return (
     <View style={styles.container}>
@@ -19,6 +21,7 @@ const HomeScreen = props => {
           name={user.name}
           photoUrl={user.photoUrl}
           logOut={dispatchLogOut}
+          getPredictions={dispatchGetPredictions}
         />
       ) : (
         <LoginPage signIn={dispatchSignIn} />
@@ -37,9 +40,12 @@ const LoginPage = props => {
 };
 
 const LoggedInPage = props => {
-  const _handlePressDocs = () => {
+  const _handlePressQuiz = () => {
     props.navigation.navigate('Quiz');
   };
+  const _handlePressRecs = () => {
+    props.navigation.navigate('Recs')
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome:{props.name}</Text>
@@ -47,11 +53,22 @@ const LoggedInPage = props => {
       <Touchable
         style={styles.option}
         background={Touchable.Ripple('#ccc', false)}
-        onPress={_handlePressDocs}
+        onPress={_handlePressQuiz}
       >
         <View style={{ flexDirection: 'row' }}>
           <View style={styles.optionTextContainer}>
             <Text style={styles.optionText}>Take/Review Quiz</Text>
+          </View>
+        </View>
+      </Touchable>
+      <Touchable
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={_handlePressRecs}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>Get Predictions</Text>
           </View>
         </View>
       </Touchable>

@@ -15,6 +15,7 @@ import SunburstScreen from '../screens/SunburstScreen';
 import BubbleChartScreen from '../screens/BubbleChartScreen';
 import HexbinScreen from '../screens/HexbinScreen';
 import SingleBeerScreen from '../screens/SingleBeerView';
+import RecommendedList from '../components/RecommendedList'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -25,6 +26,7 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Quiz: QuizScreen,
+    Recs: RecommendedList,
     Graphs: GraphsScreen,
     Sunburst: SunburstScreen,
     BubbleChart: BubbleChartScreen,

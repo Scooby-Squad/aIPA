@@ -8,13 +8,15 @@ const { apiUrl } = getEnvVars();
  **/
 const GOT_RANKED_BEERS = 'GOT_RANKED_BEERS';
 const UPDATED_RANKED_BEER = 'UPDATED_RANKED_BEER';
+const GOT_PREDICTIONS = 'GOT_PREDICTIONS';
 
 /**
  * INITIAL STATE
  **/
 const initialState = {
   all,
-  ranked: []
+  ranked: [],
+  predictions: []
 };
 
 /**
@@ -22,6 +24,7 @@ const initialState = {
  **/
 const gotRankedBeers = beers => ({ type: GOT_RANKED_BEERS, beers });
 const updatedRankedBeer = beer => ({ type: UPDATED_RANKED_BEER, beer });
+const gotPredictions = predictions => ({ type: GOT_PREDICTIONS, predictions});
 
 /**
  * THUNK CREATORS
@@ -63,10 +66,22 @@ export const updateUserBeer = ub => {
   };
 };
 
+export const getPredictions = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(`${apiUrl}/api/predictions`)
+      dispatch(gotPredictions(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 /**
  * REDUCER
  **/
 export default function(state = initialState, action) {
+  let newBeers;
   switch (action.type) {
     case GOT_RANKED_BEERS:
       return { ...state, ranked: action.beers };
@@ -78,6 +93,14 @@ export default function(state = initialState, action) {
         }
       }
       return { ...state, ranked: state.ranked };
+    case GOT_PREDICTIONS:
+      newBeers = state.all
+      .filter((beer, index) => index <= 21)
+      .map((beer, index) => {
+        return {...beer, prediction: Math.round(action.predictions[index])}
+      })
+      console.log(newBeers[1])
+      return {...state, predictions: newBeers}
     default:
       return state;
   }
