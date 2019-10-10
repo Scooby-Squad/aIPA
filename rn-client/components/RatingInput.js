@@ -12,7 +12,8 @@ const RatingInput = props => {
       <StarRating
         disabled={false}
         maxStars={5}
-        fullStarColor="yellow"
+        fullStarColor="blue"
+        rating={props.rating}
         selectedStar={(rating) => addRatingHandler(rating, false)}
       />
       <View style={styles.buttons}>

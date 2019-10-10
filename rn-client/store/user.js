@@ -14,6 +14,7 @@ const LOGGED_OUT = 'LOGGED_OUT';
  **/
 const initialState = {
   signedIn: false,
+  id: undefined,
   name: '',
   photoUrl: '',
   accessToken: '',
@@ -54,6 +55,7 @@ export const signIn = () => {
         const user = await fetchUser(result.user);
         const action = {
           signedIn: true,
+          id: user.id,
           name: result.user.name,
           photoUrl: result.user.photoUrl,
           accessToken: result.accessToken,
