@@ -94,8 +94,10 @@ export default function(state = initialState, action) {
       }
       return { ...state, ranked: state.ranked };
     case GOT_PREDICTIONS:
-      newBeers = state.all.map((beer, index) => {
-        return {...beer, prediction: action.predictions[index]}
+      newBeers = state.all
+      .filter((beer, index) => index <= 21)
+      .map((beer, index) => {
+        return {...beer, prediction: Math.round(action.predictions[index])}
       })
       console.log(newBeers[1])
       return {...state, predictions: newBeers}

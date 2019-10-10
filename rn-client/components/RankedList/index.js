@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { useSelector } from 'react-redux';
 import { getRankedBeers } from '../../store/beer';
-import List from '../list'
+import List from '../List'
 
 const styles = StyleSheet.create({
   container: {
@@ -17,14 +16,11 @@ const styles = StyleSheet.create({
 });
 
 export default function RankedList(props) {
-  const ranked = useSelector(state => state.beer.ranked);
+  const rankedState = state => state.beer.ranked;
   const sort = (a, b) =>
     (a.rating < b.rating
       ? 1
       : a.rating === b.rating ? (a.name > b.name ? 1 : -1) : -1)
 
-  let rendered = <List beers={ranked} sortCB={sort} dispatchCreator={getRankedBeers} />
-  let loading = <Text> Loading </Text>;
-
-  return ranked ? rendered : loading;
+  return <List selectorCB={rankedState} sortCB={sort} dispatchCreator={getRankedBeers} />
 }

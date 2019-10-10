@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { View, StyleSheet, Button, Text } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import StarRating from 'react-native-star-rating';
 
 const styles = StyleSheet.create({
@@ -17,14 +17,17 @@ const styles = StyleSheet.create({
 
 export default function List(props) {
   const dispatch = useDispatch();
-  const {sortCB, beers, dispatchCreator} = props
+  const {sortCB, dispatchCreator, selectorCB} = props
+
 
   useEffect(() => {
     const fetchData = () => dispatch(dispatchCreator());
     fetchData();
   }, []);
 
-  return (
+  const beers = useSelector(selectorCB)
+  let rendered =
+    (
     <View style={styles.container}>
       <View>
         {beers
@@ -53,6 +56,9 @@ export default function List(props) {
             );
           })}
       </View>
-    </View>
-  );
+    </View>)
+
+  let loading = <Text> Loading </Text>;
+
+  return beers ? rendered : loading;
 }
