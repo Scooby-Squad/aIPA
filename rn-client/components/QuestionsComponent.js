@@ -1,45 +1,51 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, StyleSheet, Modal} from 'react-native'
-import RatingsList from './RatingsList'
 import SingleQuestion from './SingleQuestion'
 import RatingInput from './RatingInput'
+import beerQuizData from '../store/beerQuizData'
+import {useSelector, useDispatch} from 'react-redux'
+import {updateUserBeer} from '../store/beer'
 
-const tempData = { questions: [{
-  id: 1,
-  question: 'Beer 1',
-},
-{
-  id: 2,
-  question: 'The 2nd Beer'
-}]}
+
+const beerData = {questions: beerQuizData}
 
 const QuestionsComponent = props => {
+  // quiz data to loop through and use for info
   const [quizData, setQuizData] = useState([])
+  // pointer to traverse the quiz data
   const [currIdx, setCurrIdx] = useState(0)
-  const [isQuizFinished, setQuizFinished] = useState(false)
+  // used for UX purposes to display rating to user
+  const [enteredRating, setRating] = useState(0)
+  const userId = useSelector(state => state.user.id)
+  const dispatch = useDispatch()
   const {returnHome} = props
 
   const addRatingHandler = (rating = 0, skipped = false) => {
     if (rating.length === 0) return
-    const copyQuizData = quizData.map((question, index) => {
-      if (index === currIdx) {
-        return {...question, rating, skipped}
-      } else return {...question}
-    })
-    setQuizData(copyQuizData)
-    const nextIdx = currIdx + 1
-    if (nextIdx === quizData.length) {
-      setQuizFinished(true)
-      returnHome(copyQuizData)
-    } else {
-      setCurrIdx(nextIdx)
-    }
+    // doing this for UX, show a rating and then move to the next item
+    setRating(rating)
+    setTimeout(() => {
+      const copyQuizData = quizData.map((question, index) => {
+        if (index === currIdx) {
+          return {...question, rating, skipped, userId}
+        } else return {...question}
+      })
+      setQuizData(copyQuizData)
+      dispatch(updateUserBeer(copyQuizData[currIdx]));
+      const nextIdx = currIdx + 1
+      if (nextIdx === quizData.length) {
+        returnHome(copyQuizData)
+      } else {
+        setCurrIdx(nextIdx)
+        setRating(0)
+      }
+    }, 250)
   }
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       try {
-        const data = tempData
+        const data = beerData
         if (data && data.questions) {
           setQuizData(data.questions)
         }
@@ -54,18 +60,15 @@ const QuestionsComponent = props => {
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.container}>
-        {isQuizFinished ? (
-          <RatingsList quizData={quizData} />
-        ) : (
           <View style={styles.container}>
             <Text>{currIdx + 1}/{quizData.length}</Text>
             <SingleQuestion quizData={quizData} currIdx={currIdx} />
             <RatingInput
+              rating={enteredRating}
               addRatingHandler={addRatingHandler}
               onCancel={props.onCancel}
             />
           </View>
-        )}
       </View>
     </Modal>
   )

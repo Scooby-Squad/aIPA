@@ -4,24 +4,24 @@ import {FlatList, View, ScrollView, Text, StyleSheet} from 'react-native'
 const RatingsList = props => {
   const {quizData} = props
   return (
-    <View style={styles.contentContainer}>
+    <ScrollView style={styles.contentContainer}>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={quizData}
         renderItem={({item}) => {
           return (
-            <ScrollView style={styles.contentContainer}>
-              <Text>Question: {item.question}</Text>
+            <View style={styles.contentContainer}>
+              <Text>Beer: {item.name}</Text>
               <View>
                 <Text>
                   Your Rating: {item.rating == 0 ? 'Skipped' : item.rating}
                 </Text>
               </View>
-            </ScrollView>
+            </View>
           )
         }}
       />
-    </View>
+    </ScrollView>
   )
 }
 
