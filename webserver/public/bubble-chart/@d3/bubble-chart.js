@@ -62,7 +62,7 @@ Bubble charts are non-hierarchical [packed circles](/@d3/circle-packing). The ar
     )
   main.variable(observer('data')).define('data', ['d3'], async function(d3) {
     return await d3.csv(
-      'http://localhost:8080/api/d3/bubble-chart',
+      '../api/d3/bubble-chart',
       ({id, value}) => ({
         name: id.split('.').pop(),
         title: id.replace(/\./g, '/'),

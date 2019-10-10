@@ -146,7 +146,7 @@ This variant of a [sunburst diagram](/@d3/sunburst) shows only two layers of the
       }
     )
   main.variable(observer('data')).define('data', ['d3'], function(d3) {
-    return d3.json('http://localhost:8080/api/d3/sunburst')
+    return d3.json('../api/d3/sunburst')
   })
   main
     .variable(observer('partition'))

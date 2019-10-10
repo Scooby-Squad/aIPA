@@ -10,6 +10,8 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import QuizScreen from '../screens/QuizScreen';
+import GraphsScreen from '../screens/GraphsScreen';
+import SunburstScreen from '../screens/SunburstScreen';
 import SingleBeerScreen from '../screens/SingleBeerView';
 
 const config = Platform.select({
@@ -20,7 +22,9 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Quiz: QuizScreen
+    Quiz: QuizScreen,
+    Graphs: GraphsScreen,
+    Sunburst: SunburstScreen
   },
   config
 );
