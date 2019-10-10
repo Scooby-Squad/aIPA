@@ -1,0 +1,14 @@
+{
+  "name": "@mbostock/zoomable-sunburst",
+  "main": "@d3/zoomable-sunburst.js",
+  "version": "343.0.0",
+  "homepage": "https://observablehq.com/@mbostock/zoomable-sunburst",
+  "author": {
+    "name": "Mike Bostock",
+    "url": "https://observablehq.com/@mbostock"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}

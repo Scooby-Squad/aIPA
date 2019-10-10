@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Beer = require('./beer')
 
 const User_Beer = db.define('user_beer', {
   rating: {
@@ -28,6 +29,15 @@ User_Beer.updateRatings = async function(userId, beerId, rating) {
     }
   )
   return updatedUserBeer
+}
+
+// Returns the object for the d3 sunburst
+User_Beer.d3Sunburst = async function(userId) {
+  const userbeers = await User_Beer.findAll({
+    where: {userId},
+    include: [{model: Beer}]
+  })
+  return userbeers
 }
 
 module.exports = User_Beer
