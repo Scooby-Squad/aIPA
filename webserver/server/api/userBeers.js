@@ -5,7 +5,7 @@ module.exports = router
 // Get a userbeers for a user
 router.get('/', async (req, res, next) => {
   try {
-    const userbeers = await User_Beer.findRatings(1)
+    const userbeers = await User_Beer.findRatings(req.user.id)
     res.json(userbeers)
   } catch (err) {
     console.error(err)

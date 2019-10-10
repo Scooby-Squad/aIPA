@@ -30,7 +30,7 @@ User_Beer.updateRatings = async function(userId, beerId, rating) {
   return updatedUserBeer
 }
 
-User_Beer.updateOrCreateRating = async function(userId, beerId, rating) {
+User_Beer.updateOrCreateRating = async function(userId, beerId, rating = 0) {
   const userBeer = await User_Beer.findOrCreate({
     where: {
       userId,
