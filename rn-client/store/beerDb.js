@@ -1,5 +1,9 @@
 export const types = [
   {
+    value: 'All',
+    id: 0
+  },
+  {
     value: 'Amber Ale',
     id: 1
   },
