@@ -8,17 +8,28 @@ import styles from './style-sheet';
 // COMPONENT
 export default function AllList() {
   const [list, setList] = useState([]);
-  const [search, setSearch] = useState('All');
+  const [type, setType] = useState('Choose Type');
+  const [search, setSearch] = useState('');
 
   // SELECTION HANDLER
-  const selectionHandler = async (type, selection) => {
-    await setSearch(selection);
+  const selectionHandler = async (typeId, selection) => {
+    await setType(selection);
     let newList = [...allBeers];
     if (type > 0) {
       newList = allBeers.filter(beer => {
-        return beer.typeId == type;
+        return beer.typeId == typeId;
       });
     }
+    await setList(newList);
+  };
+
+  // SEARCH HANDLER
+  const updateSearch = async query => {
+    await setSearch(query);
+    let newList = [...allBeers];
+    newList = allBeers.filter(beer => {
+      return beer.name.startsWith(query);
+    });
     await setList(newList);
   };
 
@@ -38,6 +49,8 @@ export default function AllList() {
         keyExtractor={item => item.id}
         ListHeaderComponent={renderHeader({
           search,
+          updateSearch,
+          type,
           types,
           styles,
           selectionHandler
