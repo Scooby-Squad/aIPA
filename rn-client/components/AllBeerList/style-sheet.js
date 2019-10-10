@@ -25,5 +25,5 @@ const styles = StyleSheet.create({
   }
 });
 export const space =
-  '                                                                           ';
+  '                                                                       ';
 export default styles;

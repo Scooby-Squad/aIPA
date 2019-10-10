@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
     case SEARCH:
       if (action.query == '') {
         if (action.beerType == 0) {
-          return all;
+          return all.slice(1);
         }
         state = all.filter(beer => {
           return beer.typeId == action.beerType;

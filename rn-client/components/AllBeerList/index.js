@@ -34,7 +34,7 @@ export default function AllList() {
   };
 
   // IF SELECTION MADE RENDER THIS
-  let rendered = (
+  let render = (
     <View style={styles.container}>
       <FlatList
         data={list}
@@ -58,8 +58,6 @@ export default function AllList() {
       />
     </View>
   );
-  // IF NO SELECTION MADE RENDER THIS
-  let loading = <Text style={styles.loading}> Loading... </Text>;
   // RENDER
-  return list ? rendered : loading;
+  return render;
 }
