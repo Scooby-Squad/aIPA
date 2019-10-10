@@ -75,6 +75,17 @@ const LoggedInPage = props => {
       <Touchable
         style={styles.option}
         background={Touchable.Ripple('#ccc', false)}
+        onPress={() => {props.navigation.navigate('Graphs')}}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>View Graphs</Text>
+          </View>
+        </View>
+      </Touchable>
+      <Touchable
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
         onPress={props.logOut}
       >
         <View style={{ flexDirection: 'row' }}>
