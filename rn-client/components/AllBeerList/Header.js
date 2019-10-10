@@ -10,7 +10,7 @@ const renderHeader = props => (
     <Searchbar
       placeholder="Search"
       onChangeText={query => {
-        props.updateSearch(query);
+        props.changeHandler(query, props.type, props.typeIndex);
       }}
       value={props.search}
     />
@@ -19,7 +19,7 @@ const renderHeader = props => (
       label={props.type}
       data={props.types}
       onChangeText={(selection, index) => {
-        props.selectionHandler(index, selection);
+        props.changeHandler(props.search, selection, index);
       }}
     />
   </View>
