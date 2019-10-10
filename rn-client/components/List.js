@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 export default function List(props) {
   const dispatch = useDispatch();
-  const {sortCB, dispatchCreator, selectorCB} = props
+  const {sortCB, dispatchCreator, selectorCB, ratingToUse} = props
 
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function List(props) {
             return (
               <View style={styles.item} key={beer.id}>
                 <Button
-                  title={`${beer.name}`}
+                  title={`${beer.name.slice(0, 30)}`}
                   onPress={() =>
                     props.navigation.navigate('SingleBeer', { beer })
                   }
@@ -45,9 +45,9 @@ export default function List(props) {
                   iconSet="Ionicons"
                   emptyStar="ios-star-outline"
                   fullStar="ios-star"
-                  stlye={styles.rating}
+                  style={styles.rating}
                   disabled={true}
-                  rating={Number(beer.rating)}
+                  rating={Number(beer[ratingToUse])}
                   maxStars={5}
                   starSize={15}
                   fullStarColor="blue"

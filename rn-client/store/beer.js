@@ -99,7 +99,6 @@ export default function(state = initialState, action) {
       .map((beer, index) => {
         return {...beer, prediction: Math.round(action.predictions[index])}
       })
-      console.log(newBeers[1])
       return {...state, predictions: newBeers}
     default:
       return state;
