@@ -94,6 +94,9 @@ export default function(state = initialState, action) {
       }
       return { ...state, ranked: state.ranked };
     case GOT_PREDICTIONS:
+      // want to filter out already done beers
+      // have different colors for recommendations, or a label
+      // ranked beers should disappear if done from the predictions view
       newBeers = state.all
       .filter((beer, index) => index <= 21)
       .map((beer, index) => {
