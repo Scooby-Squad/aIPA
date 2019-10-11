@@ -3,7 +3,6 @@ import { WebView } from 'react-native-webview';
 
 
 export default function HexbinScreen(props) {
-  
 
 
   return (

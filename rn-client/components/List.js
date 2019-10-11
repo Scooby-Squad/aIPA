@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {types} from '../store/beerDb'
-import renderHeader from './AllBeerList/Header'
-import { View, StyleSheet, Button, Text, FlatList } from 'react-native';
+import { types } from '../store/beerDb';
+import renderHeader from './AllBeerList/Header';
+import { View, Button, TouchableOpacity, Text, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import StarRating from 'react-native-star-rating';
-import renderSeparator from './AllBeerList/Seperator'
-import styles from './RankedList/style-sheet'
-import { searchRanked, blankSearch } from '../store/beer'
-
+import renderSeparator from './AllBeerList/Seperator';
+import styles from './AllBeerList/style-sheet';
+import { searchRanked, blankSearch } from '../store/beer';
 
 export default function List(props) {
   const dispatch = useDispatch();
@@ -21,8 +20,8 @@ export default function List(props) {
   const [search, setSearch] = useState('');
   const [typeIndex, setTypeIndex] = useState(100);
 
-   // INITIAL RENDER
-   useEffect(() => {
+  // INITIAL RENDER
+  useEffect(() => {
     dispatch(blankSearch());
   }, []);
 
@@ -34,15 +33,13 @@ export default function List(props) {
     dispatch(searchRanked(query, beerTypeId, listToUse));
   };
 
-
   useEffect(() => {
     const fetchData = () => dispatch(dispatchCreator());
     fetchData();
   }, []);
 
-  const beers = useSelector(selectorCB)
-  let rendered =
-    (
+  const beers = useSelector(selectorCB);
+  let rendered = (
     <View>
       <FlatList
         data={list.sort(sortCB)}
@@ -55,23 +52,23 @@ export default function List(props) {
             </View>
             <View style={styles.stars}>
               <StarRating
-                  iconSet="Ionicons"
-                  emptyStar="ios-star-outline"
-                  fullStar="ios-star"
-                  style={styles.rating}
-                  disabled={true}
-                  rating={Number(item[ratingToUse])}
-                  maxStars={5}
-                  starSize={15}
-                  fullStarColor="blue"
-                />
-              <Button
-                  style={{fontSize: 5}}
-                  title="View"
-                  onPress={() =>
-                    props.navigation.navigate('SingleBeer', { item })
-                  }
-                />
+                iconSet="Ionicons"
+                emptyStar="ios-star-outline"
+                fullStar="ios-star"
+                stlye={styles.rating}
+                disabled={true}
+                rating={Number(item[ratingToUse])}
+                maxStars={5}
+                starSize={15}
+                fullStarColor="blue"
+              />
+              <TouchableOpacity
+                onPress={() =>
+                  props.navigation.navigate('SingleBeer', { item })
+                }
+              >
+                <Text style={styles.button}>View</Text>
+              </TouchableOpacity>
             </View>
           </View>
         )}
@@ -86,7 +83,8 @@ export default function List(props) {
           changeHandler
         })}
       />
-    </View>)
+    </View>
+  );
 
   let loading = <Text> Loading </Text>;
 
