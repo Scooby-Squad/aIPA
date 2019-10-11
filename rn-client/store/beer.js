@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import axios from 'axios';
 import all from './beerDb';
 import getEnvVars from '../environment';
@@ -9,6 +10,8 @@ const { apiUrl } = getEnvVars();
 const GOT_RANKED_BEERS = 'GOT_RANKED_BEERS';
 const UPDATED_RANKED_BEER = 'UPDATED_RANKED_BEER';
 const GOT_PREDICTIONS = 'GOT_PREDICTIONS';
+const SEARCH_RANKED = 'SEARCH_RANKED'
+const SEARCH_BLANK = 'SEARCH_BLANK'
 
 /**
  * INITIAL STATE
@@ -16,6 +19,7 @@ const GOT_PREDICTIONS = 'GOT_PREDICTIONS';
 const initialState = {
   all,
   ranked: [],
+  rankSearch: [],
   predictions: []
 };
 
@@ -25,6 +29,9 @@ const initialState = {
 const gotRankedBeers = beers => ({ type: GOT_RANKED_BEERS, beers });
 const updatedRankedBeer = beer => ({ type: UPDATED_RANKED_BEER, beer });
 const gotPredictions = predictions => ({ type: GOT_PREDICTIONS, predictions});
+export const searchRanked = (query, beerType) => ({type: SEARCH_RANKED, query, beerType})
+export const blankSearch = () => ({type: SEARCH_BLANK})
+
 
 /**
  * THUNK CREATORS
@@ -83,6 +90,28 @@ export const getPredictions = () => {
 export default function(state = initialState, action) {
   let newBeers;
   switch (action.type) {
+    case SEARCH_BLANK:
+      return {...state, rankSearch: []}
+    case SEARCH_RANKED:
+        if (action.query == '') {
+          if (action.beerType == 0) {
+            return {...state, rankSearch: state.ranked}
+          }
+          state.rankSearch = state.ranked.filter(beer => {
+            return beer.typeId == action.beerType;
+          });
+        } else if (action.beerType == 100 || action.beerType == 0) {
+          state.rankSearch = state.ranked.filter(beer => {
+            return beer.name.startsWith(action.query);
+          });
+        } else {
+          state.rankSearch = state.ranked.filter(beer => {
+            return (
+              beer.name.startsWith(action.query) && beer.typeId == action.beerType
+            );
+          });
+        }
+        return state;
     case GOT_RANKED_BEERS:
       return { ...state, ranked: action.beers };
     case UPDATED_RANKED_BEER:
