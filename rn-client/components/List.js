@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {types} from '../store/beerDb'
 import renderHeader from './AllBeerList/Header'
-import { View, StyleSheet, Button, Text, FlatList } from 'react-native';
+import { View, Button, Text, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import StarRating from 'react-native-star-rating';
 import renderSeparator from './AllBeerList/Seperator'
-import styles from './RankedList/style-sheet'
+import styles from './AllBeerList/style-sheet'
 import { searchRanked, blankSearch } from '../store/beer'
 
 

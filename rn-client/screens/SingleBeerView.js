@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import StarRating from 'react-native-star-rating';
 import { updateUserBeer, getRankedBeers } from '../store/beer';
@@ -59,29 +59,29 @@ export default function Single(props) {
           fullStarColor="blue"
         />
         {
-          data.brewer ? <Text style={styles.text}>Brewed by {data.brewer}</Text> : <Text></Text>
+          data.brewer ? <Text style={styles.text}>Brewed by {data.brewer}</Text> : <Text />
         }
         {
-          data.type ? <Text style={styles.text}>Type: {data.type}</Text> : <Text></Text>
+          data.type ? <Text style={styles.text}>Type: {data.type}</Text> : <Text />
         }
         {
-          data.abv ? <Text style={styles.text}>ABV: {data.abv}</Text> : <Text></Text>
+          data.abv ? <Text style={styles.text}>ABV: {data.abv}</Text> : <Text />
         }
         {
-          data.ibu > 0 ? <Text style={styles.text}>IBU: {data.ibu}</Text> : <Text></Text>
+          data.ibu > 0 ? <Text style={styles.text}>IBU: {data.ibu}</Text> : <Text />
         }
         {
-          data.srm > 0 ? <Text style={styles.text}>SRM: {data.srm}</Text> : <Text></Text>
+          data.srm > 0 ? <Text style={styles.text}>SRM: {data.srm}</Text> : <Text />
         }
         {
-          data.description ? <Text style={styles.text}>{data.description}</Text> : <Text></Text>
+          data.description ? <Text style={styles.text}>{data.description}</Text> : <Text />
         }
         {
-          data.website ? <Text style={styles.text}>{data.website}</Text> : <Text></Text>
+          data.website ? <Text style={styles.text}>{data.website}</Text> : <Text />
         }
         <Text />
         {
-          data.address ? <Text style={styles.text}>{data.address}</Text> : <Text></Text>
+          data.address ? <Text style={styles.text}>{data.address}</Text> : <Text />
         }
         <Text style={styles.text}>
           { data.city ? `${data.city}, ` : '' }
@@ -89,11 +89,11 @@ export default function Single(props) {
           { data.country ? `${data.country}` : '' }
         </Text>
         {
-          data.coordinates ? <Text style={styles.text}>Coordinates: {data.coordinates}</Text> : <Text></Text>
+          data.coordinates ? <Text style={styles.text}>Coordinates: {data.coordinates}</Text> : <Text />
         }
 
       </View>
-      {!data.rating ? (<Button title="Add to wishlist" />) : <Text></Text>}
+      {!data.rating ? (<Button title="Add to wishlist" />) : <Text />}
     </View>
   );
 }
