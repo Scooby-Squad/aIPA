@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import allBeers, { types } from '../../store/beerDb';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Button } from 'react-native';
 import renderSeparator from './Seperator';
 import renderHeader from './Header';
 import styles from './style-sheet';
@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actions } from '../../store/search';
 
 // COMPONENT
-export default function AllList() {
+export default function AllList(props) {
   // DISPATCHER
   const dispatch = useDispatch();
 
@@ -35,14 +35,25 @@ export default function AllList() {
 
   // IF SELECTION MADE RENDER THIS
   let render = (
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={list}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={styles.flatview}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.brewer}>{item.brewer}</Text>
+            <View style={styles.text}>
+              <Text style={styles.name}>{item.name}</Text>
+              <Text style={styles.brewer}>{item.brewer}</Text>
+            </View>
+            <View style={styles.stars}>
+              <Button
+                  style={{fontSize: 5}}
+                  title="View"
+                  onPress={() =>
+                    props.navigation.navigate('SingleBeer', { item })
+                  }
+                />
+            </View>
           </View>
         )}
         ItemSeparatorComponent={renderSeparator}
