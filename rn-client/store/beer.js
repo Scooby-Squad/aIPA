@@ -2,6 +2,7 @@
 import axios from 'axios';
 import all from './beerDb';
 import getEnvVars from '../environment';
+
 const { apiUrl } = getEnvVars();
 
 /**
@@ -12,6 +13,9 @@ const UPDATED_RANKED_BEER = 'UPDATED_RANKED_BEER';
 const GOT_PREDICTIONS = 'GOT_PREDICTIONS';
 const SEARCH_RANKED = 'SEARCH_RANKED'
 const SEARCH_BLANK = 'SEARCH_BLANK'
+const GOT_WISHLIST = 'GOT_WISHLIST'
+const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST'
+const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST'
 
 /**
  * INITIAL STATE
@@ -20,7 +24,8 @@ const initialState = {
   all,
   ranked: [],
   rankSearch: [],
-  predictions: []
+  predictions: [],
+  wishlist: []
 };
 
 /**
@@ -32,6 +37,9 @@ const gotPredictions = predictions => ({ type: GOT_PREDICTIONS, predictions});
 // export const getPredictionsState = () => ({ type: GET_PREDICTIONS_STATE})
 export const searchRanked = (query, beerType, list) => ({type: SEARCH_RANKED, query, beerType, list})
 export const blankSearch = () => ({type: SEARCH_BLANK})
+const gotWishlist = (wishlist) => ({type: GOT_WISHLIST, wishlist})
+const addToWishlist = (beer) => ({type: ADD_TO_WISHLIST, beer})
+const removeFromWishlist = (beer) => ({type: REMOVE_FROM_WISHLIST, beer})
 
 
 /**
@@ -85,10 +93,45 @@ export const getPredictions = () => {
   }
 }
 
+
+export const getWishlist = () => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get(`${apiUrl}/api/wishlist`)
+      dispatch(gotWishlist(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const addToWishlistThunk = (beer) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.put(`${apiUrl}/userbeers/update`, beer)
+      dispatch(addToWishlist(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const removeFromWishlistThunk = (beer) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`${apiUrl}/api/wishlist`, beer)
+      dispatch(removeFromWishlist(beer))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 const sorter = (a, b) =>
     (a.prediction < b.prediction
       ? 1
       : a.prediction === b.prediction ? (a.name > b.name ? 1 : -1) : -1)
+
 
 /**
  * REDUCER
@@ -150,7 +193,21 @@ export default function(state = initialState, action) {
       .map((beer, index) => {
         return {...beer, prediction: Math.round(action.predictions[index])}
       })
+
+      console.log(newBeers[1])
+      return {...state, predictions: newBeers}
+    case GOT_WISHLIST:
+      return {...state, wishlist: data}
+    case ADD_TO_WISHLIST:
+      return {...state, wishlist: [...wishlist, actoin.beer]}
+    case REMOVE_FROM_WISHLIST:
+      const newWishlist = state.wishlist.filter(beer => {
+        if (beer.id !== action.beer.id) return beer
+      })
+      return {...state, wishlist: newWishlists}
+
       return {...state, predictions: newPredictions}
+
     default:
       return state;
   }
