@@ -2,7 +2,7 @@
 import axios from 'axios';
 import all from './beerDb';
 import getEnvVars from '../environment';
-import { runInNewContext } from 'vm';
+
 const { apiUrl } = getEnvVars();
 
 /**
