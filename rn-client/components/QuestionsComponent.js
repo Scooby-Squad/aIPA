@@ -28,7 +28,7 @@ const QuestionsComponent = props => {
       const copyQuizData = quizData.map((question, index) => {
         if (index === currIdx) {
           return {...question, rating, skipped, userId}
-        } else return {...question}
+        } else {return {...question}}
       })
       setQuizData(copyQuizData)
       dispatch(updateUserBeer(copyQuizData[currIdx]));
