@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { useDispatch } from 'react-redux';
-import StarRating from 'react-native-star-rating';
-import { updateUserBeer, getRankedBeers } from '../store/beer';
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
+import { useDispatch } from "react-redux";
+import StarRating from "react-native-star-rating";
+import { updateUserBeer, getRankedBeers } from "../store/beer";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
     margin: 25
   },
   text: {
@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
     fontSize: 29
   },
   nameRating: {
-    justifyContent: 'space-around'
+    justifyContent: "space-around"
   }
 });
 
 // eslint-disable-next-line complexity
 export default function Single(props) {
-  const [data, setData] = useState(props.navigation.getParam('item'));
+  const [data, setData] = useState(props.navigation.getParam("item"));
   const dispatch = useDispatch();
 
   useEffect(
@@ -43,7 +43,7 @@ export default function Single(props) {
     await setData({ ...data, rating });
   };
 
-  console.log('single beer view data is', data);
+  console.log("single beer view data is", data);
   return (
     <View style={styles.container}>
       <View style={styles.nameRating}>
@@ -68,7 +68,11 @@ export default function Single(props) {
         ) : (
           <Text />
         )}
-        {data.abv ? <Text style={styles.text}>ABV: {data.abv}</Text> : <Text />}
+        {data.abv ? (
+          <Text style={styles.text}>ABV: {Math.round(data.abv * 10) / 10}</Text>
+        ) : (
+          <Text />
+        )}
         {data.ibu > 0 ? (
           <Text style={styles.text}>IBU: {data.ibu}</Text>
         ) : (
@@ -96,9 +100,9 @@ export default function Single(props) {
           <Text />
         )}
         <Text style={styles.text}>
-          {data.city ? `${data.city}, ` : ''}
-          {data.state ? `${data.state}, ` : ''}
-          {data.country ? `${data.country}` : ''}
+          {data.city ? `${data.city}, ` : ""}
+          {data.state ? `${data.state}, ` : ""}
+          {data.country ? `${data.country}` : ""}
         </Text>
         {data.coordinates ? (
           <Text style={styles.text}>Coordinates: {data.coordinates}</Text>
