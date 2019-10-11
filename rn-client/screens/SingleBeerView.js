@@ -73,6 +73,7 @@ export default function Single(props) {
         }
 
       </View>
+      {!data.rating ? (<Button title="Add to wishlist" />) : <Text></Text>}
     </View>
   );
 }
