@@ -20,7 +20,7 @@ Touch a slice to expand. Touch the center to zoom out.`
         const svg = d3
           .create('svg')
           .attr('viewBox', [0, 0, width, width])
-          .style('font', '10px sans-serif')
+          .style('font', '14px sans-serif')
 
         const g = svg
           .append('g')
