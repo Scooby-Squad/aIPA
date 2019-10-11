@@ -43,12 +43,52 @@ export default function Single(props) {
     await setData({ ...data, rating });
   };
 
+  let wishlistStatus = 'none';
+  if(data.rating==='0') { wishlistStatus = 'wishlist' }
+  else  if(data.rating>0) { wishlistStatus = 'ranked' }
+
   console.log('single beer view data is', data);
   return (
     <View style={styles.container}>
       <View style={styles.nameRating}>
         <Text style={styles.textLarge}>{data.name}</Text>
-        <StarRating
+        {
+          wishlistStatus==='none' ? <><StarRating
+              disabled={false}
+              iconSet="Ionicons"
+              emptyStar="ios-star-outline"
+              fullStar="ios-star"
+              rating={Number(data.rating)}
+              maxStars={5}
+              selectedStar={rating => onStarRatingPress(rating)}
+              fullStarColor="blue"
+            /><Button title="Add to Wishlist" onPress={() => { onStarRatingPress(0); window.alert('added') }} /><Text style={styles.text}>Predicted Score: 100</Text></> : <Text />
+        }
+        {
+          wishlistStatus==='wishlist' ? <><StarRating
+              disabled={false}
+              iconSet="Ionicons"
+              emptyStar="ios-star-outline"
+              fullStar="ios-star"
+              rating={Number(data.rating)}
+              maxStars={5}
+              selectedStar={rating => onStarRatingPress(rating)}
+              fullStarColor="blue"
+            /><Button title="Remove from Wishlist" onPress={() => { window.alert('removed') }} /><Text style={styles.text}>Predicted Score: 100</Text></> : <Text />
+        }
+        {
+          wishlistStatus==='ranked' ? <StarRating
+              disabled={false}
+              iconSet="Ionicons"
+              emptyStar="ios-star-outline"
+              fullStar="ios-star"
+              rating={Number(data.rating)}
+              maxStars={5}
+              selectedStar={rating => onStarRatingPress(rating)}
+              fullStarColor="blue"
+            /> : <Text />
+        }
+        {/* <StarRating
           disabled={false}
           iconSet="Ionicons"
           emptyStar="ios-star-outline"
@@ -57,7 +97,7 @@ export default function Single(props) {
           maxStars={5}
           selectedStar={rating => onStarRatingPress(rating)}
           fullStarColor="blue"
-        />
+        /> */}
         {data.brewer ? (
           <Text style={styles.text}>Brewed by {data.brewer}</Text>
         ) : (
