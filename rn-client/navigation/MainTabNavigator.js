@@ -69,7 +69,8 @@ LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
-    Settings: SettingsScreen
+    Settings: SettingsScreen,
+    SingleBeer: SingleBeerScreen
   },
   config
 );
