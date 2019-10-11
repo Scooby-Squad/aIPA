@@ -1,29 +1,33 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
-  },
-  item: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  dropDown: {
-    flex: 1
-  },
-  loading: {
-    alignSelf: 'center'
+    alignItems: "center",
+    marginHorizontal: 25
   },
   flatview: {
-    justifyContent: 'center',
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    flexDirection: "row",
     paddingTop: 30,
-    borderRadius: 2
+    borderRadius: 2,
+    marginHorizontal: 25
+  },
+  rating: {
+    alignSelf: "center",
+    flexDirection: "column"
   },
   brewer: {
     opacity: 0.5
+  },
+  button: {
+    color: "#1a8cff",
+    alignSelf: "center"
+  },
+  header: {
+    marginHorizontal: 45
   }
 });
 export const space =
-  '                                                                       ';
+  "                                                                       ";
 export default styles;

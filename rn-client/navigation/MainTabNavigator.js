@@ -30,7 +30,8 @@ const HomeStack = createStackNavigator(
     Graphs: GraphsScreen,
     Sunburst: SunburstScreen,
     BubbleChart: BubbleChartScreen,
-    Hexbin: HexbinScreen
+    Hexbin: HexbinScreen,
+    SingleBeer: SingleBeerScreen
   },
   config
 );
@@ -69,7 +70,8 @@ LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
-    Settings: SettingsScreen
+    Settings: SettingsScreen,
+    SingleBeer: SingleBeerScreen
   },
   config
 );

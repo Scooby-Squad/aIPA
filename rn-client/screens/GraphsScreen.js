@@ -49,7 +49,7 @@ export default function GraphsScreen(props) {
             }
             style={styles.welcomeImage}
           />
-          
+
           <Touchable
             style={styles.option}
             background={Touchable.Ripple('#ccc', false)}
@@ -85,7 +85,7 @@ export default function GraphsScreen(props) {
           </Touchable>
         </View>
 
-        
+
       </ScrollView>
     </View>
   )
