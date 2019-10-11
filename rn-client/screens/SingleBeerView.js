@@ -4,8 +4,28 @@ import { useDispatch } from 'react-redux';
 import StarRating from 'react-native-star-rating';
 import { updateUserBeer, getRankedBeers } from '../store/beer';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 25
+  },
+  text: {
+    fontSize: 19
+  },
+  textLarge: {
+    fontSize: 29
+  },
+  nameRating: {
+    justifyContent: 'space-around'
+  }
+});
+
+// eslint-disable-next-line complexity
 export default function Single(props) {
-  const [data, setData] = useState(props.navigation.getParam('beer'));
+  const [data, setData] = useState(props.navigation.getParam('item'));
   const dispatch = useDispatch();
 
   useEffect(
@@ -48,10 +68,10 @@ export default function Single(props) {
           data.abv ? <Text style={styles.text}>ABV: {data.abv}</Text> : <Text></Text>
         }
         {
-          data.ibu>0 ? <Text style={styles.text}>IBU: {data.ibu}</Text> : <Text></Text>
+          data.ibu > 0 ? <Text style={styles.text}>IBU: {data.ibu}</Text> : <Text></Text>
         }
         {
-          data.srm>0 ? <Text style={styles.text}>SRM: {data.srm}</Text> : <Text></Text>
+          data.srm > 0 ? <Text style={styles.text}>SRM: {data.srm}</Text> : <Text></Text>
         }
         {
           data.description ? <Text style={styles.text}>{data.description}</Text> : <Text></Text>
@@ -59,7 +79,7 @@ export default function Single(props) {
         {
           data.website ? <Text style={styles.text}>{data.website}</Text> : <Text></Text>
         }
-        <Text></Text>
+        <Text />
         {
           data.address ? <Text style={styles.text}>{data.address}</Text> : <Text></Text>
         }
@@ -73,25 +93,8 @@ export default function Single(props) {
         }
 
       </View>
+      {!data.rating ? (<Button title="Add to wishlist" />) : <Text></Text>}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 25
-  },
-  text: {
-    fontSize: 19
-  },
-  textLarge: {
-    fontSize: 29
-  },
-  nameRating: {
-    justifyContent: 'space-around'
-  }
-});

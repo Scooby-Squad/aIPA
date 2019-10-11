@@ -1,23 +1,38 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {types} from '../store/beerDb'
+import renderHeader from './AllBeerList/Header'
+import { View, StyleSheet, Button, Text, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import StarRating from 'react-native-star-rating';
+import renderSeparator from './AllBeerList/Seperator'
+import styles from './RankedList/style-sheet'
+import { searchRanked, blankSearch } from '../store/beer'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center'
-  },
-  item: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  }
-});
 
 export default function List(props) {
   const dispatch = useDispatch();
   const {sortCB, dispatchCreator, selectorCB, ratingToUse} = props
+
+  // GLOBAL STATE
+  const list = useSelector(state => state.beer.rankSearch);
+
+  // LOCAL STATE
+  const [type, setType] = useState('Select Type');
+  const [search, setSearch] = useState('');
+  const [typeIndex, setTypeIndex] = useState(100);
+
+   // INITIAL RENDER
+   useEffect(() => {
+    dispatch(blankSearch());
+  }, []);
+
+  // SEARCH CHANGE HANDLER
+  const changeHandler = async (query, selection, beerTypeId) => {
+    await setSearch(query);
+    await setType(selection);
+    await setTypeIndex(beerTypeId);
+    dispatch(searchRanked(query, beerTypeId));
+  };
 
 
   useEffect(() => {
@@ -28,34 +43,49 @@ export default function List(props) {
   const beers = useSelector(selectorCB)
   let rendered =
     (
-    <View style={styles.container}>
-      <View>
-        {beers
-          .sort(sortCB)
-          .map(beer => {
-            return (
-              <View style={styles.item} key={beer.id}>
-                <Button
-                  title={`${beer.name.slice(0, 30)}`}
-                  onPress={() =>
-                    props.navigation.navigate('SingleBeer', { beer })
-                  }
-                />
-                <StarRating
+    <View>
+      <FlatList
+        data={list.sort(sortCB)}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <View style={styles.flatview}>
+            <View style={styles.text}>
+              <Text style={styles.name}>{item.name}</Text>
+              <Text style={styles.brewer}>{item.brewer}</Text>
+            </View>
+            <View style={styles.stars}>
+              <StarRating
                   iconSet="Ionicons"
                   emptyStar="ios-star-outline"
                   fullStar="ios-star"
                   style={styles.rating}
                   disabled={true}
-                  rating={Number(beer[ratingToUse])}
+                  rating={Number(item[ratingToUse])}
                   maxStars={5}
                   starSize={15}
                   fullStarColor="blue"
                 />
-              </View>
-            );
-          })}
-      </View>
+              <Button
+                  style={{fontSize: 5}}
+                  title="View"
+                  onPress={() =>
+                    props.navigation.navigate('SingleBeer', { item })
+                  }
+                />
+            </View>
+          </View>
+        )}
+        ItemSeparatorComponent={renderSeparator}
+        keyExtractor={item => item.id}
+        ListHeaderComponent={renderHeader({
+          search,
+          type,
+          typeIndex,
+          types,
+          styles,
+          changeHandler
+        })}
+      />
     </View>)
 
   let loading = <Text> Loading </Text>;

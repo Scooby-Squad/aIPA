@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   dropDown: {
-    width: 100
+    flex: 1
   },
   loading: {
     alignSelf: 'center'
