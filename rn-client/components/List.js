@@ -10,7 +10,7 @@ import { searchRanked, blankSearch } from '../store/beer';
 
 export default function List(props) {
   const dispatch = useDispatch();
-  const { sortCB, dispatchCreator, selectorCB } = props;
+  const {sortCB, dispatchCreator, selectorCB, ratingToUse, listToUse} = props
 
   // GLOBAL STATE
   const list = useSelector(state => state.beer.rankSearch);
@@ -30,7 +30,7 @@ export default function List(props) {
     await setSearch(query);
     await setType(selection);
     await setTypeIndex(beerTypeId);
-    dispatch(searchRanked(query, beerTypeId));
+    dispatch(searchRanked(query, beerTypeId, listToUse));
   };
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function List(props) {
                 fullStar="ios-star"
                 stlye={styles.rating}
                 disabled={true}
-                rating={Number(item.rating)}
+                rating={Number(item[ratingToUse])}
                 maxStars={5}
                 starSize={15}
                 fullStarColor="blue"

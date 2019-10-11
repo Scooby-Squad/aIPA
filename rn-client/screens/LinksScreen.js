@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import RankedList from '../components/RankedList'
+import RankedList from '../components/RankedList';
 
 export default function LinksScreen(props) {
   return (

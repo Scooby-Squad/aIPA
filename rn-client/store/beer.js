@@ -29,7 +29,8 @@ const initialState = {
 const gotRankedBeers = beers => ({ type: GOT_RANKED_BEERS, beers });
 const updatedRankedBeer = beer => ({ type: UPDATED_RANKED_BEER, beer });
 const gotPredictions = predictions => ({ type: GOT_PREDICTIONS, predictions});
-export const searchRanked = (query, beerType) => ({type: SEARCH_RANKED, query, beerType})
+// export const getPredictionsState = () => ({ type: GET_PREDICTIONS_STATE})
+export const searchRanked = (query, beerType, list) => ({type: SEARCH_RANKED, query, beerType, list})
 export const blankSearch = () => ({type: SEARCH_BLANK})
 
 
@@ -84,28 +85,33 @@ export const getPredictions = () => {
   }
 }
 
+const sorter = (a, b) =>
+    (a.prediction < b.prediction
+      ? 1
+      : a.prediction === b.prediction ? (a.name > b.name ? 1 : -1) : -1)
+
 /**
  * REDUCER
  **/
 export default function(state = initialState, action) {
-  let newBeers;
+  let newBeers, newPredictions;
   switch (action.type) {
     case SEARCH_BLANK:
       return {...state, rankSearch: []}
     case SEARCH_RANKED:
         if (action.query == '') {
           if (action.beerType == 0) {
-            return {...state, rankSearch: state.ranked}
+            return {...state, rankSearch: state[action.list]}
           }
-          state.rankSearch = state.ranked.filter(beer => {
+          state.rankSearch = state[action.list].filter(beer => {
             return beer.typeId == action.beerType;
           });
         } else if (action.beerType == 100 || action.beerType == 0) {
-          state.rankSearch = state.ranked.filter(beer => {
+          state.rankSearch = state[action.list].filter(beer => {
             return beer.name.startsWith(action.query);
           });
         } else {
-          state.rankSearch = state.ranked.filter(beer => {
+          state.rankSearch = state[action.list].filter(beer => {
             return (
               beer.name.startsWith(action.query) && beer.typeId == action.beerType
             );
@@ -115,21 +121,36 @@ export default function(state = initialState, action) {
     case GOT_RANKED_BEERS:
       return { ...state, ranked: action.beers };
     case UPDATED_RANKED_BEER:
-      for (let i = 0; i < state.ranked.length; ++i) {
-        let rk = state.ranked[i];
-        if (rk.id === action.beer.id) {
-          state.ranked[i] = action.beer;
+      // for (let i = 0; i < state.ranked.length; ++i) {
+      //   let rk = state.ranked[i];
+      //   if (rk.id === action.beer.id) {
+      //     state.ranked[i] = action.beer;
+      //   }
+      // }
+      // return { ...state, ranked: state.ranked };
+      newBeers = state.ranked.map(beer => {
+        if (beer.id === action.beer.id) {
+          return action.beer
+        } else {
+          return {...beer}
         }
-      }
-      return { ...state, ranked: state.ranked };
+      })
+      console.log('action beer id',action.beer.id)
+      newPredictions = state.predictions.filter(beer => beer.id != action.beer.id)
+      console.log('newpreds', newPredictions)
+      return { ...state, ranked: newBeers, predictions: newPredictions};
     case GOT_PREDICTIONS:
-      newBeers = state.all
-      .filter((beer, index) => index <= 21)
+      // want to filter out already done beers
+      // have different colors for recommendations, or a label
+      // ranked beers should disappear if done from the predictions view
+      newPredictions = state.all
+      .filter((beer) => !(state.ranked.some((userBeer) => userBeer.id == beer.id)))
+      .sort(sorter)
+      .filter((beer, index) => index <= 100)
       .map((beer, index) => {
         return {...beer, prediction: Math.round(action.predictions[index])}
       })
-      console.log(newBeers[1])
-      return {...state, predictions: newBeers}
+      return {...state, predictions: newPredictions}
     default:
       return state;
   }
