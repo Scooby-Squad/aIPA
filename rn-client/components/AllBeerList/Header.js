@@ -1,11 +1,11 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { Dropdown } from 'react-native-material-dropdown';
-import { Searchbar } from 'react-native-paper';
-import styles, { space } from './style-sheet';
+import React from "react";
+import { View, Text } from "react-native";
+import { Dropdown } from "react-native-material-dropdown";
+import { Searchbar } from "react-native-paper";
+import styles, { space } from "./style-sheet";
 
 const renderHeader = props => (
-  <View>
+  <View style={styles.header}>
     <Text>{space}</Text>
     <Searchbar
       placeholder="Search"
