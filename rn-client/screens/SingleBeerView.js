@@ -38,7 +38,7 @@ export default function Single(props) {
           fullStarColor="blue"
         />
       </View>
-      {!data.rating ? (<Button title="Add to wishlist" />) : <Text>THIS HAS A RATING</Text>}
+      {!data.rating ? (<Button title="Add to wishlist" />) : <Text></Text>}
     </View>
   );
 }
