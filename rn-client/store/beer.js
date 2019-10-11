@@ -29,7 +29,7 @@ const initialState = {
 const gotRankedBeers = beers => ({ type: GOT_RANKED_BEERS, beers });
 const updatedRankedBeer = beer => ({ type: UPDATED_RANKED_BEER, beer });
 const gotPredictions = predictions => ({ type: GOT_PREDICTIONS, predictions});
-export const searchRanked = (query, beerType) => ({type: SEARCH_RANKED, query, beerType})
+export const searchRanked = (query, beerType, list) => ({type: SEARCH_RANKED, query, beerType, list})
 export const blankSearch = () => ({type: SEARCH_BLANK})
 
 
@@ -84,6 +84,11 @@ export const getPredictions = () => {
   }
 }
 
+const sorter = (a, b) =>
+    (a.prediction < b.prediction
+      ? 1
+      : a.prediction === b.prediction ? (a.name > b.name ? 1 : -1) : -1)
+
 /**
  * REDUCER
  **/
@@ -95,17 +100,17 @@ export default function(state = initialState, action) {
     case SEARCH_RANKED:
         if (action.query == '') {
           if (action.beerType == 0) {
-            return {...state, rankSearch: state.ranked}
+            return {...state, rankSearch: state[action.list]}
           }
-          state.rankSearch = state.ranked.filter(beer => {
+          state.rankSearch = state[action.list].filter(beer => {
             return beer.typeId == action.beerType;
           });
         } else if (action.beerType == 100 || action.beerType == 0) {
-          state.rankSearch = state.ranked.filter(beer => {
+          state.rankSearch = state[action.list].filter(beer => {
             return beer.name.startsWith(action.query);
           });
         } else {
-          state.rankSearch = state.ranked.filter(beer => {
+          state.rankSearch = state[action.list].filter(beer => {
             return (
               beer.name.startsWith(action.query) && beer.typeId == action.beerType
             );
@@ -127,7 +132,9 @@ export default function(state = initialState, action) {
       // have different colors for recommendations, or a label
       // ranked beers should disappear if done from the predictions view
       newBeers = state.all
-      .filter((beer, index) => index <= 21)
+      .filter((beer) => !(state.ranked.some((userBeer) => userBeer.id == beer.id)))
+      .sort(sorter)
+      .filter((beer, index) => index <= 100)
       .map((beer, index) => {
         return {...beer, prediction: Math.round(action.predictions[index])}
       })

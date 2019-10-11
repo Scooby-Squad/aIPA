@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import StarRating from 'react-native-star-rating';
 import { updateUserBeer, getRankedBeers } from '../store/beer';

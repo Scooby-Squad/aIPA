@@ -7,10 +7,11 @@ export default function RecommendedList(props) {
   const predictionsState = state => state.beer.predictions;
   // need to run getPredictions upon completion of quiz
   const ratingToUse = 'prediction'
+  const listToUse = 'predictions'
   const sort = (a, b) =>
     (a.prediction < b.prediction
       ? 1
       : a.prediction === b.prediction ? (a.name > b.name ? 1 : -1) : -1)
 
-  return <List {...props} ratingToUse={ratingToUse} selectorCB={predictionsState} sortCB={sort} dispatchCreator={getPredictions} />
+  return <List {...props} listToUse={listToUse} ratingToUse={ratingToUse} selectorCB={predictionsState} sortCB={sort} dispatchCreator={getPredictions} />
 }

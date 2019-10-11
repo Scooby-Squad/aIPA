@@ -11,7 +11,7 @@ import { searchRanked, blankSearch } from '../store/beer'
 
 export default function List(props) {
   const dispatch = useDispatch();
-  const {sortCB, dispatchCreator, selectorCB, ratingToUse} = props
+  const {sortCB, dispatchCreator, selectorCB, ratingToUse, listToUse} = props
 
   // GLOBAL STATE
   const list = useSelector(state => state.beer.rankSearch);
@@ -31,7 +31,7 @@ export default function List(props) {
     await setSearch(query);
     await setType(selection);
     await setTypeIndex(beerTypeId);
-    dispatch(searchRanked(query, beerTypeId));
+    dispatch(searchRanked(query, beerTypeId, listToUse));
   };
 
 
