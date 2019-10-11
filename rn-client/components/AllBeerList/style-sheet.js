@@ -12,10 +12,14 @@ const styles = StyleSheet.create({
     borderRadius: 2
   },
   rating: {
-    alignSelf: 'center'
-},
+    alignSelf: 'center',
+    flexDirection: 'column'
+  },
   brewer: {
     opacity: 0.5
+  },
+  button: {
+    color: '#1a8cff'
   }
 });
 export const space =

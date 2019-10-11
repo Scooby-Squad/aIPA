@@ -47,12 +47,12 @@ export default function AllList(props) {
             </View>
             <View style={styles.stars}>
               <Button
-                  style={{fontSize: 5}}
-                  title="View"
-                  onPress={() =>
-                    props.navigation.navigate('SingleBeer', { item })
-                  }
-                />
+                style={{ fontSize: 5 }}
+                title="View"
+                onPress={() =>
+                  props.navigation.navigate('SingleBeer', { item })
+                }
+              />
             </View>
           </View>
         )}
