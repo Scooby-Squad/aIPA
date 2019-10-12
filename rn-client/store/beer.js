@@ -97,7 +97,7 @@ export const getPredictions = () => {
 export const getWishlist = () => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(`${apiUrl}/api/wishlist`)
+      const {data} = await axios.get(`${apiUrl}/api/userbeers/wishlist`)
       dispatch(gotWishlist(data))
     } catch (error) {
       console.error(error)
@@ -119,7 +119,7 @@ export const addToWishlistThunk = (beer) => {
 export const removeFromWishlistThunk = (beer) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`${apiUrl}/api/wishlist`, beer)
+      await axios.delete(`${apiUrl}/api/userbeers/wishlist`, beer)
       dispatch(removeFromWishlist(beer))
     } catch (error) {
       console.error(error)
