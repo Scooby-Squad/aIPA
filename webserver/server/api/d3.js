@@ -9,7 +9,9 @@ const beerList = require('../tensor.js/beerTesting.json')
 // Get a userbeers for a user
 router.get('/sunburst', async (req, res, next) => {
   try {
-    const userbeers = await User_Beer.d3Sunburst(req.headers.referer.split('=')[1])
+    const userbeers = await User_Beer.d3Sunburst(
+      req.headers.referer.split('=')[1]
+    )
     let out = {
       name: 'flare',
       children: [
@@ -48,7 +50,10 @@ router.get('/sunburst', async (req, res, next) => {
 router.get('/hexbin', async (req, res, next) => {
   try {
     const ratedBeers = await User_Beer.findAll({
-      where: {userId: req.headers.referer.split('=')[1], rating: {[Op.ne]: '0'}},
+      where: {
+        userId: req.headers.referer.split('=')[1],
+        rating: {[Op.ne]: '0'}
+      },
       include: [{model: Beer}]
     })
     console.log(
@@ -93,7 +98,10 @@ router.get('/bubble-chart', async (req, res, next) => {
   console.log(req.headers.referer.split('=')[1], 'user id is')
   try {
     const ratedBeers = await User_Beer.findAll({
-      where: {userId: req.headers.referer.split('=')[1], rating: {[Op.ne]: '0'}},
+      where: {
+        userId: req.headers.referer.split('=')[1],
+        rating: {[Op.ne]: '0'}
+      },
       include: [{model: Beer}]
     })
     let userRatedBeers = []
