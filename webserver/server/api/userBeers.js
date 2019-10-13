@@ -4,7 +4,7 @@ module.exports = router
 // Get a userbeers for a user
 router.get('/', async (req, res, next) => {
   try {
-    const userbeers = await User_Beer.findRatings(req.user.id)
+    const userbeers = await User_Beer.findRatings(1)
     const filterBeers = userbeers.filter(beer => {
       if (beer.rating > 0) return beer
     })
@@ -47,8 +47,9 @@ router.put('/update', async (req, res, next) => {
   // have a check on req.user in index, currently commented out for testing
   const {rating, beerId} = req.body
   try {
+    // The first argument here is user.id but is hard coded
     const update = await User_Beer.updateOrCreateRating(
-      req.user.id,
+      1,
       beerId,
       rating
     )

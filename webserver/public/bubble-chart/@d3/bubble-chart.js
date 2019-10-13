@@ -3,9 +3,8 @@ export default function define(runtime, observer) {
   const main = runtime.module()
   main.variable(observer()).define(['md'], function(md) {
     return md`
-# Bubble Chart
-
-Bubble charts are non-hierarchical [packed circles](/@d3/circle-packing). The area of each circle is proportional its value (here, file size). The organic appearance of these diagrams can be intriguing, but also consider a [treemap](/@d3/treemap) or a humble [bar chart](/@d3/horizontal-bar-chart).`
+# Beer Recommendation Chart
+The larger the bubble the more we think you will enjoy the beer`
   })
   main
     .variable(observer('chart'))
@@ -60,7 +59,7 @@ Bubble charts are non-hierarchical [packed circles](/@d3/circle-packing). The ar
         return svg.node()
       }
     )
-  main.variable(observer('data')).define('data', ['d3'], async function(d3) {
+  main.variable().define('data', ['d3'], async function(d3) {
     return await d3.csv('../api/d3/bubble-chart', ({id, value}) => ({
       name: id.split('.').pop(),
       title: id.replace(/\./g, '/'),
@@ -69,7 +68,7 @@ Bubble charts are non-hierarchical [packed circles](/@d3/circle-packing). The ar
     }))
   })
   main
-    .variable(observer('pack'))
+    .variable()
     .define('pack', ['d3', 'width', 'height'], function(d3, width, height) {
       return data =>
         d3
@@ -77,23 +76,23 @@ Bubble charts are non-hierarchical [packed circles](/@d3/circle-packing). The ar
           .size([width - 2, height - 2])
           .padding(3)(d3.hierarchy({children: data}).sum(d => d.value))
     })
-  main.variable(observer('width')).define('width', function() {
+  main.variable().define('width', function() {
     return 932
   })
   main
-    .variable(observer('height'))
+    .variable()
     .define('height', ['width'], function(width) {
       return width
     })
-  main.variable(observer('format')).define('format', ['d3'], function(d3) {
+  main.variable().define('format', ['d3'], function(d3) {
     return d3.format(',d')
   })
   main
-    .variable(observer('color'))
+    .variable()
     .define('color', ['d3', 'data'], function(d3, data) {
       return d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10)
     })
-  main.variable(observer('d3')).define('d3', ['require'], function(require) {
+  main.variable().define('d3', ['require'], function(require) {
     return require('d3@5')
   })
   return main
