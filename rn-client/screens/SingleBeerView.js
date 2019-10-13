@@ -43,7 +43,6 @@ export default function Single(props) {
     await setData({ ...data, rating });
   };
 
-  console.log("single beer view data is", data);
   return (
     <View style={styles.container}>
       <View style={styles.nameRating}>

@@ -137,7 +137,7 @@ const sorter = (a, b) =>
  * REDUCER
  **/
 export default function(state = initialState, action) {
-  let newBeers, newPredictions;
+  let newBeers, newPredictions, newWishlist;
   switch (action.type) {
     case SEARCH_BLANK:
       return {...state, rankSearch: []}
@@ -178,9 +178,7 @@ export default function(state = initialState, action) {
           return {...beer}
         }
       })
-      console.log('action beer id',action.beer.id)
       newPredictions = state.predictions.filter(beer => beer.id != action.beer.id)
-      console.log('newpreds', newPredictions)
       return { ...state, ranked: newBeers, predictions: newPredictions};
     case GOT_PREDICTIONS:
       // want to filter out already done beers
@@ -194,19 +192,16 @@ export default function(state = initialState, action) {
         return {...beer, prediction: Math.round(action.predictions[index])}
       })
 
-      console.log(newBeers[1])
-      return {...state, predictions: newBeers}
+      return {...state, predictions: newPredictions}
     case GOT_WISHLIST:
-      return {...state, wishlist: data}
+      return {...state, wishlist: action.wishlist}
     case ADD_TO_WISHLIST:
-      return {...state, wishlist: [...wishlist, actoin.beer]}
+      return {...state, wishlist: [...state.wishlist, action.beer]}
     case REMOVE_FROM_WISHLIST:
-      const newWishlist = state.wishlist.filter(beer => {
+      newWishlist = state.wishlist.filter(beer => {
         if (beer.id !== action.beer.id) return beer
       })
-      return {...state, wishlist: newWishlists}
-
-      return {...state, predictions: newPredictions}
+      return {...state, wishlist: newWishlist}
 
     default:
       return state;
