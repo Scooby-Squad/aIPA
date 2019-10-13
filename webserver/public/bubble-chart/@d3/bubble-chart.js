@@ -4,6 +4,7 @@ export default function define(runtime, observer) {
   main.variable(observer()).define(['md'], function(md) {
     return md`
 # Beer Recommendation Chart
+
 The larger the bubble the more we think you will enjoy the beer`
   })
   main
@@ -79,19 +80,15 @@ The larger the bubble the more we think you will enjoy the beer`
   main.variable().define('width', function() {
     return 932
   })
-  main
-    .variable()
-    .define('height', ['width'], function(width) {
-      return width
-    })
+  main.variable().define('height', ['width'], function(width) {
+    return width
+  })
   main.variable().define('format', ['d3'], function(d3) {
     return d3.format(',d')
   })
-  main
-    .variable()
-    .define('color', ['d3', 'data'], function(d3, data) {
-      return d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10)
-    })
+  main.variable().define('color', ['d3', 'data'], function(d3, data) {
+    return d3.scaleOrdinal(data.map(d => d.group), d3.schemeCategory10)
+  })
   main.variable().define('d3', ['require'], function(require) {
     return require('d3@5')
   })

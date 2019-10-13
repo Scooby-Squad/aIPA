@@ -48,11 +48,9 @@ See how ABV affects our predicted score`
         return svg.node()
       }
     )
-  main
-    .variable()
-    .define('height', ['width'], function(width) {
-      return Math.max(640, width)
-    })
+  main.variable().define('height', ['width'], function(width) {
+    return Math.max(640, width)
+  })
   main.variable().define('margin', function() {
     return {top: 20, right: 20, bottom: 30, left: 40}
   })
@@ -82,13 +80,11 @@ See how ABV affects our predicted score`
         .domain(d3.extent(data, d => d.y))
         .rangeRound([height - margin.bottom, margin.top])
     })
-  main
-    .variable()
-    .define('color', ['d3', 'bins'], function(d3, bins) {
-      return d3
-        .scaleSequential(d3.interpolateBuPu)
-        .domain([0, d3.max(bins, d => d.length) / 2])
-    })
+  main.variable().define('color', ['d3', 'bins'], function(d3, bins) {
+    return d3
+      .scaleSequential(d3.interpolateBuPu)
+      .domain([0, d3.max(bins, d => d.length) / 2])
+  })
   main
     .variable()
     .define('xAxis', ['height', 'margin', 'd3', 'x', 'width', 'data'], function(
@@ -157,11 +153,9 @@ See how ABV affects our predicted score`
           ])
       }
     )
-  main
-    .variable()
-    .define('bins', ['hexbin', 'data'], function(hexbin, data) {
-      return hexbin(data)
-    })
+  main.variable().define('bins', ['hexbin', 'data'], function(hexbin, data) {
+    return hexbin(data)
+  })
   main.variable().define('data', ['d3'], async function(d3) {
     return Object.assign(
       await d3.csv('../api/d3/hexbin', ({carat, price}) => ({

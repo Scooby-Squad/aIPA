@@ -109,6 +109,7 @@ export const addToWishlistThunk = (beer) => {
   return async (dispatch) => {
     try {
       const {data} = await axios.put(`${apiUrl}/userbeers/update`, beer)
+      
       dispatch(addToWishlist(data))
     } catch (error) {
       console.error(error)
@@ -136,7 +137,7 @@ const sorter = (a, b) =>
 /**
  * REDUCER
  **/
-export default function(state = initialState, action) {
+export default async function(state = initialState, action) {
   let newBeers, newPredictions;
   switch (action.type) {
     case SEARCH_BLANK:
@@ -199,7 +200,9 @@ export default function(state = initialState, action) {
     case GOT_WISHLIST:
       return {...state, wishlist: data}
     case ADD_TO_WISHLIST:
-      return {...state, wishlist: [...wishlist, actoin.beer]}
+      console.log(action, 'this is action')
+      
+      return {...state, wishlist: [...state.wishlist, action.beer]}
     case REMOVE_FROM_WISHLIST:
       const newWishlist = state.wishlist.filter(beer => {
         if (beer.id !== action.beer.id) return beer

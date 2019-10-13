@@ -13,7 +13,7 @@ import RatingsList from '../components/RatingsList'
 import Touchable from 'react-native-platform-touchable';
 
 export default function GraphsScreen(props) {
-  console.log(props)
+  // console.log(props)
   const [isQuizzing, setIsQuizzing] = useState(false)
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [ratingData, setRatingData] = useState([])

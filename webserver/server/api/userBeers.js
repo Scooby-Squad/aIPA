@@ -48,11 +48,7 @@ router.put('/update', async (req, res, next) => {
   const {rating, beerId} = req.body
   try {
     // The first argument here is user.id but is hard coded
-    const update = await User_Beer.updateOrCreateRating(
-      1,
-      beerId,
-      rating
-    )
+    const update = await User_Beer.updateOrCreateRating(1, beerId, rating)
     if (!update) {
       console.error('Updated')
     }
