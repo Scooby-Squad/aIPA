@@ -24,6 +24,17 @@ router.get('/', async (req, res, next) => {
       })
     })
     const tensor = await Tensor(userRatedBeers)
+
+    // Reduce number by 0.5, then make sure values are between 1 and 5
+    for (let i = 0; i < tensor.length; i++) {
+      tensor[i] -= 0.5
+      if (tensor[i] < 1) {
+        tensor[i] = 1
+      } else if (tensor[i] > 5) {
+        tensor[i] = 5
+      }
+    }
+
     res.json(tensor)
   } catch (err) {
     next(err)

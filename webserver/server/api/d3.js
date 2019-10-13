@@ -9,7 +9,9 @@ const beerList = require('../tensor.js/beerTesting.json')
 // Get a userbeers for a user
 router.get('/sunburst', async (req, res, next) => {
   try {
-    const userbeers = await User_Beer.d3Sunburst(1)
+    const userbeers = await User_Beer.d3Sunburst(
+      req.headers.referer.split('=')[1]
+    )
     let out = {
       name: 'flare',
       children: [
@@ -48,7 +50,10 @@ router.get('/sunburst', async (req, res, next) => {
 router.get('/hexbin', async (req, res, next) => {
   try {
     const ratedBeers = await User_Beer.findAll({
-      where: {userId: 1, rating: {[Op.ne]: '0'}},
+      where: {
+        userId: req.headers.referer.split('=')[1],
+        rating: {[Op.ne]: '0'}
+      },
       include: [{model: Beer}]
     })
     console.log(
@@ -67,12 +72,21 @@ router.get('/hexbin', async (req, res, next) => {
     })
     const tensor = await Tensor(userRatedBeers)
 
+    // Reduce number by 0.5, then make sure values are between 1 and 5
+    for (let i = 0; i < tensor.length; i++) {
+      tensor[i] -= 0.5
+      if (tensor[i] < 1) {
+        tensor[i] = 1
+      } else if (tensor[i] > 5) {
+        tensor[i] = 5
+      }
+    }
+
     let out = 'carat,price\n'
     for (let i = 0; i < tensor.length; i++) {
       out += `${beerList[i].abv},${tensor[i]}\n`
     }
-    console.log(typeof beerList)
-    console.log(beerList.length)
+
     res.send(out)
     //res.json(tensor)
   } catch (err) {
@@ -81,9 +95,13 @@ router.get('/hexbin', async (req, res, next) => {
 })
 
 router.get('/bubble-chart', async (req, res, next) => {
+  console.log(req.headers.referer.split('=')[1], 'user id is')
   try {
     const ratedBeers = await User_Beer.findAll({
-      where: {userId: 1, rating: {[Op.ne]: '0'}},
+      where: {
+        userId: req.headers.referer.split('=')[1],
+        rating: {[Op.ne]: '0'}
+      },
       include: [{model: Beer}]
     })
     let userRatedBeers = []
@@ -98,6 +116,16 @@ router.get('/bubble-chart', async (req, res, next) => {
     })
     const tensor = await Tensor(userRatedBeers)
 
+    // Reduce number by 0.5, then make sure values are between 1 and 5
+    for (let i = 0; i < tensor.length; i++) {
+      tensor[i] -= 0.5
+      if (tensor[i] < 1) {
+        tensor[i] = 1
+      } else if (tensor[i] > 5) {
+        tensor[i] = 5
+      }
+    }
+
     let out = 'id,value\n'
     for (let i = 0; i < tensor.length; i++) {
       out += `${beerList[i].type}.${beerList[i].name},${tensor[i] *
@@ -108,8 +136,7 @@ router.get('/bubble-chart', async (req, res, next) => {
         tensor[i] *
         tensor[i]}\n`
     }
-    console.log(typeof beerList)
-    console.log(beerList.length)
+
     res.send(out)
     //res.json(tensor)
   } catch (err) {
