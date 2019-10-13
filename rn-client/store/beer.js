@@ -178,9 +178,9 @@ export default function(state = initialState, action) {
           return {...beer}
         }
       })
-      console.log('action beer id',action.beer.id)
+      //console.log('action beer id',action.beer.id)
       newPredictions = state.predictions.filter(beer => beer.id != action.beer.id)
-      console.log('newpreds', newPredictions)
+      //console.log('newpreds', newPredictions)
       return { ...state, ranked: newBeers, predictions: newPredictions};
     case GOT_PREDICTIONS:
       // want to filter out already done beers
@@ -194,7 +194,7 @@ export default function(state = initialState, action) {
         return {...beer, prediction: Math.round(action.predictions[index])}
       })
 
-      console.log(newBeers[1])
+      //sconsole.log(newBeers[1])
       return {...state, predictions: newBeers}
     case GOT_WISHLIST:
       return {...state, wishlist: data}
