@@ -1,46 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import { useDispatch } from "react-redux";
-import StarRating from "react-native-star-rating";
-import { updateUserBeer, getRankedBeers } from "../store/beer";
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { useDispatch } from 'react-redux';
+import StarRating from 'react-native-star-rating';
+import {
+  updateUserBeer,
+  getRankedBeers,
+  addToWishlistThunk,
+} from '../store/beer';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 25
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 25,
   },
   text: {
-    fontSize: 19
+    fontSize: 19,
   },
   textLarge: {
-    fontSize: 29
+    fontSize: 29,
   },
   nameRating: {
-    justifyContent: "space-around"
-  }
+    justifyContent: 'space-around',
+  },
 });
 
 // eslint-disable-next-line complexity
 export default function Single(props) {
-  const [data, setData] = useState(props.navigation.getParam("item"));
+  const [data, setData] = useState(props.navigation.getParam('item'));
   const dispatch = useDispatch();
 
-  useEffect(
-    () => {
-      const dispatchers = async () => {
-        await dispatch(updateUserBeer(data));
-        await dispatch(getRankedBeers());
-      };
-      dispatchers();
-    },
-    [data]
-  );
+  useEffect(() => {
+    const dispatchers = async () => {
+      await dispatch(updateUserBeer(data));
+      await dispatch(getRankedBeers());
+    };
+    dispatchers();
+  }, [data]);
 
   const onStarRatingPress = async rating => {
     await setData({ ...data, rating });
+  };
+
+  const onWishlistPress = async beer => {
+    await dispatch(addToWishlistThunk(beer))
   };
 
   return (
@@ -99,9 +104,9 @@ export default function Single(props) {
           <Text />
         )}
         <Text style={styles.text}>
-          {data.city ? `${data.city}, ` : ""}
-          {data.state ? `${data.state}, ` : ""}
-          {data.country ? `${data.country}` : ""}
+          {data.city ? `${data.city}, ` : ''}
+          {data.state ? `${data.state}, ` : ''}
+          {data.country ? `${data.country}` : ''}
         </Text>
         {data.coordinates ? (
           <Text style={styles.text}>Coordinates: {data.coordinates}</Text>
@@ -109,7 +114,17 @@ export default function Single(props) {
           <Text />
         )}
       </View>
-      {!data.rating ? <Button title="Add to wishlist" /> : <Text />}
+      {!data.rating ? (
+        <Button
+          title="Add to wishlist"
+          onPress={() => {
+            console.log(data)
+            onWishlistPress(data);
+          }}
+        />
+      ) : (
+        <Text />
+      )}
     </View>
   );
 }

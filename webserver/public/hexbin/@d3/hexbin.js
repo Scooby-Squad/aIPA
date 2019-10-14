@@ -3,11 +3,9 @@ export default function define(runtime, observer) {
   const main = runtime.module()
   main.variable(observer()).define(['md'], function(md) {
     return md`
-# Hexbin
+# ABV vs Predicted Score
 
-A demonstration of [d3-hexbin](https://github.com/d3/d3-hexbin) with a color encoding; compare to [area](/@mbostock/d3-hexbin-area).
-
-Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
+See how ABV affects our predicted score`
   })
   main
     .variable(observer('viewof radius'))
@@ -22,7 +20,7 @@ Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
       return form
     })
   main
-    .variable(observer('radius'))
+    .variable()
     .define('radius', ['Generators', 'viewof radius'], (G, _) => G.input(_))
   main
     .variable(observer('chart'))
@@ -50,16 +48,14 @@ Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
         return svg.node()
       }
     )
-  main
-    .variable(observer('height'))
-    .define('height', ['width'], function(width) {
-      return Math.max(640, width)
-    })
-  main.variable(observer('margin')).define('margin', function() {
+  main.variable().define('height', ['width'], function(width) {
+    return Math.max(640, width)
+  })
+  main.variable().define('margin', function() {
     return {top: 20, right: 20, bottom: 30, left: 40}
   })
   main
-    .variable(observer('x'))
+    .variable()
     .define('x', ['d3', 'data', 'margin', 'width'], function(
       d3,
       data,
@@ -72,7 +68,7 @@ Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
         .range([margin.left, width - margin.right])
     })
   main
-    .variable(observer('y'))
+    .variable()
     .define('y', ['d3', 'data', 'height', 'margin'], function(
       d3,
       data,
@@ -84,15 +80,13 @@ Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
         .domain(d3.extent(data, d => d.y))
         .rangeRound([height - margin.bottom, margin.top])
     })
+  main.variable().define('color', ['d3', 'bins'], function(d3, bins) {
+    return d3
+      .scaleSequential(d3.interpolateBuPu)
+      .domain([0, d3.max(bins, d => d.length) / 2])
+  })
   main
-    .variable(observer('color'))
-    .define('color', ['d3', 'bins'], function(d3, bins) {
-      return d3
-        .scaleSequential(d3.interpolateBuPu)
-        .domain([0, d3.max(bins, d => d.length) / 2])
-    })
-  main
-    .variable(observer('xAxis'))
+    .variable()
     .define('xAxis', ['height', 'margin', 'd3', 'x', 'width', 'data'], function(
       height,
       margin,
@@ -118,7 +112,7 @@ Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
           )
     })
   main
-    .variable(observer('yAxis'))
+    .variable()
     .define('yAxis', ['margin', 'd3', 'y', 'data'], function(
       margin,
       d3,
@@ -143,7 +137,7 @@ Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
           )
     })
   main
-    .variable(observer('hexbin'))
+    .variable()
     .define(
       'hexbin',
       ['d3', 'x', 'y', 'radius', 'width', 'margin', 'height'],
@@ -159,12 +153,10 @@ Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
           ])
       }
     )
-  main
-    .variable(observer('bins'))
-    .define('bins', ['hexbin', 'data'], function(hexbin, data) {
-      return hexbin(data)
-    })
-  main.variable(observer('data')).define('data', ['d3'], async function(d3) {
+  main.variable().define('bins', ['hexbin', 'data'], function(hexbin, data) {
+    return hexbin(data)
+  })
+  main.variable().define('data', ['d3'], async function(d3) {
     return Object.assign(
       await d3.csv('../api/d3/hexbin', ({carat, price}) => ({
         x: +carat,
@@ -173,7 +165,7 @@ Data: [diamonds](https://github.com/observablehq/datasets/tree/master/diamonds)`
       {x: 'ABV', y: 'Estimated Ranking'}
     )
   })
-  main.variable(observer('d3')).define('d3', ['require'], function(require) {
+  main.variable().define('d3', ['require'], function(require) {
     return require('d3@5', 'd3-hexbin@0.2')
   })
   return main

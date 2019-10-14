@@ -109,6 +109,7 @@ export const addToWishlistThunk = (beer) => {
   return async (dispatch) => {
     try {
       const {data} = await axios.put(`${apiUrl}/userbeers/update`, beer)
+
       dispatch(addToWishlist(data))
     } catch (error) {
       console.error(error)
