@@ -108,8 +108,9 @@ export const getWishlist = () => {
 export const addToWishlistThunk = (beer) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.put(`${apiUrl}/userbeers/update`, beer)
-      
+      const {data} = await axios.put(`${apiUrl}/api/userbeers/update`, beer)
+      console.log(`${apiUrl}/userbeers/update`, 'this is URL')
+      console.log(data, 'this is data')
       dispatch(addToWishlist(data))
     } catch (error) {
       console.error(error)
