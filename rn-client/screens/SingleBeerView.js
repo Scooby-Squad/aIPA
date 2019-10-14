@@ -6,6 +6,7 @@ import {
   updateUserBeer,
   getRankedBeers,
   addToWishlistThunk,
+  removeFromWishlistThunk
 } from '../store/beer';
 
 const styles = StyleSheet.create({
@@ -48,10 +49,12 @@ export default function Single(props) {
   const onAddWishlistPress = async beer => {
     await dispatch(addToWishlistThunk(beer))
     await setData({...data, rating: "0"})
-    //data.rating = 0;
-    // change = !change
-    console.log(data.rating, 'data after change')
   };
+
+  const onRemoveWishlistPress = async beer => {
+    await dispatch(removeFromWishlistThunk(beer))
+    await setData({...data, rating: null})
+  }
 
   return (
     <View style={styles.container}>
