@@ -109,6 +109,7 @@ export const addToWishlistThunk = (beer) => {
   return async (dispatch) => {
     try {
       const {data} = await axios.put(`${apiUrl}/userbeers/update`, beer)
+      
       dispatch(addToWishlist(data))
     } catch (error) {
       console.error(error)
@@ -136,7 +137,7 @@ const sorter = (a, b) =>
 /**
  * REDUCER
  **/
-export default function(state = initialState, action) {
+export default async function(state = initialState, action) {
   let newBeers, newPredictions;
   switch (action.type) {
     case SEARCH_BLANK:
@@ -178,9 +179,9 @@ export default function(state = initialState, action) {
           return {...beer}
         }
       })
-      console.log('action beer id',action.beer.id)
+      //console.log('action beer id',action.beer.id)
       newPredictions = state.predictions.filter(beer => beer.id != action.beer.id)
-      console.log('newpreds', newPredictions)
+      //console.log('newpreds', newPredictions)
       return { ...state, ranked: newBeers, predictions: newPredictions};
     case GOT_PREDICTIONS:
       // want to filter out already done beers
@@ -194,12 +195,14 @@ export default function(state = initialState, action) {
         return {...beer, prediction: Math.round(action.predictions[index])}
       })
 
-      console.log(newBeers[1])
+      //sconsole.log(newBeers[1])
       return {...state, predictions: newBeers}
     case GOT_WISHLIST:
       return {...state, wishlist: data}
     case ADD_TO_WISHLIST:
-      return {...state, wishlist: [...wishlist, actoin.beer]}
+      console.log(action, 'this is action')
+      
+      return {...state, wishlist: [...state.wishlist, action.beer]}
     case REMOVE_FROM_WISHLIST:
       const newWishlist = state.wishlist.filter(beer => {
         if (beer.id !== action.beer.id) return beer
