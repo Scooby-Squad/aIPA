@@ -18,8 +18,7 @@ router.get('/wishlist', async (req, res, next) => {
   try {
     const wishlist = await User_Beer.findAll({
       where: {
-        // userId is hard coded change in the future
-        userId: 1,
+        userId: req.user.id,
         rating: '0'
       }
     })
@@ -31,10 +30,10 @@ router.get('/wishlist', async (req, res, next) => {
 router.delete('/wishlist', async (req, res, next) => {
   try {
     await User_Beer.destroy({
-      // userId is hard coded
+
       where: {
-        userId: 1,
-        beerId: req.body.beerId
+        userId: req.user.id,
+        beerId: req.body.id
       }
     })
     res.sendStatus(204)
@@ -45,10 +44,15 @@ router.delete('/wishlist', async (req, res, next) => {
 // Update a userbeer
 router.put('/update', async (req, res, next) => {
   // have a check on req.user in index, currently commented out for testing
-  const {rating, beerId} = req.body
+  let {rating, beerId} = req.body
+  if (!beerId) beerId = req.body.id
   try {
-    // The first argument here is user.id but is hard coded
-    const update = await User_Beer.updateOrCreateRating(1, beerId, rating)
+
+    const update = await User_Beer.updateOrCreateRating(
+      req.user.id,
+      beerId,
+      rating
+    )
     if (!update) {
       console.error('Updated')
     }

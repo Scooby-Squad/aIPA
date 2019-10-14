@@ -6,6 +6,7 @@ import {
   updateUserBeer,
   getRankedBeers,
   addToWishlistThunk,
+  removeFromWishlistThunk
 } from '../store/beer';
 
 const styles = StyleSheet.create({
@@ -40,13 +41,20 @@ export default function Single(props) {
     dispatchers();
   }, [data]);
 
+
   const onStarRatingPress = async rating => {
     await setData({ ...data, rating });
   };
 
-  const onWishlistPress = async beer => {
+  const onAddWishlistPress = async beer => {
     await dispatch(addToWishlistThunk(beer))
+    await setData({...data, rating: "0"})
   };
+
+  const onRemoveWishlistPress = async beer => {
+    await dispatch(removeFromWishlistThunk(beer))
+    await setData({...data, rating: null})
+  }
 
   return (
     <View style={styles.container}>
@@ -118,8 +126,17 @@ export default function Single(props) {
         <Button
           title="Add to wishlist"
           onPress={() => {
-            console.log(data)
-            onWishlistPress(data);
+            onAddWishlistPress(data);
+          }}
+        />
+      ) : (
+        <Text />
+      )}
+      {data.rating === "0" ? (
+        <Button
+          title="Remove from wishlist"
+          onPress={() => {
+            onRemoveWishlistPress(data);
           }}
         />
       ) : (
