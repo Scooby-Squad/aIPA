@@ -24,6 +24,7 @@ export default function QuizScreen(props) {
     setRatingData(answers)
     setIsQuizzing(false)
     setQuizCompleted(true)
+    props.navigation.navigate('Recs')
   }
 
   const cancelQuizHandler = () => {

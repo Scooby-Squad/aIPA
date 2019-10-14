@@ -66,7 +66,9 @@ const QuestionsComponent = props => {
             <RatingInput
               rating={enteredRating}
               addRatingHandler={addRatingHandler}
-              onCancel={props.onCancel}
+              returnHomeHandler={props.returnHomeHandler}
+              currentQuestion={currIdx}
+              totalQuestions={quizData.length}
             />
           </View>
       </View>
