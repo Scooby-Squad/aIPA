@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { types } from '../store/beerDb';
-import renderHeader from './AllBeerList/Header';
-import { View, Button, TouchableOpacity, Text, FlatList } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import StarRating from 'react-native-star-rating';
-import renderSeparator from './AllBeerList/Seperator';
-import styles from './AllBeerList/style-sheet';
-import { searchRanked, blankSearch } from '../store/beer';
+import React, { useState, useEffect } from "react";
+import { types } from "../store/beerDb";
+import renderHeader from "./AllBeerList/Header";
+import { View, Button, TouchableOpacity, Text, FlatList } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import StarRating from "react-native-star-rating";
+import renderSeparator from "./AllBeerList/Seperator";
+import styles from "./AllBeerList/style-sheet";
+import { searchRanked, blankSearch } from "../store/beer";
 
 export default function List(props) {
   const dispatch = useDispatch();
-  const {sortCB, dispatchCreator, selectorCB, ratingToUse, listToUse} = props
+  const { sortCB, dispatchCreator, selectorCB, ratingToUse, listToUse } = props;
 
   // GLOBAL STATE
   const list = useSelector(state => state.beer.rankSearch);
 
   // LOCAL STATE
-  const [type, setType] = useState('Select Type');
-  const [search, setSearch] = useState('');
+  const [type, setType] = useState("Select Type");
+  const [search, setSearch] = useState("");
   const [typeIndex, setTypeIndex] = useState(100);
 
   // INITIAL RENDER
@@ -64,7 +64,7 @@ export default function List(props) {
               />
               <TouchableOpacity
                 onPress={() =>
-                  props.navigation.navigate('SingleBeer', { item })
+                  props.navigation.navigate("SingleBeer", { item })
                 }
               >
                 <Text style={styles.button}>View</Text>

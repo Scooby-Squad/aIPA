@@ -18,7 +18,7 @@ router.get('/wishlist', async (req, res, next) => {
   try {
     const wishlist = await User_Beer.findAll({
       where: {
-        userId: req.user.id,
+        userId: 1,
         rating: '0'
       }
     })
@@ -30,9 +30,8 @@ router.get('/wishlist', async (req, res, next) => {
 router.delete('/wishlist', async (req, res, next) => {
   try {
     await User_Beer.destroy({
-
       where: {
-        userId: req.user.id,
+        userId: 1,
         beerId: req.body.id
       }
     })
@@ -47,12 +46,7 @@ router.put('/update', async (req, res, next) => {
   let {rating, beerId} = req.body
   if (!beerId) beerId = req.body.id
   try {
-
-    const update = await User_Beer.updateOrCreateRating(
-      req.user.id,
-      beerId,
-      rating
-    )
+    const update = await User_Beer.updateOrCreateRating(1, beerId, rating)
     if (!update) {
       console.error('Updated')
     }
