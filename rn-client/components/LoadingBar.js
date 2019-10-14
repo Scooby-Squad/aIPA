@@ -20,15 +20,10 @@ const LoadingBar = props => {
     outputRange: ["0%", "100%"],
     extrapolate: "clamp"
   })
-  // dev purposes
-  // console.log('width', width)
-  // console.log('CurrentQ', currentQuestion, 'Total', totalQuestions)
-
-  // let test = Object.values(width)
-  // console.log('test', test)
 
 return (
   <Fragment>
+    <Text>{'\n'}</Text>
     <View style={styles.progressBar}>
       <Animated.View style={{
         position: 'absolute',
@@ -40,7 +35,7 @@ return (
         width
       }} />
     </View>
-    <Text>{width.toString()}</Text>
+    <Text>{`${Math.round((currentQuestion / totalQuestions) * 100)}%`}</Text>
   </Fragment>
 )
 }

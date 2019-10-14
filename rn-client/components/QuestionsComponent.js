@@ -61,12 +61,11 @@ const QuestionsComponent = props => {
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.container}>
           <View style={styles.container}>
-            <Text>{currIdx + 1}/{quizData.length}</Text>
             <SingleQuestion quizData={quizData} currIdx={currIdx} />
             <RatingInput
               rating={enteredRating}
               addRatingHandler={addRatingHandler}
-              returnHomeHandler={props.returnHomeHandler}
+              returnHome={returnHome}
               currentQuestion={currIdx}
               totalQuestions={quizData.length}
             />

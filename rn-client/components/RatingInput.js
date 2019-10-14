@@ -1,11 +1,11 @@
-import React, {useRef, useState, useEffect} from 'react'
-import {ScrollView, View, StyleSheet, Button, Text, Animated} from 'react-native'
+import React from 'react'
+import {ScrollView, View, StyleSheet, Button} from 'react-native'
 import StarRating from 'react-native-star-rating'
 import Constants from 'expo-constants'
 import LoadingBar from './LoadingBar'
 
 const RatingInput = props => {
-  const {addRatingHandler} = props
+  const {addRatingHandler, returnHome, currentQuestion, totalQuestions} = props
   return (
     <ScrollView
       keyboardShouldPersistTaps="always"
@@ -23,10 +23,10 @@ const RatingInput = props => {
           <Button title="Skip" onPress={() => addRatingHandler(undefined, true)} />
         </View>
         <View style={styles.button}>
-          <Button title="Quit" color="red" onPress={props.returnHomeHandler} />
+          <Button title="Quit" color="red" onPress={returnHome} />
         </View>
       </View>
-      <LoadingBar currentQuestion={props.currentQuestion} totalQuestions={props.totalQuestions} />
+      <LoadingBar currentQuestion={currentQuestion} totalQuestions={totalQuestions} />
     </ScrollView>
   )
 }
@@ -56,27 +56,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+    // backgroundColor: '#ecf0f1',
     padding: 8,
-  },
-  // progressBar: {
-  //   height: 20,
-  //   width: '100%',
-  //   backgroundColor: 'white',
-  //   borderColor: '#000',
-  //   borderWidth: 2,
-  //   borderRadius: 5,
-  //   flexDirection: 'row'
-  // },
-  // animatedView: {
-  //   position: 'absolute',
-  //   left: 0,
-  //   right: 0,
-  //   top: 0,
-  //   bottom: 0,
-  //   backgroundColor: '#8BED4F',
-  //   width: '50%'
-  // }
+  }
 })
 
 export default RatingInput
