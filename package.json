@@ -15,7 +15,7 @@
     "lint-fix": "npm run lint -- --fix",
     "prepare": "touch preparationComplete.js",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
-    "postinstall": "touch secrets.js",
+    "postinstall": "node webserver/script/seed.js",
     "seed": "node webserver/script/seed.js",
     "start": "node webserver/server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
