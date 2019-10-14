@@ -48,7 +48,6 @@ export default function Single(props) {
     await dispatch(addToWishlistThunk(beer))
   };
 
-  // console.log("single beer view data is", data);
   return (
     <View style={styles.container}>
       <View style={styles.nameRating}>
