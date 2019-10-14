@@ -40,15 +40,19 @@ export default function Single(props) {
     dispatchers();
   }, [data]);
 
+
   const onStarRatingPress = async rating => {
     await setData({ ...data, rating });
   };
 
-  const onWishlistPress = async beer => {
+  const onAddWishlistPress = async beer => {
     await dispatch(addToWishlistThunk(beer))
+    await setData({...data, rating: "0"})
+    //data.rating = 0;
+    // change = !change
+    console.log(data.rating, 'data after change')
   };
 
-  // console.log("single beer view data is", data);
   return (
     <View style={styles.container}>
       <View style={styles.nameRating}>
@@ -119,8 +123,17 @@ export default function Single(props) {
         <Button
           title="Add to wishlist"
           onPress={() => {
-            console.log(data)
-            onWishlistPress(data);
+            onAddWishlistPress(data);
+          }}
+        />
+      ) : (
+        <Text />
+      )}
+      {data.rating === "0" ? (
+        <Button
+          title="Remove from wishlist"
+          onPress={() => {
+            onRemoveWishlistPress(data);
           }}
         />
       ) : (

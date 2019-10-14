@@ -109,8 +109,7 @@ export const addToWishlistThunk = (beer) => {
   return async (dispatch) => {
     try {
       const {data} = await axios.put(`${apiUrl}/api/userbeers/update`, beer)
-      console.log(`${apiUrl}/userbeers/update`, 'this is URL')
-      console.log(data, 'this is data')
+
       dispatch(addToWishlist(data))
     } catch (error) {
       console.error(error)
@@ -138,8 +137,8 @@ const sorter = (a, b) =>
 /**
  * REDUCER
  **/
-export default async function(state = initialState, action) {
-  let newBeers, newPredictions;
+export default function(state = initialState, action) {
+  let newBeers, newPredictions, newWishlist;
   switch (action.type) {
     case SEARCH_BLANK:
       return {...state, rankSearch: []}
@@ -180,9 +179,7 @@ export default async function(state = initialState, action) {
           return {...beer}
         }
       })
-      //console.log('action beer id',action.beer.id)
       newPredictions = state.predictions.filter(beer => beer.id != action.beer.id)
-      //console.log('newpreds', newPredictions)
       return { ...state, ranked: newBeers, predictions: newPredictions};
     case GOT_PREDICTIONS:
       // want to filter out already done beers
@@ -196,21 +193,16 @@ export default async function(state = initialState, action) {
         return {...beer, prediction: Math.round(action.predictions[index])}
       })
 
-      //sconsole.log(newBeers[1])
-      return {...state, predictions: newBeers}
+      return {...state, predictions: newPredictions}
     case GOT_WISHLIST:
-      return {...state, wishlist: data}
+      return {...state, wishlist: action.wishlist}
     case ADD_TO_WISHLIST:
-      console.log(action, 'this is action')
-      
       return {...state, wishlist: [...state.wishlist, action.beer]}
     case REMOVE_FROM_WISHLIST:
-      const newWishlist = state.wishlist.filter(beer => {
+      newWishlist = state.wishlist.filter(beer => {
         if (beer.id !== action.beer.id) return beer
       })
-      return {...state, wishlist: newWishlists}
-
-      return {...state, predictions: newPredictions}
+      return {...state, wishlist: newWishlist}
 
     default:
       return state;

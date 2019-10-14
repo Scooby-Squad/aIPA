@@ -45,10 +45,11 @@ router.delete('/wishlist', async (req, res, next) => {
 // Update a userbeer
 router.put('/update', async (req, res, next) => {
   // have a check on req.user in index, currently commented out for testing
-  const {rating, beerId} = req.body
+  let {rating, beerId} = req.body
+  if(!beerId) beerId = req.body.id
   try {
     // The first argument here is user.id but is hard coded
-    const update = await User_Beer.updateOrCreateRating(1, beerId, rating)
+    const update = await User_Beer.updateOrCreateRating(req.user.id, beerId, rating)
     if (!update) {
       console.error('Updated')
     }
