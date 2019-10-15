@@ -1,15 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
-import {logOut} from '../store/user'
+import { logOut } from '../store/user';
 import { useDispatch } from 'react-redux';
 
 const RealSettings = props => {
-    const dispatch = useDispatch();
-    const dispatchLogOut = () => {
-        dispatch(logOut());
-        props.navigation.navigate('Home')
-    }
+  const dispatch = useDispatch();
+  const dispatchLogOut = () => {
+    dispatch(logOut());
+    props.navigation.navigate('Home');
+  };
+
+  const _handlePressQuiz = () => {
+    props.navigation.navigate('Quiz');
+  };
 
   return (
     <View style={styles.container}>
@@ -27,11 +31,11 @@ const RealSettings = props => {
       <Touchable
         style={styles.option}
         background={Touchable.Ripple('#ccc', false)}
-        onPress={dispatchLogOut}
+        onPress={_handlePressQuiz}
       >
         <View style={{ flexDirection: 'row' }}>
           <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Retake Quiz</Text>
+            <Text style={styles.optionText}>Retake the Quiz</Text>
           </View>
         </View>
       </Touchable>

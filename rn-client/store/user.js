@@ -80,7 +80,6 @@ export default function(state = initialState, action) {
     case LOGGED_IN:
       return { ...state, ...action.user };
     case LOGGED_OUT:
-      console.log('We out here for REAL')
       return initialState;
     default:
       return state;
