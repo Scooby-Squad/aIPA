@@ -16,7 +16,7 @@ const SEARCH_BLANK = "SEARCH_BLANK";
 const GOT_WISHLIST = "GOT_WISHLIST";
 const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
-const REFRESH = 'REFRESH'
+const REFRESH = "REFRESH";
 
 /**
  * INITIAL STATE
@@ -24,9 +24,9 @@ const REFRESH = 'REFRESH'
 const initialState = {
   all,
   ranked: [],
-  
+
   predictions: [],
-  wishlist: [], 
+  wishlist: [],
   refesh: 0
 };
 
@@ -47,7 +47,7 @@ export const blankSearch = () => ({ type: SEARCH_BLANK });
 const gotWishlist = wishlist => ({ type: GOT_WISHLIST, wishlist });
 const addToWishlist = beer => ({ type: ADD_TO_WISHLIST, beer });
 const removeFromWishlist = beer => ({ type: REMOVE_FROM_WISHLIST, beer });
-export const refresher = () => ({type: REFRESH})
+export const refresher = () => ({ type: REFRESH });
 
 /**
  * THUNK CREATORS
@@ -105,10 +105,10 @@ export const getWishlist = () => {
     try {
       const { data } = await axios.get(`${apiUrl}/api/userbeers/wishlist`);
       let beers = data.map(el => {
-        el.beer.rating = el.rating
-        el.beer.userId = el.userId
-        return el.beer
-      })
+        el.beer.rating = el.rating;
+        el.beer.userId = el.userId;
+        return el.beer;
+      });
       dispatch(gotWishlist(beers));
     } catch (error) {
       console.error(error);
@@ -130,10 +130,8 @@ export const addToWishlistThunk = beer => {
 export const removeFromWishlistThunk = beer => {
   return async dispatch => {
     try {
-      //console.log(beer)
-      await axios.delete(`${apiUrl}/api/userbeers/wishlist`, beer);
+      await axios.delete(`${apiUrl}/api/userbeers/wishlist/${beer.id}`, beer);
       dispatch(removeFromWishlist(beer));
-      dispatch(getRankedBeers())
     } catch (error) {
       console.error(error);
     }
@@ -152,7 +150,7 @@ export default function(state = initialState, action) {
   let newBeers, newPredictions, newWishlist;
   switch (action.type) {
     case REFRESH:
-      return {...state, refresh: (state.refresh + 1)}
+      return { ...state, refresh: state.refresh + 1 };
     case SEARCH_BLANK:
       return { ...state, rankSearch: [] };
     case SEARCH_RANKED:
@@ -188,10 +186,15 @@ export default function(state = initialState, action) {
       newPredictions = state.predictions.filter(
         beer => beer.id != action.beer.id
       );
-       let newWishList = state.wishlist.filter(beer => {
-        return beer.id != action.beer.id
-      })
-      return { ...state, ranked: newBeers, predictions: newPredictions, wishlist: newWishList};
+      let newWishList = state.wishlist.filter(beer => {
+        return beer.id != action.beer.id;
+      });
+      return {
+        ...state,
+        ranked: newBeers,
+        predictions: newPredictions,
+        wishlist: newWishList
+      };
     case GOT_PREDICTIONS:
       // want to filter out already done beers
       // have different colors for recommendations, or a label
