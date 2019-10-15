@@ -60,52 +60,103 @@ const LoggedInPage = props => {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Welcome:{props.name}</Text>
-      <Image style={styles.image} source={{ uri: props.photoUrl }} />
-      <Touchable
-        style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
-        onPress={_handlePressQuiz}
-      >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Take/Review Quiz</Text>
-          </View>
+      <ImageBackground
+              source={
+                __DEV__
+                  ? require('../assets/images/aipa-matrix-top.jpg')
+                  : require('../assets/images/aipa-matrix-top.jpg')
+              }
+              style={{width: '100%', height: '100%', position: 'absolute', bottom: 0}}
+            >
+      
+        <View style={styles.buttonBox}>
+          <Touchable
+            style={styles.option}
+            background={Touchable.Ripple('#ccc', false)}
+            onPress={_handlePressQuiz}
+          >
+            <Image source={
+                __DEV__
+                  ? require('../assets/images/suggest.png')
+                  : require('../assets/images/suggest.png')
+              }
+              style={{width: '100%', resizeMode: 'contain'}}
+            />
+          </Touchable>
+          <Touchable
+            style={styles.option}
+            background={Touchable.Ripple('#ccc', false)}
+            onPress={_handlePressQuiz}
+          >
+            <Image source={
+                __DEV__
+                  ? require('../assets/images/suggest.png')
+                  : require('../assets/images/suggest.png')
+              }
+              style={{width: '100%', resizeMode: 'contain'}}
+            />
+          </Touchable>
+          <Touchable
+            style={styles.option}
+            background={Touchable.Ripple('#ccc', false)}
+            onPress={_handlePressQuiz}
+          >
+            <Image source={
+                __DEV__
+                  ? require('../assets/images/suggest.png')
+                  : require('../assets/images/suggest.png')
+              }
+              style={{width: '100%', resizeMode: 'contain'}}
+            />
+          </Touchable>
+          <Touchable
+            style={styles.option}
+            background={Touchable.Ripple('#ccc', false)}
+            onPress={_handlePressQuiz}
+          >
+            <Image source={
+                __DEV__
+                  ? require('../assets/images/suggest.png')
+                  : require('../assets/images/suggest.png')
+              }
+              style={{width: '100%', resizeMode: 'contain'}}
+            />
+          </Touchable>
+          {/* <Touchable
+            style={styles.option}
+            background={Touchable.Ripple('#ccc', false)}
+            onPress={_handlePressRecs}
+          >
+            <View style={{ flexDirection: 'row' }}>
+              <View style={styles.optionTextContainer}>
+                <Text style={styles.optionText}>Get Predictions</Text>
+              </View>
+            </View>
+          </Touchable>
+          <Touchable
+            style={styles.option}
+            background={Touchable.Ripple('#ccc', false)}
+            onPress={() => {props.navigation.navigate('Graphs')}}
+          >
+            <View style={{ flexDirection: 'row' }}>
+              <View style={styles.optionTextContainer}>
+                <Text style={styles.optionText}>View Graphs</Text>
+              </View>
+            </View>
+          </Touchable>
+          <Touchable
+            style={styles.option}
+            background={Touchable.Ripple('#ccc', false)}
+            onPress={props.logOut}
+          >
+            <View style={{ flexDirection: 'row' }}>
+              <View style={styles.optionTextContainer}>
+                <Text style={styles.optionText}>Log Out</Text>
+              </View>
+            </View>
+          </Touchable> */}
         </View>
-      </Touchable>
-      <Touchable
-        style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
-        onPress={_handlePressRecs}
-      >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Get Predictions</Text>
-          </View>
-        </View>
-      </Touchable>
-      <Touchable
-        style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
-        onPress={() => {props.navigation.navigate('Graphs')}}
-      >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>View Graphs</Text>
-          </View>
-        </View>
-      </Touchable>
-      <Touchable
-        style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
-        onPress={props.logOut}
-      >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Log Out</Text>
-          </View>
-        </View>
-      </Touchable>
+      </ImageBackground>
     </View>
   );
 };
@@ -115,7 +166,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-around'
   },
   header: {
     fontSize: 25
@@ -127,33 +178,43 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignContent: 'center'
   },
-  image: {
-    marginTop: 15,
-    width: 150,
-    height: 150,
-    borderColor: 'rgba(0,0,0,0.2)',
-    borderWidth: 3,
-    borderRadius: 150
-  },
-  optionsTitleText: {
-    fontSize: 16,
-    marginLeft: 15,
-    marginTop: 9,
-    marginBottom: 12
-  },
-  optionIconContainer: {
-    marginRight: 9
-  },
+  // image: {
+  //   marginTop: 0,
+  //   width: 150,
+  //   height: 150,
+  //   borderColor: 'rgba(0,0,0,0.2)',
+  //   borderWidth: 3,
+  //   borderRadius: 150
+  // },
+  // optionsTitleText: {
+  //   fontSize: 16,
+  //   marginLeft: 15,
+  //   marginTop: 9,
+  //   marginBottom: 12
+  // },
+  // optionIconContainer: {
+  //   marginRight: 9
+  // },
   option: {
-    backgroundColor: '#fdfdfd',
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 15,
-    paddingVertical: 15,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#EDEDED'
+    paddingVertical: 0,
+    flex: 4,
+    justifyContent: 'flex-end'
+    // borderBottomWidth: StyleSheet.hairlineWidth,
+    // borderBottomColor: '#EDEDED'
   },
   optionText: {
     fontSize: 15,
     marginTop: 1
+  },
+  buttonBox: {
+    bottom: 0,
+    width: '100%',
+    height: '75%',
+    position: 'absolute',
+    flex: 0,
+    justifyContent: 'flex-end'
   }
 });
 
