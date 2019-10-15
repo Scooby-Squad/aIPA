@@ -4,7 +4,7 @@ module.exports = router
 // Get a userbeers for a user
 router.get('/', async (req, res, next) => {
   try {
-    const userbeers = await User_Beer.findRatings(1)
+    const userbeers = await User_Beer.findRatings(req.user.id)
     const filterBeers = userbeers.filter(beer => {
       if (beer.rating > 0) return beer
     })

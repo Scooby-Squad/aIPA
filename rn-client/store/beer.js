@@ -97,7 +97,8 @@ export const getPredictions = () => {
 export const getWishlist = () => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(`${apiUrl}/api/wishlist`)
+      const {data} = await axios.get(`${apiUrl}/api/userbeers/wishlist`)
+      console.log('thunk', data)
       dispatch(gotWishlist(data))
     } catch (error) {
       console.error(error)
@@ -195,7 +196,15 @@ export default function(state = initialState, action) {
 
       return {...state, predictions: newPredictions}
     case GOT_WISHLIST:
-      return {...state, wishlist: action.wishlist}
+      newWishlist = action.wishlist.map(userBeer => {
+        let beer = state.predictions.filter(prediction => prediction.id == userBeer.beerId)
+        if (!beer.length) {
+          beer = state.all.filter(single => single.id == userBeer.beerId)
+        }
+        return {...beer[0], ...userBeer}
+      })
+      console.log('reducer', newWishlist)
+      return {...state, wishlist: newWishlist}
     case ADD_TO_WISHLIST:
       return {...state, wishlist: [...state.wishlist, action.beer]}
     case REMOVE_FROM_WISHLIST:

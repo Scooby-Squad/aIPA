@@ -45,7 +45,7 @@ const LoginPage = props => {
             <View style={styles.headerbottom}>
               <Button title="Sign in with Google" onPress={props.signIn} style={styles.headerbottom} />
             </View>
-        
+
       </ImageBackground>
     // </View>
   );
@@ -57,6 +57,9 @@ const LoggedInPage = props => {
   };
   const _handlePressRecs = () => {
     props.navigation.navigate('Recs')
+  }
+  const _handlePressWish = () => {
+    props.navigation.navigate('Wish')
   }
   return (
     <View style={styles.container}>
@@ -92,6 +95,17 @@ const LoggedInPage = props => {
         <View style={{ flexDirection: 'row' }}>
           <View style={styles.optionTextContainer}>
             <Text style={styles.optionText}>View Graphs</Text>
+          </View>
+        </View>
+      </Touchable>
+      <Touchable
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={_handlePressWish}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>View Wishlist</Text>
           </View>
         </View>
       </Touchable>
