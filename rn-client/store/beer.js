@@ -120,7 +120,7 @@ export const addToWishlistThunk = (beer) => {
 export const removeFromWishlistThunk = (beer) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`${apiUrl}/api/wishlist`, beer)
+      await axios.delete(`${apiUrl}/api/wishlist/${beer.id}`, beer)
       dispatch(removeFromWishlist(beer))
     } catch (error) {
       console.error(error)
