@@ -98,7 +98,6 @@ export const getWishlist = () => {
   return async (dispatch) => {
     try {
       const {data} = await axios.get(`${apiUrl}/api/userbeers/wishlist`)
-      console.log('thunk', data)
       dispatch(gotWishlist(data))
     } catch (error) {
       console.error(error)
@@ -166,13 +165,6 @@ export default function(state = initialState, action) {
     case GOT_RANKED_BEERS:
       return { ...state, ranked: action.beers };
     case UPDATED_RANKED_BEER:
-      // for (let i = 0; i < state.ranked.length; ++i) {
-      //   let rk = state.ranked[i];
-      //   if (rk.id === action.beer.id) {
-      //     state.ranked[i] = action.beer;
-      //   }
-      // }
-      // return { ...state, ranked: state.ranked };
       newBeers = state.ranked.map(beer => {
         if (beer.id === action.beer.id) {
           return action.beer
@@ -203,7 +195,6 @@ export default function(state = initialState, action) {
         }
         return {...beer[0], ...userBeer}
       })
-      console.log('reducer', newWishlist)
       return {...state, wishlist: newWishlist}
     case ADD_TO_WISHLIST:
       return {...state, wishlist: [...state.wishlist, action.beer]}
