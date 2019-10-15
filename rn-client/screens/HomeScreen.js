@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn, logOut } from '../store/user';
 import { getPredictions } from '../store/beer';
@@ -32,10 +32,22 @@ const HomeScreen = props => {
 
 const LoginPage = props => {
   return (
-    <View>
-      <Text style={styles.header}>Sign In With Google</Text>
-      <Button title="Sign in with Google" onPress={props.signIn} />
-    </View>
+    // <View>
+      <ImageBackground
+            source={
+              __DEV__
+                ? require('../assets/images/aipa-matrix.jpg')
+                : require('../assets/images/aipa-matrix.jpg')
+            }
+            style={{width: '100%', height: '100%', position: 'absolute', bottom: 0}}
+            // style={{width: '100%', height: '100%', justifyContent: 'left', position: 'absolute', bottom: 0}}
+          >
+            <View style={styles.headerbottom}>
+              <Button title="Sign in with Google" onPress={props.signIn} style={styles.headerbottom} />
+            </View>
+        
+      </ImageBackground>
+    // </View>
   );
 };
 
@@ -107,6 +119,13 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 25
+  },
+  headerbottom: {
+    fontSize: 35,
+    bottom: 25,
+    width: '100%',
+    position: 'absolute',
+    alignContent: 'center'
   },
   image: {
     marginTop: 15,
