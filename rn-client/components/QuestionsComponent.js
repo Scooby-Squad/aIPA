@@ -7,7 +7,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {updateUserBeer} from '../store/beer'
 // import Splash from '../QuestionsSplash'
 
-
+// would need to facor in user ratings from db if pulling existing ratings
 const beerData = {questions: beerQuizData}
 
 const QuestionsComponent = props => {
@@ -40,7 +40,7 @@ const QuestionsComponent = props => {
         returnHome(copyQuizData)
       } else {
         setCurrIdx(nextIdx)
-        setRating(0)
+        setRating(parseInt(quizData[currIdx].rating, 10))
       }
     }, 250)
   }
@@ -51,6 +51,8 @@ const QuestionsComponent = props => {
         const data = beerData
         if (data && data.questions) {
           setQuizData(data.questions)
+          // this line is really just if we can work in prior ratings to retaking test
+          setRating(parseInt(data.questions[currIdx].rating, 10))
         }
       } catch (error) {
         console.error('error: ', error)
