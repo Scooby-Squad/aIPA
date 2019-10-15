@@ -106,6 +106,17 @@ const LoggedInPage = props => {
           </View>
         </View>
       </Touchable>
+      <Touchable
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={() => props.navigation.navigate('RealSettings')}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>Settings</Text>
+          </View>
+        </View>
+      </Touchable>
     </View>
   );
 };
