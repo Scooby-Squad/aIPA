@@ -65,17 +65,6 @@ const LoggedInPage = props => {
       <Touchable
         style={styles.option}
         background={Touchable.Ripple('#ccc', false)}
-        onPress={_handlePressQuiz}
-      >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Take/Review Quiz</Text>
-          </View>
-        </View>
-      </Touchable>
-      <Touchable
-        style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
         onPress={_handlePressRecs}
       >
         <View style={{ flexDirection: 'row' }}>
@@ -92,17 +81,6 @@ const LoggedInPage = props => {
         <View style={{ flexDirection: 'row' }}>
           <View style={styles.optionTextContainer}>
             <Text style={styles.optionText}>View Graphs</Text>
-          </View>
-        </View>
-      </Touchable>
-      <Touchable
-        style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
-        onPress={props.logOut}
-      >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Log Out</Text>
           </View>
         </View>
       </Touchable>
