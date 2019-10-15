@@ -18,11 +18,12 @@ export default function List(props) {
   // LOCAL STATE
   const [type, setType] = useState('Select Type');
   const [search, setSearch] = useState('');
-  const [typeIndex, setTypeIndex] = useState(100);
+  const [typeIndex, setTypeIndex] = useState(0);
 
   // INITIAL RENDER
   useEffect(() => {
-    dispatch(blankSearch());
+    dispatch(searchRanked('', 0, listToUse))
+    //dispatch(blankSearch());
   }, []);
 
   // SEARCH CHANGE HANDLER

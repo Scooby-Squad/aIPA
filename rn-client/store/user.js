@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as Google from 'expo-google-app-auth';
 import getEnvVars from '../environment';
+import {getRankedBeers} from './beer'
 const { apiUrl, androidClientId, iosClientId } = getEnvVars();
 
 /**
@@ -33,6 +34,7 @@ export const logOut = () => ({ type: LOGGED_OUT });
  **/
 const fetchUser = async user => {
   try {
+    console.log(`${apiUrl}/auth/google/`)
     const { data } = await axios.post(`${apiUrl}/auth/google/`, user);
     return data;
   } catch (error) {
@@ -62,6 +64,7 @@ export const signIn = () => {
           refreshToken: result.refreshToken,
           persisted: 'I persisted here'
         };
+        dispatch(getRankedBeers());
         dispatch(loggedIn(action));
       } else {
         console.log('cancelled');
