@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn, logOut } from '../store/user';
-import { getPredictions } from '../store/beer';
+import { getPredictions, getRankedBeers } from '../store/beer';
 import Touchable from 'react-native-platform-touchable';
+import QuestionsComponent from '../components/QuestionsComponent';
 
 const HomeScreen = props => {
   const user = useSelector(state => state.user);
@@ -11,6 +12,16 @@ const HomeScreen = props => {
   const dispatchSignIn = () => dispatch(signIn());
   const dispatchLogOut = () => dispatch(logOut());
   const dispatchGetPredictions = () => dispatch(getPredictions());
+
+  const ranked = useSelector(state => state.beer.ranked);
+  const [isQuizzing, setIsQuizzing] = useState(true)
+  const dispatchGetRankedBeers = () => dispatch(getRankedBeers());
+  const returnHomeHandler = () => {
+    setIsQuizzing(false)
+    dispatchGetRankedBeers()
+    props.navigation.navigate('Recs')
+  }
+
 
   return (
     <View style={styles.container}>
@@ -22,6 +33,9 @@ const HomeScreen = props => {
           photoUrl={user.photoUrl}
           logOut={dispatchLogOut}
           getPredictions={dispatchGetPredictions}
+          ranked={ranked}
+          isQuizzing={isQuizzing}
+          returnHomeHandler={returnHomeHandler}
         />
       ) : (
         <LoginPage signIn={dispatchSignIn} />
@@ -45,7 +59,7 @@ const LoginPage = props => {
             <View style={styles.headerbottom}>
               <Button title="Sign in with Google" onPress={props.signIn} style={styles.headerbottom} />
             </View>
-        
+
       </ImageBackground>
     // </View>
   );
@@ -58,6 +72,15 @@ const LoggedInPage = props => {
   const _handlePressRecs = () => {
     props.navigation.navigate('Recs')
   }
+
+  if (!props.ranked.length) return (
+    <QuestionsComponent
+      visible={props.isQuizzing}
+      returnHome={props.returnHomeHandler}
+      // onCancel={cancelQuizHandler}
+    />
+  )
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome:{props.name}</Text>
