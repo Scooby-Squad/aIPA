@@ -22,7 +22,7 @@ export default function List(props) {
 
   // INITIAL RENDER
   useEffect(() => {
-    dispatch(searchRanked('', 0, 'ranked'))
+    dispatch(searchRanked('', 0, listToUse))
     //dispatch(blankSearch());
   }, []);
 
