@@ -17,6 +17,7 @@ import HexbinScreen from '../screens/HexbinScreen';
 import SingleBeerScreen from '../screens/SingleBeerView';
 import RecommendedList from '../components/RecommendedList';
 import WishList from '../components/Wishlist';
+import RealSettings from '../components/RealSettings';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -33,7 +34,8 @@ const HomeStack = createStackNavigator(
     BubbleChart: BubbleChartScreen,
     Hexbin: HexbinScreen,
     SingleBeer: SingleBeerScreen,
-    Wish: WishList
+    Wish: WishList,
+    RealSettings: RealSettings
   },
   config
 );
