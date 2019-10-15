@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {User_Beer} = require('../db/models')
+const { Beer } = require('../db/models')
 module.exports = router
 // Get a userbeers for a user
 router.get('/', async (req, res, next) => {
@@ -17,6 +18,7 @@ router.get('/', async (req, res, next) => {
 router.get('/wishlist', async (req, res, next) => {
   try {
     const wishlist = await User_Beer.findAll({
+      include: [{model: Beer}],
       where: {
         userId: 1,
         rating: '0'
@@ -29,6 +31,7 @@ router.get('/wishlist', async (req, res, next) => {
 })
 router.delete('/wishlist', async (req, res, next) => {
   try {
+    console.log('REQ', req)
     await User_Beer.destroy({
       where: {
         userId: 1,

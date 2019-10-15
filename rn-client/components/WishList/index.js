@@ -4,7 +4,7 @@ import List from "../List";
 
 export default function WishList(props) {
   const rankedState = state => state.beer.wishlist;
-  const ratingToUse = "";
+  const ratingToUse = 'rating';
   const listToUse = "wishlist";
   const sort = (a, b) =>
     a.rating < b.rating

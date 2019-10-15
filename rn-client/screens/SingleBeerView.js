@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { refresher } from '../store/beer'
 import StarRating from 'react-native-star-rating';
 import {
+  getWishlist,
   updateUserBeer,
   getRankedBeers,
   addToWishlistThunk,
   removeFromWishlistThunk
 } from '../store/beer';
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -31,19 +35,23 @@ const styles = StyleSheet.create({
 // eslint-disable-next-line complexity
 export default function Single(props) {
   const [data, setData] = useState(props.navigation.getParam('item'));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     const dispatchers = async () => {
       await dispatch(updateUserBeer(data));
       await dispatch(getRankedBeers());
+      await dispatch(getWishlist())
+      await dispatch(refresher())
     };
     dispatchers();
   }, [data]);
 
 
-  const onStarRatingPress = async rating => {
+  const onStarRatingPress = async (rating, beer) => {
     await setData({ ...data, rating });
+    await dispatch(removeFromWishlistThunk(beer))
   };
 
   const onAddWishlistPress = async beer => {
@@ -67,7 +75,7 @@ export default function Single(props) {
           fullStar="ios-star"
           rating={Number(data.rating)}
           maxStars={5}
-          selectedStar={rating => onStarRatingPress(rating)}
+          selectedStar={rating => onStarRatingPress(rating, data)}
           fullStarColor="blue"
         />
         {data.brewer ? (

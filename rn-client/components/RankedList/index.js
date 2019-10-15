@@ -11,5 +11,10 @@ export default function RankedList(props) {
       ? 1
       : a.rating === b.rating ? (a.name > b.name ? 1 : -1) : -1)
 
-  return <List {...props} listToUse={listToUse} ratingToUse={ratingToUse} selectorCB={rankedState} sortCB={sort} dispatchCreator={getRankedBeers} />
+  return <List {...props} 
+  listToUse={listToUse} 
+  ratingToUse={ratingToUse} 
+  selectorCB={rankedState} 
+  sortCB={sort} 
+  dispatchCreator={getRankedBeers} />
 }

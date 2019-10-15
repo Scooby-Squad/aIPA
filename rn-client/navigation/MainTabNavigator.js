@@ -16,6 +16,7 @@ import BubbleChartScreen from '../screens/BubbleChartScreen';
 import HexbinScreen from '../screens/HexbinScreen';
 import SingleBeerScreen from '../screens/SingleBeerView';
 import RecommendedList from '../components/RecommendedList'
+import WishList from '../components/WishList'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -51,7 +52,8 @@ HomeStack.path = '';
 const LinksStack = createStackNavigator(
   {
     Links: LinksScreen,
-    SingleBeer: SingleBeerScreen
+    SingleBeer: SingleBeerScreen,
+    WishList: WishList
   },
   config
 );
@@ -62,6 +64,7 @@ LinksStack.navigationOptions = {
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-beer' : 'md-beer'}
+      onPress={() => console.log('dfsafsd')}
     />
   )
 };
@@ -72,6 +75,7 @@ const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
     SingleBeer: SingleBeerScreen
+
   },
   config
 );

@@ -8,12 +8,17 @@ import renderSeparator from "./AllBeerList/Seperator";
 import styles from "./AllBeerList/style-sheet";
 import { searchRanked, blankSearch } from "../store/beer";
 
+
+
+
 export default function List(props) {
   const dispatch = useDispatch();
   const { sortCB, dispatchCreator, selectorCB, ratingToUse, listToUse } = props;
 
   // GLOBAL STATE
   const list = useSelector(state => state.beer.rankSearch);
+  const state = useSelector(state => state)
+
 
   // LOCAL STATE
   const [type, setType] = useState("Select Type");
@@ -43,8 +48,10 @@ export default function List(props) {
     <View>
       <FlatList
         data={list.sort(sortCB)}
+        extraData={state}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
+        renderItem={({ item }) => {
+          return (
           <View style={styles.flatview}>
             <View style={styles.text}>
               <Text style={styles.name}>{item.name}</Text>
@@ -63,15 +70,15 @@ export default function List(props) {
                 fullStarColor="blue"
               />
               <TouchableOpacity
-                onPress={() =>
-                  props.navigation.navigate("SingleBeer", { item })
-                }
+                onPress={() => {
+                  return props.navigation.navigate("SingleBeer", { item })
+                }}
               >
                 <Text style={styles.button}>View</Text>
               </TouchableOpacity>
             </View>
           </View>
-        )}
+        )}}
         ItemSeparatorComponent={renderSeparator}
         keyExtractor={item => item.id}
         ListHeaderComponent={renderHeader({

@@ -16,6 +16,7 @@ const SEARCH_BLANK = "SEARCH_BLANK";
 const GOT_WISHLIST = "GOT_WISHLIST";
 const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
+const REFRESH = 'REFRESH'
 
 /**
  * INITIAL STATE
@@ -23,9 +24,10 @@ const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
 const initialState = {
   all,
   ranked: [],
-  rankSearch: [],
+  
   predictions: [],
-  wishlist: []
+  wishlist: [], 
+  refesh: 0
 };
 
 /**
@@ -45,6 +47,7 @@ export const blankSearch = () => ({ type: SEARCH_BLANK });
 const gotWishlist = wishlist => ({ type: GOT_WISHLIST, wishlist });
 const addToWishlist = beer => ({ type: ADD_TO_WISHLIST, beer });
 const removeFromWishlist = beer => ({ type: REMOVE_FROM_WISHLIST, beer });
+export const refresher = () => ({type: REFRESH})
 
 /**
  * THUNK CREATORS
@@ -100,8 +103,13 @@ export const getPredictions = () => {
 export const getWishlist = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${apiUrl}/api/wishlist`);
-      dispatch(gotWishlist(data));
+      const { data } = await axios.get(`${apiUrl}/api/userbeers/wishlist`);
+      let beers = data.map(el => {
+        el.beer.rating = el.rating
+        el.beer.userId = el.userId
+        return el.beer
+      })
+      dispatch(gotWishlist(beers));
     } catch (error) {
       console.error(error);
     }
@@ -112,7 +120,6 @@ export const addToWishlistThunk = beer => {
   return async dispatch => {
     try {
       const { data } = await axios.put(`${apiUrl}/api/userbeers/update`, beer);
-
       dispatch(addToWishlist(data));
     } catch (error) {
       console.error(error);
@@ -123,8 +130,10 @@ export const addToWishlistThunk = beer => {
 export const removeFromWishlistThunk = beer => {
   return async dispatch => {
     try {
-      await axios.delete(`${apiUrl}/api/wishlist`, beer);
+      //console.log(beer)
+      await axios.delete(`${apiUrl}/api/userbeers/wishlist`, beer);
       dispatch(removeFromWishlist(beer));
+      dispatch(getRankedBeers())
     } catch (error) {
       console.error(error);
     }
@@ -142,6 +151,8 @@ const sorter = (a, b) =>
 export default function(state = initialState, action) {
   let newBeers, newPredictions, newWishlist;
   switch (action.type) {
+    case REFRESH:
+      return {...state, refresh: (state.refresh + 1)}
     case SEARCH_BLANK:
       return { ...state, rankSearch: [] };
     case SEARCH_RANKED:
@@ -167,20 +178,20 @@ export default function(state = initialState, action) {
     case GOT_RANKED_BEERS:
       return { ...state, ranked: action.beers };
     case UPDATED_RANKED_BEER:
-      console.log("ACTION", action);
       newBeers = state.ranked.map(beer => {
         if (beer.id === action.beer.id) {
-          console.log("MADE IT");
           return action.beer;
         } else {
           return { ...beer };
         }
       });
-      //console.log('NEW BEERS', newBeers)
       newPredictions = state.predictions.filter(
         beer => beer.id != action.beer.id
       );
-      return { ...state, ranked: newBeers, predictions: newPredictions };
+       let newWishList = state.wishlist.filter(beer => {
+        return beer.id != action.beer.id
+      })
+      return { ...state, ranked: newBeers, predictions: newPredictions, wishlist: newWishList};
     case GOT_PREDICTIONS:
       // want to filter out already done beers
       // have different colors for recommendations, or a label
