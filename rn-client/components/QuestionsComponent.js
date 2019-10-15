@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, StyleSheet, Modal} from 'react-native'
+import {View, Text, StyleSheet, Modal, TouchableOpacity} from 'react-native'
 import SingleQuestion from './SingleQuestion'
 import RatingInput from './RatingInput'
 import beerQuizData from '../store/beerQuizData'
 import {useSelector, useDispatch} from 'react-redux'
 import {updateUserBeer} from '../store/beer'
+// import Splash from '../QuestionsSplash'
 
 
 const beerData = {questions: beerQuizData}
@@ -16,6 +17,7 @@ const QuestionsComponent = props => {
   const [currIdx, setCurrIdx] = useState(0)
   // used for UX purposes to display rating to user
   const [enteredRating, setRating] = useState(0)
+  const [quizStarted, setStartQuiz] = useState(false)
   const userId = useSelector(state => state.user.id)
   const dispatch = useDispatch()
   const {returnHome} = props
@@ -34,6 +36,7 @@ const QuestionsComponent = props => {
       dispatch(updateUserBeer(copyQuizData[currIdx]));
       const nextIdx = currIdx + 1
       if (nextIdx === quizData.length) {
+        setStartQuiz(false)
         returnHome(copyQuizData)
       } else {
         setCurrIdx(nextIdx)
@@ -60,6 +63,22 @@ const QuestionsComponent = props => {
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.container}>
+          {
+          !quizStarted
+          ? <TouchableOpacity onPress={() => setStartQuiz(true)}>
+              <View style={styles.questionsSplash}>
+                <View style = {styles.splashContainer}>
+                  <Text style={styles.splashHeader}>Welcome to aIPA!</Text>
+                </View>
+                <View style={styles.splashContainer}>
+                <Text style={styles.splashText}>Rate as many beers as possible and heavily in order to get started.</Text>
+                </View>
+                <View style={styles.splashContainer}>
+                <Text style={styles.splashFooter}>Press anywhere to continue</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          :
           <View style={styles.container}>
             <SingleQuestion quizData={quizData} currIdx={currIdx} />
             <RatingInput
@@ -70,6 +89,7 @@ const QuestionsComponent = props => {
               totalQuestions={quizData.length}
             />
           </View>
+          }
       </View>
     </Modal>
   )
@@ -82,6 +102,34 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 30
+  },
+  questionsSplash: {
+    // flex: 1,
+    height: '100%',
+    paddingTop: 20,
+    margin: 15,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  splashContainer: {
+    height: '30%',
+  },
+  splashHeader: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 40,
+  },
+  splashText: {
+    // height: '30%',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 25,
+  },
+  splashFooter: {
+    height: '30%',
+    textAlign: 'center',
+    fontSize: 20
   }
 })
 
