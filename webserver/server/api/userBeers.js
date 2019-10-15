@@ -27,12 +27,12 @@ router.get('/wishlist', async (req, res, next) => {
     next(error)
   }
 })
-router.delete('/wishlist', async (req, res, next) => {
+router.delete('/wishlist/:beerId', async (req, res, next) => {
   try {
     await User_Beer.destroy({
       where: {
         userId: req.user.id,
-        beerId: req.body.id
+        beerId: req.params.beerId
       }
     })
     res.sendStatus(204)
