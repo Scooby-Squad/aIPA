@@ -30,7 +30,6 @@ router.get('/wishlist', async (req, res, next) => {
 router.delete('/wishlist/:beerId', async (req, res, next) => {
   try {
     await User_Beer.destroy({
-
       where: {
         userId: req.user.id,
         beerId: req.params.beerId
@@ -47,7 +46,6 @@ router.put('/update', async (req, res, next) => {
   let {rating, beerId} = req.body
   if (!beerId) beerId = req.body.id
   try {
-
     const update = await User_Beer.updateOrCreateRating(
       req.user.id,
       beerId,
