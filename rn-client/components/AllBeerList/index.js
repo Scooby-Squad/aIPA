@@ -22,7 +22,7 @@ export default function AllList(props) {
 
   // INITIAL RENDER
   useEffect(() => {
-    dispatch(actions.blank());
+    dispatch(actions.search('', 0));
   }, []);
 
   // SEARCH CHANGE HANDLER
