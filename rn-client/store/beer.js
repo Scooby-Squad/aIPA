@@ -16,6 +16,7 @@ const SEARCH_BLANK = 'SEARCH_BLANK';
 const GOT_WISHLIST = 'GOT_WISHLIST';
 const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
 const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
+const LOGGED_OUT = 'LOGGED_OUT'
 
 /**
  * INITIAL STATE
@@ -202,14 +203,14 @@ export default function(state = initialState, action) {
       });
       return { ...state, wishlist: newWishlist };
     case ADD_TO_WISHLIST:
-      console.log('action', action.beer);
       return { ...state, wishlist: [...state.wishlist, action.beer] };
     case REMOVE_FROM_WISHLIST:
       newWishlist = state.wishlist.filter(beer => {
-        if (beer.id !== action.beer.id) return beer;
-      });
-      return { ...state, wishlist: newWishlist };
-
+        if (beer.id !== action.beer.id) return beer
+      })
+      return {...state, wishlist: newWishlist}
+    case LOGGED_OUT:
+      return initialState
     default:
       return state;
   }

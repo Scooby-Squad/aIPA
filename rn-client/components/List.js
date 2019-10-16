@@ -10,7 +10,14 @@ import { searchRanked, blankSearch } from '../store/beer';
 
 export default function List(props) {
   const dispatch = useDispatch();
-  const {sortCB, dispatchCreator, selectorCB, ratingToUse, listToUse, starColorToUse} = props
+  const {
+    sortCB,
+    dispatchCreator,
+    selectorCB,
+    ratingToUse,
+    listToUse,
+    starColorToUse,
+  } = props;
 
   // GLOBAL STATE
   const list = useSelector(state => state.beer.rankSearch);
@@ -27,7 +34,7 @@ export default function List(props) {
 
   // INITIAL RENDER
   useEffect(() => {
-    dispatch(searchRanked('', 0, listToUse))
+    dispatch(searchRanked('', 0, listToUse));
     //dispatch(blankSearch());
   }, []);
 
@@ -43,7 +50,7 @@ export default function List(props) {
 
   let loading = <Text> Loading... </Text>;
 
-  if (beers.length === 0 || !beers[0].id) return loading
+  if (beers.length === 0 || !beers[0].id) return loading;
 
   let rendered = (
     <View>
@@ -53,15 +60,23 @@ export default function List(props) {
         renderItem={({ item }) => (
           <View style={styles.flatview}>
             <View style={styles.text}>
-              <Text style={styles.name}>{item.name.length > 30 ? `${item.name.slice(0, 30)}...` : item.name}</Text>
-              <Text style={styles.brewer}>{item.brewer.length > 35 ? `${item.brewer.slice(0, 35)}...` : item.brewer}</Text>
+              <Text style={styles.name}>
+                {item.name.length > 30
+                  ? `${item.name.slice(0, 30)}...`
+                  : item.name}
+              </Text>
+              <Text style={styles.brewer}>
+                {item.brewer.length > 35
+                  ? `${item.brewer.slice(0, 35)}...`
+                  : item.brewer}
+              </Text>
             </View>
             <View style={styles.stars}>
               <StarRating
                 iconSet="Ionicons"
                 emptyStar="ios-star-outline"
                 fullStar="ios-star"
-                stlye={styles.rating}
+                style={styles.rating}
                 disabled={true}
                 rating={Number(item[ratingToUse])}
                 maxStars={5}
@@ -86,11 +101,11 @@ export default function List(props) {
           typeIndex,
           types,
           styles,
-          changeHandler
+          changeHandler,
         })}
       />
     </View>
   );
 
-  return rendered
+  return rendered;
 }
