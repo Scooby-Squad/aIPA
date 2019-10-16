@@ -23,7 +23,6 @@ const HomeScreen = props => {
     props.navigation.navigate('Recs')
   }
 
-
   return (
     <View style={styles.container}>
       {user.signedIn ? (
@@ -95,7 +94,6 @@ const LoggedInPage = props => {
               }
               style={{width: '100%', height: '100%', position: 'absolute', bottom: 0}}
             >
-      
         <View style={styles.buttonBox}>
 
 
@@ -146,7 +144,7 @@ const LoggedInPage = props => {
               }
               style={{width: '100%', resizeMode: 'contain', height: '100%'}}
             />
-          </Touchable>  
+          </Touchable>
 {/* dh
       <ImageBackground
               source={
@@ -156,7 +154,7 @@ const LoggedInPage = props => {
               }
               style={{width: '100%', height: '100%', position: 'absolute', bottom: 0}}
             >
-      
+
         <View style={styles.buttonBox}>
           <Touchable
             style={styles.option}
@@ -210,7 +208,7 @@ const LoggedInPage = props => {
               style={{width: '100%', resizeMode: 'contain'}}
             />
           </Touchable>
-          
+
 
         </View>
       </ImageBackground>
@@ -226,7 +224,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#FFF',
     alignItems: 'center',
-    justifyContent: 'flex-end', 
+    justifyContent: 'flex-end',
     paddingVertical: 0,
     marginBottom: 0,
     marginEnd: 0,

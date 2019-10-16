@@ -20,6 +20,11 @@ export default function List(props) {
   const [search, setSearch] = useState('');
   const [typeIndex, setTypeIndex] = useState(0);
 
+  useEffect(() => {
+    const fetchData = () => dispatch(dispatchCreator());
+    fetchData();
+  }, []);
+
   // INITIAL RENDER
   useEffect(() => {
     dispatch(searchRanked('', 0, listToUse))
@@ -33,11 +38,6 @@ export default function List(props) {
     await setTypeIndex(beerTypeId);
     dispatch(searchRanked(query, beerTypeId, listToUse));
   };
-
-  useEffect(() => {
-    const fetchData = () => dispatch(dispatchCreator());
-    fetchData();
-  }, []);
 
   const beers = useSelector(selectorCB);
 
