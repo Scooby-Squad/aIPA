@@ -20,22 +20,22 @@ const RealSettings = props => {
       <Touchable
         style={styles.option}
         background={Touchable.Ripple('#ccc', false)}
-        onPress={dispatchLogOut}
+        onPress={_handlePressQuiz}
       >
         <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Log Out</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>Retake the Quiz</Text>
           </View>
         </View>
       </Touchable>
       <Touchable
         style={styles.option}
         background={Touchable.Ripple('#ccc', false)}
-        onPress={_handlePressQuiz}
+        onPress={dispatchLogOut}
       >
         <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Retake the Quiz</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>Log Out</Text>
           </View>
         </View>
       </Touchable>
@@ -52,10 +52,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 19,
+    color: '#000',
+  
   },
-  nameRating: {
-    justifyContent: 'space-around',
-  },
+  textContainer: {
+    padding: 50
+
+  }
 });
 
 export default RealSettings;
