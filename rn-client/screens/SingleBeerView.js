@@ -1,46 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, ImageBackground } from 'react-native';
-import { useDispatch } from 'react-redux';
-import StarRating from 'react-native-star-rating';
-import Hyperlink from 'react-native-hyperlink';
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, Button, ImageBackground } from "react-native";
+import { useDispatch } from "react-redux";
+import StarRating from "react-native-star-rating";
+import Hyperlink from "react-native-hyperlink";
 import {
   updateUserBeer,
   getRankedBeers,
   addToWishlistThunk,
   removeFromWishlistThunk
-} from '../store/beer';
+} from "../store/beer";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
     margin: 25
   },
   text: {
-    alignSelf: 'center',
+    alignSelf: "center",
     fontSize: 19
     //fontWeight: 'bold'
   },
   stat: {
     fontSize: 21,
     //fontWeight: 'bold',
-    alignSelf: 'auto',
-    fontStyle: 'italic'
+    alignSelf: "auto",
+    fontStyle: "italic"
   },
   textLarge: {
-    color: 'brown',
+    color: "brown",
     fontSize: 29,
-    fontWeight: 'bold'
+    fontWeight: "bold"
   },
   nameRating: {
-    alignItems: 'center',
-    justifyContent: 'space-around'
+    alignItems: "center",
+    justifyContent: "space-around"
   },
   location: {
-    textDecorationLine: 'underline',
-    alignSelf: 'center',
+    textDecorationLine: "underline",
+    alignSelf: "center",
     fontSize: 19
     //fontWeight: 'bold'
   }
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 
 // eslint-disable-next-line complexity
 export default function Single(props) {
-  const [data, setData] = useState(props.navigation.getParam('item'));
+  const [data, setData] = useState(props.navigation.getParam("item"));
   const dispatch = useDispatch();
 
   useEffect(
@@ -68,7 +68,7 @@ export default function Single(props) {
 
   const onAddWishlistPress = async beer => {
     await dispatch(addToWishlistThunk(beer));
-    await setData({ ...data, rating: '0' });
+    await setData({ ...data, rating: "0" });
   };
 
   const onRemoveWishlistPress = async beer => {
@@ -81,14 +81,14 @@ export default function Single(props) {
       <ImageBackground
         source={
           __DEV__
-            ? require('../assets/images/single-beer.png')
-            : require('../assets/images/single-beer.png')
+            ? require("../assets/images/single-beer.png")
+            : require("../assets/images/single-beer.png")
         }
         style={{
-          width: '110%',
-          height: '110%',
+          width: "110%",
+          height: "110%",
           bottom: 0,
-          position: 'absolute',
+          position: "absolute",
           opacity: 0.6
         }}
       />
@@ -132,8 +132,8 @@ export default function Single(props) {
         {data.description ? (
           <Text style={styles.text}>
             {data.description.length > 600
-              ? '    ' + data.description.slice(0, 600).concat('...')
-              : '    ' + data.description}
+              ? "    " + data.description.slice(0, 600).concat("...")
+              : "    " + data.description}
           </Text>
         ) : (
           <Text />
@@ -141,7 +141,7 @@ export default function Single(props) {
         {data.website ? (
           <Hyperlink
             linkDefault={true}
-            linkStyle={{ color: 'blue', fontSize: 20 }}
+            linkStyle={{ color: "blue", fontSize: 20 }}
           >
             <Text style={styles.text}>{data.website}</Text>
           </Hyperlink>
@@ -155,9 +155,9 @@ export default function Single(props) {
           <Text />
         )}
         <Text style={styles.location}>
-          {data.city ? `${data.city}, ` : ''}
-          {data.state ? `${data.state}, ` : ''}
-          {data.country ? `${data.country}` : ''}
+          {data.city ? `${data.city}, ` : ""}
+          {data.state ? `${data.state}, ` : ""}
+          {data.country ? `${data.country}` : ""}
         </Text>
         {data.coordinates ? (
           <Text style={styles.location}>Coordinates: {data.coordinates}</Text>
@@ -168,6 +168,7 @@ export default function Single(props) {
       {!data.rating ? (
         <Button
           title="Add to wishlist"
+          color="blue"
           onPress={() => {
             onAddWishlistPress(data);
           }}
@@ -175,9 +176,10 @@ export default function Single(props) {
       ) : (
         <Text />
       )}
-      {data.rating === '0' ? (
+      {data.rating === "0" ? (
         <Button
           title="Remove from wishlist"
+          color="blue"
           onPress={() => {
             onRemoveWishlistPress(data);
           }}
