@@ -130,6 +130,8 @@ const LoggedInPage = props => {
           <View style={styles.optionTextContainer}>
             <Text style={styles.optionText}>Settings</Text>
           </View>
+          </View>
+          </Touchable>  
 {/* dh
       <ImageBackground
               source={
@@ -193,42 +195,11 @@ const LoggedInPage = props => {
               style={{width: '100%', resizeMode: 'contain'}}
             />
           </Touchable>
-          {/* <Touchable
-            style={styles.option}
-            background={Touchable.Ripple('#ccc', false)}
-            onPress={_handlePressRecs}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.optionTextContainer}>
-                <Text style={styles.optionText}>Get Predictions</Text>
-              </View>
-            </View>
-          </Touchable>
-          <Touchable
-            style={styles.option}
-            background={Touchable.Ripple('#ccc', false)}
-            onPress={() => {props.navigation.navigate('Graphs')}}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.optionTextContainer}>
-                <Text style={styles.optionText}>View Graphs</Text>
-              </View>
-            </View>
-          </Touchable>
-          <Touchable
-            style={styles.option}
-            background={Touchable.Ripple('#ccc', false)}
-            onPress={props.logOut}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.optionTextContainer}>
-                <Text style={styles.optionText}>Log Out</Text>
-              </View>
-            </View>
-          </Touchable> */}
-*/}
+          
+
         </View>
       </ImageBackground>
+    */}
     </View>
   );
 };
