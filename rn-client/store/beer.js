@@ -11,11 +11,11 @@ const { apiUrl } = getEnvVars();
 const GOT_RANKED_BEERS = 'GOT_RANKED_BEERS';
 const UPDATED_RANKED_BEER = 'UPDATED_RANKED_BEER';
 const GOT_PREDICTIONS = 'GOT_PREDICTIONS';
-const SEARCH_RANKED = 'SEARCH_RANKED'
-const SEARCH_BLANK = 'SEARCH_BLANK'
-const GOT_WISHLIST = 'GOT_WISHLIST'
-const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST'
-const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST'
+const SEARCH_RANKED = 'SEARCH_RANKED';
+const SEARCH_BLANK = 'SEARCH_BLANK';
+const GOT_WISHLIST = 'GOT_WISHLIST';
+const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
+const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 const LOGGED_OUT = 'LOGGED_OUT'
 
 /**
@@ -113,8 +113,7 @@ export const addToWishlistThunk = beer => {
   return async dispatch => {
     try {
       const { data } = await axios.put(`${apiUrl}/api/userbeers/update`, beer);
-
-      dispatch(addToWishlist(data));
+      dispatch(addToWishlist(beer));
     } catch (error) {
       console.error(error);
     }
