@@ -5,6 +5,7 @@ import { signIn, logOut } from '../store/user';
 import { getPredictions, getRankedBeers } from '../store/beer';
 import Touchable from 'react-native-platform-touchable';
 import QuestionsComponent from '../components/QuestionsComponent';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const HomeScreen = props => {
   const user = useSelector(state => state.user);
@@ -86,51 +87,65 @@ const LoggedInPage = props => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Welcome:{props.name}</Text>
-      <Image style={styles.image} source={{ uri: props.photoUrl }} />
+      <ImageBackground
+              source={
+                __DEV__
+                  ? require('../assets/images/aipa-home.jpg')
+                  : require('../assets/images/aipa-home.jpg')
+              }
+              style={{width: '100%', height: '100%', position: 'absolute', bottom: 0}}
+            >
+      
+        <View style={styles.buttonBox}>
+
+
       <Touchable
         style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
         onPress={_handlePressRecs}
       >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Get Predictions</Text>
-          </View>
-        </View>
+        <Image source={
+                __DEV__
+                  ? require('../assets/images/suggest.png')
+                  : require('../assets/images/suggest.png')
+              }
+              style={{width: '100%', resizeMode: 'contain', height: '100%'}}
+            />
       </Touchable>
       <Touchable
         style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
         onPress={() => {props.navigation.navigate('Graphs')}}
       >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>View Graphs</Text>
-          </View>
-        </View>
+        <Image source={
+                __DEV__
+                  ? require('../assets/images/visualize.png')
+                  : require('../assets/images/visualize.png')
+              }
+              style={{width: '100%', resizeMode: 'contain', height: '100%'}}
+            />
       </Touchable>
       <Touchable
         style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
         onPress={_handlePressWish}
       >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>View Wishlist</Text>
-          </View>
-        </View>
+        <Image source={
+                __DEV__
+                  ? require('../assets/images/wishlist.png')
+                  : require('../assets/images/wishlist.png')
+              }
+              style={{width: '100%', resizeMode: 'contain', height: '100%'}}
+            />
       </Touchable>
       <Touchable
-        style={styles.option}
-        background={Touchable.Ripple('#ccc', false)}
+        style={{...styles.option}}
         onPress={() => props.navigation.navigate('RealSettings')}
       >
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.optionTextContainer}>
-            <Text style={styles.optionText}>Settings</Text>
-          </View>
-          </View>
+        <Image source={
+                __DEV__
+                  ? require('../assets/images/settings.png')
+                  : require('../assets/images/settings.png')
+              }
+              style={{width: '100%', resizeMode: 'contain', height: '100%'}}
+            />
           </Touchable>  
 {/* dh
       <ImageBackground
@@ -201,15 +216,23 @@ const LoggedInPage = props => {
       </ImageBackground>
     */}
     </View>
+      </ImageBackground>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#FFF',
     alignItems: 'center',
-    justifyContent: 'flex-end'
+
+    justifyContent: 'flex-end', 
+    paddingVertical: 0,
+    marginBottom: 0,
+    marginEnd: 0,
+    marginVertical: 0,
+    height: '100%'
   },
   header: {
     fontSize: 25
@@ -239,13 +262,18 @@ const styles = StyleSheet.create({
   //   marginRight: 9
   // },
   option: {
-    backgroundColor: '#FFFFFF',
+    // backgroundColor: '#FFFFFF',
     paddingHorizontal: 15,
     paddingVertical: 0,
+    marginBottom: 0,
+    marginEnd: 0,
+    marginVertical: 0,
+    height: '20%',
     flex: 4,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
     // borderBottomWidth: StyleSheet.hairlineWidth,
     // borderBottomColor: '#EDEDED'
+    // backgroundColor: '#EEEEEE'
   },
   optionText: {
     fontSize: 15,
@@ -254,10 +282,14 @@ const styles = StyleSheet.create({
   buttonBox: {
     bottom: 0,
     width: '100%',
-    height: '75%',
+    height: '80%',
     position: 'absolute',
     flex: 0,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    paddingVertical: 0,
+    marginBottom: 5,
+    marginEnd: 0,
+    marginVertical: 0
   }
 });
 
