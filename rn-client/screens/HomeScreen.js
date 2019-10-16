@@ -78,6 +78,7 @@ const LoggedInPage = props => {
       visible={props.isQuizzing}
       returnHome={props.returnHomeHandler}
       // onCancel={cancelQuizHandler}
+      //need a push
     />
   )
 
