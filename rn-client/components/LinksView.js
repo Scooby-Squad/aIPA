@@ -33,7 +33,7 @@ export default class LinksView extends React.Component {
   }
 
   _handlePressDocs = () => {
-    // console.log(this.props)
+    
     this.props.navigation.navigate('Quiz')
   };
 }
