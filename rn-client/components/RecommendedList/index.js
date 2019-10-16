@@ -8,10 +8,11 @@ export default function RecommendedList(props) {
   // need to run getPredictions upon completion of quiz
   const ratingToUse = 'prediction'
   const listToUse = 'predictions'
+  const starColorToUse = 'gray'
   const sort = (a, b) =>
     (a.prediction < b.prediction
       ? 1
       : a.prediction === b.prediction ? (a.name > b.name ? 1 : -1) : -1)
 
-  return <List {...props} listToUse={listToUse} ratingToUse={ratingToUse} selectorCB={predictionsState} sortCB={sort} dispatchCreator={getPredictions} />
+  return <List {...props} listToUse={listToUse} ratingToUse={ratingToUse} selectorCB={predictionsState} sortCB={sort} dispatchCreator={getPredictions} starColorToUse={starColorToUse} />
 }

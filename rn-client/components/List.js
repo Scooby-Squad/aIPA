@@ -10,7 +10,7 @@ import { searchRanked, blankSearch } from '../store/beer';
 
 export default function List(props) {
   const dispatch = useDispatch();
-  const {sortCB, dispatchCreator, selectorCB, ratingToUse, listToUse} = props
+  const {sortCB, dispatchCreator, selectorCB, ratingToUse, listToUse, starColorToUse} = props
 
   // GLOBAL STATE
   const list = useSelector(state => state.beer.rankSearch);
@@ -40,6 +40,11 @@ export default function List(props) {
   }, []);
 
   const beers = useSelector(selectorCB);
+
+  let loading = <Text> Loading... </Text>;
+
+  if (beers.length === 0 || !beers[0].id) return loading
+
   let rendered = (
     <View>
       <FlatList
@@ -49,7 +54,7 @@ export default function List(props) {
           <View style={styles.flatview}>
             <View style={styles.text}>
               <Text style={styles.name}>{item.name}</Text>
-              <Text style={styles.brewer}>{item.brewer}</Text>
+              <Text style={styles.brewer}>{item.brewer.length > 40 ? `${item.brewer.slice(0, 40)}...` : item.brewer}</Text>
             </View>
             <View style={styles.stars}>
               <StarRating
@@ -61,7 +66,7 @@ export default function List(props) {
                 rating={Number(item[ratingToUse])}
                 maxStars={5}
                 starSize={15}
-                fullStarColor="blue"
+                fullStarColor={starColorToUse}
               />
               <TouchableOpacity
                 onPress={() =>
@@ -74,7 +79,7 @@ export default function List(props) {
           </View>
         )}
         ItemSeparatorComponent={renderSeparator}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         ListHeaderComponent={renderHeader({
           search,
           type,
@@ -87,7 +92,5 @@ export default function List(props) {
     </View>
   );
 
-  let loading = <Text> Loading </Text>;
-
-  return beers ? rendered : loading;
+  return rendered
 }

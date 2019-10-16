@@ -72,6 +72,9 @@ const LoggedInPage = props => {
   const _handlePressRecs = () => {
     props.navigation.navigate('Recs')
   }
+  const _handlePressWish = () => {
+    props.navigation.navigate('Wish')
+  }
 
   if (!props.ranked.length) return (
     <QuestionsComponent
@@ -83,6 +86,51 @@ const LoggedInPage = props => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>Welcome:{props.name}</Text>
+      <Image style={styles.image} source={{ uri: props.photoUrl }} />
+      <Touchable
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={_handlePressRecs}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>Get Predictions</Text>
+          </View>
+        </View>
+      </Touchable>
+      <Touchable
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={() => {props.navigation.navigate('Graphs')}}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>View Graphs</Text>
+          </View>
+        </View>
+      </Touchable>
+      <Touchable
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={_handlePressWish}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>View Wishlist</Text>
+          </View>
+        </View>
+      </Touchable>
+      <Touchable
+        style={styles.option}
+        background={Touchable.Ripple('#ccc', false)}
+        onPress={() => props.navigation.navigate('RealSettings')}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.optionTextContainer}>
+            <Text style={styles.optionText}>Settings</Text>
+          </View>
+{/* dh
       <ImageBackground
               source={
                 __DEV__
@@ -178,6 +226,7 @@ const LoggedInPage = props => {
               </View>
             </View>
           </Touchable> */}
+*/}
         </View>
       </ImageBackground>
     </View>
