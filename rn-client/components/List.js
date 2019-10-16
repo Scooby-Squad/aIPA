@@ -76,7 +76,7 @@ export default function List(props) {
                 iconSet="Ionicons"
                 emptyStar="ios-star-outline"
                 fullStar="ios-star"
-                stlye={styles.rating}
+                style={styles.rating}
                 disabled={true}
                 rating={Number(item[ratingToUse])}
                 maxStars={5}
