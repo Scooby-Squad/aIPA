@@ -53,8 +53,8 @@ export default function List(props) {
         renderItem={({ item }) => (
           <View style={styles.flatview}>
             <View style={styles.text}>
-              <Text style={styles.name}>{item.name}</Text>
-              <Text style={styles.brewer}>{item.brewer.length > 40 ? `${item.brewer.slice(0, 40)}...` : item.brewer}</Text>
+              <Text style={styles.name}>{item.name.length > 30 ? `${item.name.slice(0, 30)}...` : item.name}</Text>
+              <Text style={styles.brewer}>{item.brewer.length > 35 ? `${item.brewer.slice(0, 35)}...` : item.brewer}</Text>
             </View>
             <View style={styles.stars}>
               <StarRating
