@@ -1,94 +1,125 @@
-import React, {useState, useEffect, Fragment} from 'react'
-import {View, Text, StyleSheet, Modal, TouchableOpacity} from 'react-native'
-import SingleQuestion from './SingleQuestion'
-import RatingInput from './RatingInput'
-import beerQuizData from '../store/beerQuizData'
-import {useSelector, useDispatch} from 'react-redux'
-import {updateUserBeer} from '../store/beer'
-import {logOut} from '../store/user'
+import React, { useState, useEffect, Fragment } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
+import SingleQuestion from './SingleQuestion';
+import RatingInput from './RatingInput';
+import beerQuizData from '../store/beerQuizData';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserBeer } from '../store/beer';
+import { logOut } from '../store/user';
 // import Splash from '../QuestionsSplash'
 
 // would need to facor in user ratings from db if pulling existing ratings
-const beerData = {questions: beerQuizData}
+const beerData = { questions: beerQuizData };
 
 const QuestionsComponent = props => {
   // quiz data to loop through and use for info
-  const [quizData, setQuizData] = useState([])
+  const [quizData, setQuizData] = useState([]);
   // pointer to traverse the quiz data
-  const [currIdx, setCurrIdx] = useState(0)
+  const [currIdx, setCurrIdx] = useState(0);
   // used for UX purposes to display rating to user
-  const [enteredRating, setRating] = useState(0)
-  const [quizStarted, setStartQuiz] = useState(false)
-  const userId = useSelector(state => state.user.id)
-  const dispatch = useDispatch()
-  const {returnHome} = props
+  const [enteredRating, setRating] = useState(0);
+  const [quizStarted, setStartQuiz] = useState(false);
+  const userId = useSelector(state => state.user.id);
+  const dispatch = useDispatch();
+  const { returnHome } = props;
 
   const addRatingHandler = (rating = 0, skipped = false) => {
-    if (rating.length === 0) return
+    if (rating.length === 0) return;
     // doing this for UX, show a rating and then move to the next item
-    setRating(rating)
+    setRating(rating);
     setTimeout(() => {
       const copyQuizData = quizData.map((question, index) => {
         if (index === currIdx) {
-          return {...question, rating, skipped, userId}
-        } else {return {...question}}
-      })
-      setQuizData(copyQuizData)
+          return { ...question, rating, skipped, userId };
+        } else {
+          return { ...question };
+        }
+      });
+      setQuizData(copyQuizData);
       dispatch(updateUserBeer(copyQuizData[currIdx]));
-      const nextIdx = currIdx + 1
+      const nextIdx = currIdx + 1;
       if (nextIdx === quizData.length) {
-        setStartQuiz(false)
-        returnHome(copyQuizData)
+        setStartQuiz(false);
+        returnHome(copyQuizData);
       } else {
-        setCurrIdx(nextIdx)
-        setRating(parseInt(quizData[currIdx].rating, 10))
+        setCurrIdx(nextIdx);
+        setRating(parseInt(quizData[currIdx].rating, 10));
       }
-    }, 250)
-  }
+    }, 250);
+  };
 
   useEffect(() => {
     const fetchData = () => {
       try {
-        const data = beerData
+        const data = beerData;
         if (data && data.questions) {
-          setQuizData(data.questions)
+          setQuizData(data.questions);
           // this line is really just if we can work in prior ratings to retaking test
-          setRating(parseInt(data.questions[currIdx].rating, 10))
+          setRating(parseInt(data.questions[currIdx].rating, 10));
         }
       } catch (error) {
-        console.error('error: ', error)
+        console.error('error: ', error);
       }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
 
-  if (quizData.length === 0) return <Text>Loading...</Text>
+  if (quizData.length === 0) return <Text>Loading...</Text>;
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.container}>
-          {
-          !quizStarted
-          ? <Fragment>
-              <View style={styles.questionsSplash}>
-                <TouchableOpacity onPress={() => setStartQuiz(true)}>
-                  <View style = {styles.splashContainer}>
-                    <Text style={styles.splashHeader}>Welcome to aIPA!</Text>
-                  </View>
-                  <View style={styles.splashContainer}>
-                  <Text style={styles.splashText}>Rate as many beers as possible and heavily in order to get started.</Text>
-                  </View>
-                  <View style={styles.splashContainer}>
-                  <Text style={styles.splashFooter}>Press here to continue</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => dispatch(logOut())}>
-                  <View style = {styles.splashContainer}>
-                    <Text style={styles.splashFooter}>Re-login</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </Fragment>
-          :
+        {!quizStarted ? (
+          <Fragment>
+            <ImageBackground
+              source={
+                __DEV__
+                  ? require('../assets/images/single-beer.png')
+                  : require('../assets/images/single-beer.png')
+              }
+              style={{
+                width: '110%',
+                height: '110%',
+                bottom: 0,
+                position: 'absolute',
+                opacity: 0.6,
+              }}
+            />
+            <View style={styles.questionsSplash}>
+              <TouchableOpacity onPress={() => setStartQuiz(true)}>
+                <View style={styles.splashContainer}>
+                  <Text style={styles.splashHeader}>Welcome to aIPA!</Text>
+                </View>
+                <View style={styles.textContainer}>
+                  <Text></Text>
+                  <Text></Text>
+                  <Text style={styles.splashText}>
+                    To help us recommend beer, rate as many of the following
+                    beer as you can. The more you rate and the more aggressively
+                    you rate them, the better our neural network learns your
+                    preferences.
+                  </Text>
+                </View>
+                <View style={styles.splashContainer}>
+                  <Text style={styles.splashFooter}>
+                    Press here to continue
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => dispatch(logOut())}>
+                <View style={styles.splashContainer}>
+                  <Text style={styles.splashFooter}>Re-login</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </Fragment>
+        ) : (
           <View style={styles.container}>
             <SingleQuestion quizData={quizData} currIdx={currIdx} />
             <RatingInput
@@ -99,19 +130,19 @@ const QuestionsComponent = props => {
               totalQuestions={quizData.length}
             />
           </View>
-          }
+        )}
       </View>
     </Modal>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingTop: 30
+    paddingTop: 30,
   },
   questionsSplash: {
     // flex: 1,
@@ -122,8 +153,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  textContainer: {
+    height: '40%',
+  },
   splashContainer: {
-    height: '25%',
+    height: '20%',
+    flexWrap: 'wrap',
   },
   splashHeader: {
     textAlign: 'center',
@@ -137,10 +172,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   splashFooter: {
-    height: '30%',
+    height: '100%',
     textAlign: 'center',
-    fontSize: 20
-  }
-})
+    fontSize: 20,
+  },
+});
 
-export default QuestionsComponent
+export default QuestionsComponent;
