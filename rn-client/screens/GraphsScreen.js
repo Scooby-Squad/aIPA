@@ -44,8 +44,8 @@ export default function GraphsScreen(props) {
           <Image
             source={
               __DEV__
-                ? require('../assets/images/scooby-squad-aipa-logo.png')
-                : require('../assets/images/scooby-squad-aipa-logo.png')
+                ? require('../assets/images/visualize.png')
+                : require('../assets/images/visualize.png')
             }
             style={styles.welcomeImage}
           />
