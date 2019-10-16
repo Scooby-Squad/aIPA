@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'flex-end'
   },
   header: {
     fontSize: 25

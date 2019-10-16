@@ -73,7 +73,7 @@ const QuestionsComponent = props => {
                   <Text style={styles.splashHeader}>Welcome to aIPA!</Text>
                 </View>
                 <View style={styles.splashContainer}>
-                <Text style={styles.splashText}>Rate as many beers as possible and heavily in order to get started.</Text>
+                <Text style={styles.splashText}>To help us recommend beer, rate as many of the following beer as you can.  The more you rate and the more aggressively you rate them, the better our neural network learns your preferences.</Text>
                 </View>
                 <View style={styles.splashContainer}>
                 <Text style={styles.splashFooter}>Press anywhere to continue</Text>
