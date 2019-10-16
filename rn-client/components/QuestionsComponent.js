@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import {View, Text, StyleSheet, Modal, TouchableOpacity} from 'react-native'
 import SingleQuestion from './SingleQuestion'
 import RatingInput from './RatingInput'
 import beerQuizData from '../store/beerQuizData'
 import {useSelector, useDispatch} from 'react-redux'
 import {updateUserBeer} from '../store/beer'
+import {logOut} from '../store/user'
 // import Splash from '../QuestionsSplash'
 
 // would need to facor in user ratings from db if pulling existing ratings
@@ -67,19 +68,26 @@ const QuestionsComponent = props => {
       <View style={styles.container}>
           {
           !quizStarted
-          ? <TouchableOpacity onPress={() => setStartQuiz(true)}>
+          ? <Fragment>
               <View style={styles.questionsSplash}>
-                <View style = {styles.splashContainer}>
-                  <Text style={styles.splashHeader}>Welcome to aIPA!</Text>
-                </View>
-                <View style={styles.splashContainer}>
-                <Text style={styles.splashText}>Rate as many beers as possible and heavily in order to get started.</Text>
-                </View>
-                <View style={styles.splashContainer}>
-                <Text style={styles.splashFooter}>Press anywhere to continue</Text>
-                </View>
+                <TouchableOpacity onPress={() => setStartQuiz(true)}>
+                  <View style = {styles.splashContainer}>
+                    <Text style={styles.splashHeader}>Welcome to aIPA!</Text>
+                  </View>
+                  <View style={styles.splashContainer}>
+                  <Text style={styles.splashText}>Rate as many beers as possible and heavily in order to get started.</Text>
+                  </View>
+                  <View style={styles.splashContainer}>
+                  <Text style={styles.splashFooter}>Press here to continue</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => dispatch(logOut())}>
+                  <View style = {styles.splashContainer}>
+                    <Text style={styles.splashFooter}>Re-login</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
-            </TouchableOpacity>
+            </Fragment>
           :
           <View style={styles.container}>
             <SingleQuestion quizData={quizData} currIdx={currIdx} />
@@ -115,7 +123,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   splashContainer: {
-    height: '30%',
+    height: '25%',
   },
   splashHeader: {
     textAlign: 'center',
