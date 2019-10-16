@@ -35,58 +35,47 @@ export default function GraphsScreen(props) {
 
   return (
     <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-        keyboardShouldPersistTaps="always"
-      >
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/visualize.png')
-                : require('../assets/images/visualize.png')
-            }
-            style={styles.welcomeImage}
-          />
+
 
           <Touchable
             style={styles.option}
             background={Touchable.Ripple('#ccc', false)}
             onPress={() => {props.navigation.navigate('Sunburst')}}
           >
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.optionTextContainer}>
-                <Text style={styles.optionText}>View Sunburst</Text>
-              </View>
-            </View>
+            <Image source={
+                __DEV__
+                  ? require('../assets/images/sunburst.jpg')
+                  : require('../assets/images/sunburst.jpg')
+              }
+              style={{width: '100%', resizeMode: 'contain', height: '100%'}}
+            />
           </Touchable>
           <Touchable
             style={styles.option}
             background={Touchable.Ripple('#ccc', false)}
             onPress={() => {props.navigation.navigate('BubbleChart')}}
           >
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.optionTextContainer}>
-                <Text style={styles.optionText}>View Bubble Chart</Text>
-              </View>
-            </View>
+            <Image source={
+                __DEV__
+                  ? require('../assets/images/bubbles.jpg')
+                  : require('../assets/images/bubbles.jpg')
+              }
+              style={{width: '100%', resizeMode: 'contain', height: '100%'}}
+            />
           </Touchable>
           <Touchable
             style={styles.option}
             background={Touchable.Ripple('#ccc', false)}
             onPress={() => {props.navigation.navigate('Hexbin')}}
           >
-            <View style={{ flexDirection: 'row' }}>
-              <View style={styles.optionTextContainer}>
-                <Text style={styles.optionText}>View Hexbin</Text>
-              </View>
-            </View>
+            <Image source={
+                __DEV__
+                  ? require('../assets/images/hexbin.jpg')
+                  : require('../assets/images/hexbin.jpg')
+              }
+              style={{width: '100%', resizeMode: 'contain', height: '100%'}}
+            />
           </Touchable>
-        </View>
-
-
-      </ScrollView>
     </View>
   )
 }
@@ -177,5 +166,31 @@ const styles = StyleSheet.create({
   helpLinkText: {
     fontSize: 14,
     color: '#2e78b7'
+  },
+  option: {
+    // backgroundColor: '#FFFFFF',
+    paddingHorizontal: 15,
+    paddingVertical: 0,
+    marginBottom: 0,
+    marginEnd: 0,
+    marginVertical: 0,
+    height: '20%',
+    flex: 3,
+    justifyContent: 'flex-end',
+    // borderBottomWidth: StyleSheet.hairlineWidth,
+    // borderBottomColor: '#EDEDED'
+    // backgroundColor: '#EEEEEE'
+  },
+  buttonBox: {
+    bottom: 0,
+    width: '100%',
+    height: '80%',
+    position: 'absolute',
+    flex: 0,
+    justifyContent: 'flex-end',
+    paddingVertical: 0,
+    marginBottom: 5,
+    marginEnd: 0,
+    marginVertical: 0
   }
 })
