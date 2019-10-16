@@ -105,10 +105,13 @@ const QuestionsComponent = props => {
                     you rate them, the better our neural network learns your
                     preferences.
                   </Text>
+                  <Text style={styles.splashText}>Press here to continue</Text>
                 </View>
                 <View style={styles.splashContainer}>
+                <Text></Text>
+                  <Text></Text>
                   <Text style={styles.splashFooter}>
-                    Press here to continue
+                    {/* Press here to continue */}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -176,6 +179,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
   },
+  splashContinue: {
+    height: '100%',
+    fontSize: 20,
+    textAlign: 'center',
+    bottom: 25,
+    position: 'absolute'
+  }
 });
 
 export default QuestionsComponent;
