@@ -12,7 +12,8 @@ export default class LinksView extends React.Component {
         <Touchable
           style={styles.option}
           background={Touchable.Ripple('#ccc', false)}
-          onPress={this._handlePressDocs}>
+          onPress={this._handlePressDocs}
+        >
           <View style={{ flexDirection: 'row' }}>
             <View style={styles.optionIconContainer}>
               {/* <Image
@@ -27,14 +28,12 @@ export default class LinksView extends React.Component {
             </View>
           </View>
         </Touchable>
-
       </View>
     );
   }
 
   _handlePressDocs = () => {
-    
-    this.props.navigation.navigate('Quiz')
+    this.props.navigation.navigate('Quiz');
   };
 }
 
