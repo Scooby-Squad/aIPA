@@ -139,6 +139,7 @@ const sorter = (a, b) =>
  **/
 export default function(state = initialState, action) {
   let newBeers, newPredictions, newWishlist;
+  console.log('action', action.type)
   switch (action.type) {
     case SEARCH_BLANK:
       return {...state, rankSearch: []}
