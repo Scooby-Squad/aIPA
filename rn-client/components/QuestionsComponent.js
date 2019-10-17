@@ -97,19 +97,20 @@ const QuestionsComponent = props => {
                   <Text style={styles.splashHeader}>Welcome to aIPA!</Text>
                 </View>
                 <View style={styles.textContainer}>
-                  <Text></Text>
-                  <Text></Text>
+                  <Text />
+                  <Text />
                   <Text style={styles.splashText}>
                     To help us recommend beer, rate as many of the following
                     beer as you can. The more you rate and the more aggressively
                     you rate them, the better our neural network learns your
                     preferences.
                   </Text>
+                  <Text style={styles.splashText} />
                   <Text style={styles.splashText}>Press here to continue</Text>
                 </View>
                 <View style={styles.splashContainer}>
-                <Text></Text>
-                  <Text></Text>
+                  <Text />
+                  <Text />
                   <Text style={styles.splashFooter}>
                     {/* Press here to continue */}
                   </Text>
@@ -184,8 +185,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     bottom: 25,
-    position: 'absolute'
-  }
+    position: 'absolute',
+  },
 });
 
 export default QuestionsComponent;
