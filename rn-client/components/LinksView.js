@@ -1,6 +1,5 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import { StyleSheet, Image, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 
 export default class LinksView extends React.Component {
@@ -16,12 +15,6 @@ export default class LinksView extends React.Component {
         >
           <View style={{ flexDirection: 'row' }}>
             <View style={styles.optionIconContainer}>
-              {/* <Image
-                source={require('../assets/images/expo-icon.png')}
-                resizeMode="contain"
-                fadeDuration={0}
-                style={{ width: 20, height: 20, marginTop: 1 }}
-              /> */}
             </View>
             <View style={styles.optionTextContainer}>
               <Text style={styles.optionText}>Take/Review Quiz</Text>

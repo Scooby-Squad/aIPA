@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native';
+import { StyleSheet, View, Image, Button, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn, logOut } from '../store/user';
 import { getPredictions, getRankedBeers } from '../store/beer';
 import Touchable from 'react-native-platform-touchable';
 import QuestionsComponent from '../components/QuestionsComponent';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 const HomeScreen = props => {
   const user = useSelector(state => state.user);
@@ -46,22 +46,19 @@ const HomeScreen = props => {
 
 const LoginPage = props => {
   return (
-    // <View>
       <ImageBackground
-            source={
-              __DEV__
-                ? require('../assets/images/aipa-matrix.jpg')
-                : require('../assets/images/aipa-matrix.jpg')
-            }
-            style={{width: '100%', height: '100%', position: 'absolute', bottom: 0}}
-            // style={{width: '100%', height: '100%', justifyContent: 'left', position: 'absolute', bottom: 0}}
-          >
-            <View style={styles.headerbottom}>
-              <Button title="Sign in with Google" onPress={props.signIn} style={styles.headerbottom} />
-            </View>
+        source={
+          __DEV__
+            ? require('../assets/images/aipa-matrix.jpg')
+            : require('../assets/images/aipa-matrix.jpg')
+        }
+        style={{width: '100%', height: '100%', position: 'absolute', bottom: 0}}
+      >
+      <View style={styles.headerbottom}>
+        <Button title="Sign in with Google" onPress={props.signIn} style={styles.headerbottom} />
+      </View>
 
       </ImageBackground>
-    // </View>
   );
 };
 
@@ -73,6 +70,7 @@ const LoggedInPage = props => {
     props.navigation.navigate('Recs')
   }
   const _handlePressWish = () => {
+    navName = 'Wish List'
     props.navigation.navigate('Wish')
   }
 
@@ -80,7 +78,6 @@ const LoggedInPage = props => {
     <QuestionsComponent
       visible={props.isQuizzing}
       returnHome={props.returnHomeHandler}
-      // onCancel={cancelQuizHandler}
     />
   )
 
@@ -144,76 +141,8 @@ const LoggedInPage = props => {
               }
               style={{width: '100%', resizeMode: 'contain', height: '100%'}}
             />
-          </Touchable>
-{/* dh
-      <ImageBackground
-              source={
-                __DEV__
-                  ? require('../assets/images/aipa-matrix-top.jpg')
-                  : require('../assets/images/aipa-matrix-top.jpg')
-              }
-              style={{width: '100%', height: '100%', position: 'absolute', bottom: 0}}
-            >
-
-        <View style={styles.buttonBox}>
-          <Touchable
-            style={styles.option}
-            background={Touchable.Ripple('#ccc', false)}
-            onPress={_handlePressQuiz}
-          >
-            <Image source={
-                __DEV__
-                  ? require('../assets/images/suggest.png')
-                  : require('../assets/images/suggest.png')
-              }
-              style={{width: '100%', resizeMode: 'contain'}}
-            />
-          </Touchable>
-          <Touchable
-            style={styles.option}
-            background={Touchable.Ripple('#ccc', false)}
-            onPress={_handlePressQuiz}
-          >
-            <Image source={
-                __DEV__
-                  ? require('../assets/images/suggest.png')
-                  : require('../assets/images/suggest.png')
-              }
-              style={{width: '100%', resizeMode: 'contain'}}
-            />
-          </Touchable>
-          <Touchable
-            style={styles.option}
-            background={Touchable.Ripple('#ccc', false)}
-            onPress={_handlePressQuiz}
-          >
-            <Image source={
-                __DEV__
-                  ? require('../assets/images/suggest.png')
-                  : require('../assets/images/suggest.png')
-              }
-              style={{width: '100%', resizeMode: 'contain'}}
-            />
-          </Touchable>
-          <Touchable
-            style={styles.option}
-            background={Touchable.Ripple('#ccc', false)}
-            onPress={_handlePressQuiz}
-          >
-            <Image source={
-                __DEV__
-                  ? require('../assets/images/suggest.png')
-                  : require('../assets/images/suggest.png')
-              }
-              style={{width: '100%', resizeMode: 'contain'}}
-            />
-          </Touchable>
-
-
+      </Touchable>
         </View>
-      </ImageBackground>
-    */}
-    </View>
       </ImageBackground>
     </View>
   );
@@ -222,7 +151,6 @@ const LoggedInPage = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingVertical: 0,
@@ -241,25 +169,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignContent: 'center'
   },
-  // image: {
-  //   marginTop: 0,
-  //   width: 150,
-  //   height: 150,
-  //   borderColor: 'rgba(0,0,0,0.2)',
-  //   borderWidth: 3,
-  //   borderRadius: 150
-  // },
-  // optionsTitleText: {
-  //   fontSize: 16,
-  //   marginLeft: 15,
-  //   marginTop: 9,
-  //   marginBottom: 12
-  // },
-  // optionIconContainer: {
-  //   marginRight: 9
-  // },
   option: {
-    // backgroundColor: '#FFFFFF',
     paddingHorizontal: 15,
     paddingVertical: 0,
     marginBottom: 0,
@@ -268,9 +178,6 @@ const styles = StyleSheet.create({
     height: '20%',
     flex: 4,
     justifyContent: 'flex-end',
-    // borderBottomWidth: StyleSheet.hairlineWidth,
-    // borderBottomColor: '#EDEDED'
-    // backgroundColor: '#EEEEEE'
   },
   optionText: {
     fontSize: 15,
@@ -289,5 +196,9 @@ const styles = StyleSheet.create({
     marginVertical: 0
   }
 });
+
+HomeScreen.navigationOptions = {
+  title: 'Home'
+};
 
 export default HomeScreen;

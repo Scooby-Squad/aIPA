@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import allBeers, { types } from '../../store/beerDb';
+import { types } from '../../store/beerDb';
 import { View, Text, FlatList, Button } from 'react-native';
 import renderSeparator from './Seperator';
 import renderHeader from './Header';

@@ -35,7 +35,6 @@ const initialState = {
 const gotRankedBeers = beers => ({ type: GOT_RANKED_BEERS, beers });
 const updatedRankedBeer = beer => ({ type: UPDATED_RANKED_BEER, beer });
 const gotPredictions = predictions => ({ type: GOT_PREDICTIONS, predictions });
-// export const getPredictionsState = () => ({ type: GET_PREDICTIONS_STATE})
 export const searchRanked = (query, beerType, list) => ({
   type: SEARCH_RANKED,
   query,

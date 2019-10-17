@@ -6,7 +6,7 @@ export default function RankedList(props) {
   const rankedState = state => state.beer.ranked;
   const ratingToUse = 'rating';
   const listToUse = 'ranked';
-  const starColorToUse = 'blue';
+  const starColorToUse = '#b8860b';
   const sort = (a, b) =>
     (a.rating < b.rating
       ? 1
