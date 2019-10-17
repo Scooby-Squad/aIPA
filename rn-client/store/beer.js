@@ -16,7 +16,7 @@ const SEARCH_BLANK = 'SEARCH_BLANK';
 const GOT_WISHLIST = 'GOT_WISHLIST';
 const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
 const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
-const LOGGED_OUT = 'LOGGED_OUT'
+const LOGGED_OUT = 'LOGGED_OUT';
 
 /**
  * INITIAL STATE
@@ -184,11 +184,11 @@ export default function(state = initialState, action) {
       // ranked beers should disappear if done from the predictions view
       newPredictions = state.all
         .filter(beer => !state.ranked.some(userBeer => userBeer.id == beer.id))
-        .sort(sorter)
-        .filter((beer, index) => index <= 100)
         .map((beer, index) => {
           return { ...beer, prediction: Math.round(action.predictions[index]) };
-        });
+        })
+        .sort(sorter)
+        .filter((beer, index) => index <= 100);
 
       return { ...state, predictions: newPredictions };
     case GOT_WISHLIST:
@@ -206,11 +206,11 @@ export default function(state = initialState, action) {
       return { ...state, wishlist: [...state.wishlist, action.beer] };
     case REMOVE_FROM_WISHLIST:
       newWishlist = state.wishlist.filter(beer => {
-        if (beer.id !== action.beer.id) return beer
-      })
-      return {...state, wishlist: newWishlist}
+        if (beer.id !== action.beer.id) return beer;
+      });
+      return { ...state, wishlist: newWishlist };
     case LOGGED_OUT:
-      return initialState
+      return initialState;
     default:
       return state;
   }
