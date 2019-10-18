@@ -13,7 +13,7 @@ import beerQuizData from '../store/beerQuizData';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserBeer } from '../store/beer';
 import { logOut } from '../store/user';
-// import Splash from '../QuestionsSplash'
+
 
 // would need to facor in user ratings from db if pulling existing ratings
 const beerData = { questions: beerQuizData };

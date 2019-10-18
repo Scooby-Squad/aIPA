@@ -21,11 +21,9 @@ const styles = StyleSheet.create({
   text: {
     alignSelf: "center",
     fontSize: 19
-    //fontWeight: 'bold'
   },
   stat: {
     fontSize: 21,
-    //fontWeight: 'bold',
     alignSelf: "auto",
     fontStyle: "italic"
   },
@@ -42,7 +40,6 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     alignSelf: "center",
     fontSize: 19
-    //fontWeight: 'bold'
   }
 });
 

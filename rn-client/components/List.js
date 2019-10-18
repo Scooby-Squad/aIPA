@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { types } from '../store/beerDb';
 import renderHeader from './AllBeerList/Header';
-import { View, Button, TouchableOpacity, Text, FlatList } from 'react-native';
+import { View, TouchableOpacity, Text, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import StarRating from 'react-native-star-rating';
 import renderSeparator from './AllBeerList/Seperator';
 import styles from './AllBeerList/style-sheet';
-import { searchRanked, blankSearch } from '../store/beer';
+import { searchRanked } from '../store/beer';
+
 
 export default function List(props) {
   const dispatch = useDispatch();
@@ -35,7 +36,6 @@ export default function List(props) {
   // INITIAL RENDER
   useEffect(() => {
     dispatch(searchRanked('', 0, listToUse));
-    //dispatch(blankSearch());
   }, []);
 
   // SEARCH CHANGE HANDLER
@@ -49,8 +49,9 @@ export default function List(props) {
   const beers = useSelector(selectorCB);
 
   let loading = <Text> Loading... </Text>;
+  let predictionsLoading = <Text>Running Machine Learning On Your Data... </Text>
 
-  if (beers.length === 0 || !beers[0].id) return loading;
+  if (beers.length === 0 || !beers[0].id) return listToUse == 'predictions' ? predictionsLoading : loading
 
   let rendered = (
     <View>
