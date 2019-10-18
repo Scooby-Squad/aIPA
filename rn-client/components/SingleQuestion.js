@@ -5,15 +5,10 @@ const SingleQuestion = props => {
   const {quizData, currIdx} = props
   return (
     <View style={styles.contentContainer}>
-      <View>
-        <Text style={styles.categoryText}>
-          Beer
-        </Text>
-      </View>
-      <View>
-        <Text style={styles.questionText}>Name: {quizData[currIdx].name}</Text>
-      <Text style={styles.questionText}>Brewery: {quizData[currIdx].brewer}</Text>
-        <Text style={styles.questionText}>Style: {quizData[currIdx].style}</Text>
+      <View style={styles.question}>
+        <Text style={styles.name}>{quizData[currIdx].name}</Text>
+        <Text style={styles.brew}>Brewed By {quizData[currIdx].brewer}</Text>
+        <Text style={styles.brew}>{quizData[currIdx].style}</Text>
       </View>
     </View>
   )
@@ -24,14 +19,22 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     justifyContent: 'center'
   },
-  categoryText: {
-    fontSize: 24,
+  question: {
+    paddingTop: 50
+  },
+  name: {
+    padding: 10,
+    fontSize: 26,
     fontWeight: 'bold',
-    textAlign: 'center'
+  },
+  brew: {
+    padding: 10,
+    fontSize: 22,
+    fontStyle: "italic"
   },
   questionText: {
     fontSize: 22,
-    padding: 15,
+    padding: 10,
     textAlign: 'center'
   }
 })
