@@ -125,6 +125,20 @@ const QuestionsComponent = props => {
           </Fragment>
         ) : (
           <View style={styles.container}>
+            <ImageBackground
+              source={
+                __DEV__
+                  ? require("../assets/images/quiz-beer.jpg")
+                  : require("../assets/images/quiz-beer.jpg")
+              }
+              style={{
+                width: "100%",
+                height: "100%",
+                bottom: 0,
+                position: "absolute",
+                opacity: 0.6
+              }}
+              />
             <SingleQuestion quizData={quizData} currIdx={currIdx} />
             <RatingInput
               rating={enteredRating}
