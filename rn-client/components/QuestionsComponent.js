@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   questionsSplash: {
-    // flex: 1,
     height: '100%',
     paddingTop: 20,
     margin: 15,
@@ -184,7 +183,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   splashText: {
-    // height: '30%',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 25,

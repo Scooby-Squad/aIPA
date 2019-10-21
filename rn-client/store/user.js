@@ -34,7 +34,6 @@ export const logOut = () => ({ type: LOGGED_OUT });
  **/
 const fetchUser = async user => {
   try {
-    console.log(`${apiUrl}/auth/google/`)
     const { data } = await axios.post(`${apiUrl}/auth/google/`, user);
     return data;
   } catch (error) {

@@ -88,7 +88,6 @@ router.get('/hexbin', async (req, res, next) => {
     }
 
     res.send(out)
-    //res.json(tensor)
   } catch (err) {
     next(err)
   }
@@ -138,7 +137,6 @@ router.get('/bubble-chart', async (req, res, next) => {
     }
 
     res.send(out)
-    //res.json(tensor)
   } catch (err) {
     next(err)
   }
