@@ -8,9 +8,6 @@ import renderSeparator from "./AllBeerList/Seperator";
 import styles from "./AllBeerList/style-sheet";
 import { searchRanked, blankSearch } from "../store/beer";
 
-
-
-
 export default function List(props) {
   const dispatch = useDispatch();
   const { sortCB, dispatchCreator, selectorCB, ratingToUse, listToUse } = props;
