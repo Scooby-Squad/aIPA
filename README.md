@@ -6,7 +6,7 @@ Bypass Bad Beer Before Buying
 
 To use a deployed version of the app, please visit the site here to download and use via Expo. Otherwise, see instructions below for setting up on a local machine.
 
-https://expo.io/@jschwantz/aIPA
+http://bit.ly/b5aIPA
 
 ## Installation
 
