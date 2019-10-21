@@ -65,6 +65,9 @@ const getEnvVars = (env = Constants.manifest.releaseChannel) => {
 export default getEnvVars
 
 ```
+Please reference documentation here for setting up your own Android/iOS Google client IDs.
+https://docs.expo.io/versions/latest/sdk/google/
+
 
 ## Usage
 ```bash
