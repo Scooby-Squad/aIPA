@@ -83,9 +83,9 @@ expo start
  
 This will open a browser window from Expo, that will allow you to open the app in either an Android or iOS simulator. To get the experience on your phone, download Expo Client from the App Store (available on both platforms) and scan the QR code. Please note the change potentially needed to the apiUrl in the file above if using directly on your phone.
 
-## Technologies
+## Technologies Used
 
-- [React Native](https://facebook.github.io/react-native/) with [Expo](https://expo.io/tools) - With React Native we were able to build an app that functions on both iOS and Android, and with Expo we were able to test and see our app function before deploying.
+https://stackshare.io/dhochbaum/aipa
 
 
 ## Contributors
