@@ -1,4 +1,4 @@
-![Picture1](https://raw.githubusercontent.com/Scooby-Squad/aIPA/tree/master/rn-client/assets/images/aipa-matrix.jpg)
+![Picture1](https://imgur.com/a/s9kNeMD)
 
 # aIPA
 
