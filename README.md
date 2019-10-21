@@ -1,4 +1,4 @@
-![Picture1](https://imgur.com/a/s9kNeMD)
+![Picture1](https://i.imgur.com/oxAxDAs.jpg)
 
 # aIPA
 
