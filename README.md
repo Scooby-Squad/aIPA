@@ -68,13 +68,13 @@ export default getEnvVars
 
 ## Usage
 ```bash
-cd ../webserver
+cd ~/aipa/webserver
 npm run start-dev
 ```
 This will start the webserver locally so that a user can login, store information about their ratings, and get predictions from the server
 
 ```bash
-cd rn-client
+cd ~/aipa/rn-client
 expo start
 ```
  
