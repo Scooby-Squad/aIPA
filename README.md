@@ -92,7 +92,10 @@ https://stackshare.io/dhochbaum/aipa
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/jschwantz"><img src="" width="120px;" alt="Jared Schwantz"/><br /><sub><b>Jared Schwantz</b></sub><br /></a></td>
+    <td align="center"><a href="https://github.com/dhochbaum"><br /><sub><b>David Hochbaum</b></sub><br /></a></td>
+    <td align="center"><a href="https://github.com/igallag"><br /><sub><b>Ian Gallagher</b></sub><br /></a></td>
+    <td align="center"><a href="https://github.com/jschwantz"><br /><sub><b>Jared Schwantz</b></sub><br /></a></td>
+    <td align="center"><a href="https://github.com/dse3621"><br /><sub><b>Dominic Sciara</b></sub><br /></a></td>
   </tr>
 </table>
 
