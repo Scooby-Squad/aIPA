@@ -44,6 +44,8 @@ const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
 
+  app.set('secretKey', process.env.SECRETKEY || 'my best friend is Cody')
+
   // body parsing middleware
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))

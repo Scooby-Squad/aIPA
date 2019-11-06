@@ -36,6 +36,7 @@ const fetchUser = async user => {
   try {
     console.log(`${apiUrl}/auth/google/`)
     const { data } = await axios.post(`${apiUrl}/auth/google/`, user);
+    console.log('user data', data)
     return data;
   } catch (error) {
     console.error(error);

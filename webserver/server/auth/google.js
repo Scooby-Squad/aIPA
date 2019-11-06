@@ -2,6 +2,7 @@ const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const {User} = require('../db/models')
+const jwt = require('jsonwebtoken')
 module.exports = router
 
 /**
@@ -45,7 +46,9 @@ router.post('/', async (req, res, next) => {
         // , imgUrl, firstName, lastName, fullName
       }
     })
-    req.login(user[0], err => (err ? next(err) : res.json(user[0])))
+    const token = jwt.sign({id: user[0].id}, req.app.get('secretKey'));
+    // req.login(user[0], err => (err ? next(err) : res.json(user[0])))
+    res.json({...user[0], token})
   } catch (err) {
     console.error(err)
   }
