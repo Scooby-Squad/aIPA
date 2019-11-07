@@ -47,8 +47,13 @@ router.post('/', async (req, res, next) => {
       }
     })
     const token = jwt.sign({id: user[0].id}, req.app.get('secretKey'));
-    // req.login(user[0], err => (err ? next(err) : res.json(user[0])))
-    res.json({...user[0], token})
+    const sendUser = {
+      id: user[0].id,
+      email: user[0].email,
+      googleId: user[0].googleId,
+      token
+    }
+    res.json(sendUser)
   } catch (err) {
     console.error(err)
   }

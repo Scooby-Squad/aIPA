@@ -4,7 +4,8 @@ module.exports = router
 // Get a userbeers for a user
 router.get('/', async (req, res, next) => {
   try {
-    const userbeers = await User_Beer.findRatings(req.user.id)
+    // thanks to JWT, have userId on all req.bodys now
+    const userbeers = await User_Beer.findRatings(req.body.userId)
     const filterBeers = userbeers.filter(beer => {
       if (beer.rating > 0) return beer
     })
@@ -18,7 +19,7 @@ router.get('/wishlist', async (req, res, next) => {
   try {
     const wishlist = await User_Beer.findAll({
       where: {
-        userId: req.user.id,
+        userId: req.body.userId,
         rating: '0'
       }
     })
@@ -31,7 +32,7 @@ router.delete('/wishlist/:beerId', async (req, res, next) => {
   try {
     await User_Beer.destroy({
       where: {
-        userId: req.user.id,
+        userId: req.body.userId,
         beerId: req.params.beerId
       }
     })
@@ -47,7 +48,7 @@ router.put('/update', async (req, res, next) => {
   if (!beerId) beerId = req.body.id
   try {
     const update = await User_Beer.updateOrCreateRating(
-      req.user.id,
+      req.body.userId,
       beerId,
       rating
     )

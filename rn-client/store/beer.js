@@ -44,7 +44,7 @@ export const searchRanked = (query, beerType, list) => ({
 export const blankSearch = () => ({ type: SEARCH_BLANK });
 const gotWishlist = wishlist => ({ type: GOT_WISHLIST, wishlist });
 const addToWishlist = beer => ({ type: ADD_TO_WISHLIST, beer });
-const removeFromWishlist = beer => ({ type: REMOVE_FROM_WISHLIST, beer });
+const removeFromWishlist = beer => ({ type: REMOVE_FROM_WISHLIST, beer })
 
 /**
  * THUNK CREATORS
@@ -131,9 +131,9 @@ export const removeFromWishlistThunk = beer => {
 };
 
 const sorter = (a, b) =>
-  a.prediction < b.prediction
+  (a.prediction < b.prediction
     ? 1
-    : a.prediction === b.prediction ? (a.name > b.name ? 1 : -1) : -1;
+    : a.prediction === b.prediction ? (a.name > b.name ? 1 : -1) : -1);
 
 /**
  * REDUCER

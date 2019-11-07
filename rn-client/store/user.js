@@ -20,6 +20,7 @@ const initialState = {
   photoUrl: '',
   accessToken: '',
   refreshToken: '',
+  JWT: '',
   persisted: 'Not persisted'
 };
 
@@ -34,9 +35,8 @@ export const logOut = () => ({ type: LOGGED_OUT });
  **/
 const fetchUser = async user => {
   try {
-    console.log(`${apiUrl}/auth/google/`)
+    // console.log(`${apiUrl}/auth/google/`)
     const { data } = await axios.post(`${apiUrl}/auth/google/`, user);
-    console.log('user data', data)
     return data;
   } catch (error) {
     console.error(error);
@@ -63,10 +63,11 @@ export const signIn = () => {
           photoUrl: result.user.photoUrl,
           accessToken: result.accessToken,
           refreshToken: result.refreshToken,
-          persisted: 'I persisted here'
+          JWT: user.token,
+          persisted: 'persisted'
         };
-        dispatch(getRankedBeers());
         dispatch(loggedIn(action));
+        dispatch(getRankedBeers());
       } else {
         console.log('cancelled');
       }
@@ -82,8 +83,10 @@ export const signIn = () => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case LOGGED_IN:
+        axios.defaults.headers.common['authorization'] = `${action.user.token}`
       return { ...state, ...action.user };
     case LOGGED_OUT:
+        axios.defaults.headers.common['authorization'] = null
       return initialState;
     default:
       return state;

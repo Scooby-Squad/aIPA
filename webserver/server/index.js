@@ -10,6 +10,7 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const jwt = require('jsonwebtoken')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -40,11 +41,26 @@ passport.deserializeUser(async (id, done) => {
   }
 })
 
+const validateUser = (req, res, next) => {
+  console.log('valHEADER', req.headers)
+  jwt.verify(req.headers['authorization'], req.app.get('secretKey'), function(err, decoded) {
+    if (err) {
+      console.log('valErr', err.message)
+      next(err)
+    }else{
+      // add user id to request
+      console.log('valHEADER', decoded)
+      req.body.userId = decoded.id;
+      next();
+    }
+  })
+};
+
 const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
 
-  app.set('secretKey', process.env.SECRETKEY || 'my best friend is Cody')
+  app.set('secretKey', process.env.SECRETKEY || 'nodeJWTauthkey')
 
   // body parsing middleware
   app.use(express.json())
@@ -62,12 +78,12 @@ const createApp = () => {
       saveUninitialized: false
     })
   )
-  app.use(passport.initialize())
-  app.use(passport.session())
+  // app.use(passport.initialize())
+  // app.use(passport.session())
 
   // auth and api routes
   app.use('/auth', require('./auth'))
-  app.use('/api', require('./api'))
+  app.use('/api', validateUser, require('./api'))
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))

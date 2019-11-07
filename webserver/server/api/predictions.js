@@ -9,7 +9,7 @@ const Op = Sequelize.Op
 router.get('/', async (req, res, next) => {
   try {
     const ratedBeers = await User_Beer.findAll({
-      where: {userId: req.user.id, rating: {[Op.ne]: '0'}},
+      where: {userId: req.body.userId, rating: {[Op.ne]: '0'}},
       include: [{model: Beer}]
     })
 
