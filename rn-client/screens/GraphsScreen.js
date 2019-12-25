@@ -1,19 +1,8 @@
 import React, {useState} from 'react'
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  View,
-  Button,
-  Text
-} from 'react-native'
-import QuestionsComponent from '../components/QuestionsComponent'
-import RatingsList from '../components/RatingsList'
+import { Image, Platform, StyleSheet, View } from 'react-native'
 import Touchable from 'react-native-platform-touchable';
 
 export default function GraphsScreen(props) {
-  // console.log(props)
   const [isQuizzing, setIsQuizzing] = useState(false)
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [ratingData, setRatingData] = useState([])
@@ -168,7 +157,6 @@ const styles = StyleSheet.create({
     color: '#2e78b7'
   },
   option: {
-    // backgroundColor: '#FFFFFF',
     paddingHorizontal: 15,
     paddingVertical: 0,
     marginBottom: 0,
@@ -176,10 +164,7 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     height: '20%',
     flex: 3,
-    justifyContent: 'flex-end',
-    // borderBottomWidth: StyleSheet.hairlineWidth,
-    // borderBottomColor: '#EDEDED'
-    // backgroundColor: '#EEEEEE'
+    justifyContent: 'flex-end'
   },
   buttonBox: {
     bottom: 0,
